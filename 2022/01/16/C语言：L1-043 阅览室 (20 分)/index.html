@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 天梯图书阅览室请你编写一个简单的图书借阅统计程序。当读者借书时，管理员输入书号并按下S键，程序开始计时；当读者还书时，管理员输入书号并按下E键，程序结束计时。书号为不超过1000的正整数。当管理员将0作为书号输入时，表示一天工作结束，你的程序应输出当天的读者借书次数和平均阅读时间。   注意：由于线路偶尔会有故障，可能出现不完整的纪录，即只有S没有E，或者只有E没有S的纪录，系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 天梯图书阅览室请你编写一个简单的图书借阅统计程序。当读者借书时，管理员输入书号并按下S键，程序开始计时；当读者还书时，管理员输入书号并按下E键，程序结束计时。书号为不超过1000的正整数。当管理员将0作为书号输入时，表示一天工作结束，你的程序应输出当天的读者借书次数和平均阅读时间。   注意：由于线路偶尔会有故障，可能出现不完整的纪录，即只有S没有E，或者只有E没有S的纪录，系">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-16T09:03:35.136Z">
+<meta property="article:modified_time" content="2022-01-16T09:03:19.830Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L1-043 阅览室 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-16T09:03:35.136Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>天梯图书阅览室请你编写一个简单的图书借阅统计程序。当读者借书时，管理员输入书号并按下<strong>S</strong>键，程序开始计时；当读者还书时，管理员输入书号并按下<strong>E</strong>键，程序结束计时。书号为不超过1000的正整数。当管理员将0作为书号输入时，表示一天工作结束，你的程序应输出当天的读者借书次数和平均阅读时间。</p>
+</blockquote>
+<blockquote>
+<p>注意：由于线路偶尔会有故障，可能出现不完整的纪录，即只有<strong>S</strong>没有<strong>E</strong>，或者只有<strong>E</strong>没有<strong>S</strong>的纪录，系统应能自动忽略这种无效纪录。另外，题目保证书号是书的唯一标识，同一本书在任何时间区间内只可能被一位读者借阅。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在第一行给出一个正整数N（≤10），随后给出N天的纪录。每天的纪录由若干次借阅操作组成，每次操作占一行，格式为：</p>
+<p><strong>书号</strong>（[1, 1000]内的整数） <strong>键值</strong>（<strong>S</strong>或<strong>E</strong>） <strong>发生时间</strong>（<strong>hh:mm</strong>，其中<strong>hh</strong>是[0,23]内的整数，<strong>mm</strong>是[0, 59]内整数）</p>
+<p>每一天的纪录保证按时间递增的顺序给出。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每天的纪录，在一行中输出当天的读者借书次数和平均阅读时间（以分钟为单位的精确到个位的整数时间）。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>3<br>1 S 08:10<br>2 S 08:35<br>1 E 10:00<br>2 E 13:16<br>0 S 17:00<br>0 S 17:00<br>3 E 08:10<br>1 S 08:20<br>2 S 09:00<br>1 E 09:20<br>0 E 17:00</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>2 196<br>0 0<br>1 60</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>遇到这种题，我们首先想到的肯定是用数组来存放数据，显然这个题不借助其他变量来存放数据的话，仅仅用一维数组是无法达到目的的，因为我们需要存放 <strong>书号</strong>、<strong>键值</strong>、<strong>时间</strong>（可以都化为分钟）三个信息，所以我们选择使用二维数组。<br><strong>易错点提示：</strong></p>
+<ol>
+<li>每一天数据都要清零；</li>
+<li>在输入数据时必须使用while，不能使用do-while，防止第一次的 <strong>书号</strong> 已经为0的情况；</li>
+<li>每次借书以后，我们把标准元素置（arr[j][0]）为 1 ，记得还书以后将其置为 0 ；</li>
+<li>当键值为 ‘E’ 的时候，我们需要多加一个判断条件 arr[id][0] == 1，防止只还不借的情况；至于只借不换的情况，是不参与计算的，不用考虑；</li>
+<li>注意输出结果的时候，输出当天的读者借书次数和平均阅读时间（以分钟为单位的精确到个位的整数时间），所以当借书次数大于1次时，我们需要用到强制转换为浮点型。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, h, m, t, count, id, i, j;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">1005</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">char</span> size;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        count = <span class="number">0</span>, t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">1005</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            arr[j][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">            arr[j][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %c %d:%d&quot;</span>, &amp;id, &amp;size, &amp;h, &amp;m);</span><br><span class="line">        <span class="keyword">while</span> (id)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (size == <span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                arr[id][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">                arr[id][<span class="number">1</span>] = h * <span class="number">60</span> + m;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (size == <span class="string">&#x27;E&#x27;</span> &amp;&amp; arr[id][<span class="number">0</span>] == <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                t += h * <span class="number">60</span> + m - arr[id][<span class="number">1</span>];</span><br><span class="line">                arr[id][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %c %d:%d&quot;</span>, &amp;id, &amp;size, &amp;h, &amp;m);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %.0lf\n&quot;</span>, count, (<span class="keyword">double</span>)t / count);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, count, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-043%20%E9%98%85%E8%A7%88%E5%AE%A4%20(20%20%E5%88%86)/" data-id="ckyh17bep000mbkvlfkmqdrv9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-042%20%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%20(5%20%E5%88%86)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-018%20%E5%A4%A7%E7%AC%A8%E9%92%9F%20(10%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-021%20%E9%87%8D%E8%A6%81%E7%9A%84%E8%AF%9D%E8%AF%B4%E4%B8%89%E9%81%8D%20(5%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-022%20%E5%A5%87%E5%81%B6%E5%88%86%E5%AE%B6%20(10%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-023%20%E8%BE%93%E5%87%BAGPLT%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-024%20%E5%90%8E%E5%A4%A9%20(5%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-025%20%E6%AD%A3%E6%95%B4%E6%95%B0A+B%20(15%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
