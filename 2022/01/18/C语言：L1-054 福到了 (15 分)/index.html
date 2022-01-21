@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 “福”字倒着贴，寓意“福到”。不论到底算不算民俗，本题且请你编写程序，把各种汉字倒过来输出。这里要处理的每个汉字是由一个 N × N 的网格组成的，网格中的元素或者为字符 @ 或者为空格。而倒过来的汉字所用的字符由裁判指定。  输入格式：  输入在第一行中给出倒过来的汉字所用的字符、以及网格的规模 N （不超过100的正整数），其间以 1 个空格分隔；随后 N 行，每行给出 N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-054%20%E7%A6%8F%E5%88%B0%E4%BA%86%20(15%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 “福”字倒着贴，寓意“福到”。不论到底算不算民俗，本题且请你编写程序，把各种汉字倒过来输出。这里要处理的每个汉字是由一个 N × N 的网格组成的，网格中的元素或者为字符 @ 或者为空格。而倒过来的汉字所用的字符由裁判指定。  输入格式：  输入在第一行中给出倒过来的汉字所用的字符、以及网格的规模 N （不超过100的正整数），其间以 1 个空格分隔；随后 N 行，每行给出 N">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/086d9cd6501c4981ad65fe5a42757d6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/595717ec1698420a9e02221e67a1a470.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a29bc28fdfdd4de9a9a44ab793d7b087.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/df4a8a1be62941cba567fa4bb0d99a79.png">
+<meta property="article:published_time" content="2022-01-18T15:31:36.183Z">
+<meta property="article:modified_time" content="2022-01-18T11:49:10.728Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/086d9cd6501c4981ad65fe5a42757d6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L1-054 福到了 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-054%20%E7%A6%8F%E5%88%B0%E4%BA%86%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-18T15:31:36.183Z" itemprop="datePublished">2022-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>“福”字倒着贴，寓意“福到”。不论到底算不算民俗，本题且请你编写程序，把各种汉字倒过来输出。这里要处理的每个汉字是由一个 N × N 的网格组成的，网格中的元素或者为字符 <strong>@</strong> 或者为空格。而倒过来的汉字所用的字符由裁判指定。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在第一行中给出倒过来的汉字所用的字符、以及网格的规模 N （不超过100的正整数），其间以 1 个空格分隔；随后 N 行，每行给出 N 个字符，或者为 <strong>@</strong> 或者为空格。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>输出倒置的网格，如样例所示。但是，如果这个字正过来倒过去是一样的，就先输出<strong>bu yong dao le</strong>，然后再用输入指定的字符将其输出。</p>
+</blockquote>
+<p><strong>输入样例 1：</strong><br><img src="https://img-blog.csdnimg.cn/086d9cd6501c4981ad65fe5a42757d6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><strong>输出样例 1：</strong><br><img src="https://img-blog.csdnimg.cn/595717ec1698420a9e02221e67a1a470.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><strong>输入样例 2：</strong><br><img src="https://img-blog.csdnimg.cn/a29bc28fdfdd4de9a9a44ab793d7b087.png" alt="在这里插入图片描述"><br><strong>输出样例 2：</strong><br><img src="https://img-blog.csdnimg.cn/df4a8a1be62941cba567fa4bb0d99a79.png" alt="在这里插入图片描述"></p>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
+<ol>
+<li>关于输入：<br>（1）在输入时，先输入字符 <strong>c</strong> 和网格的规模 <strong>N</strong>，然后记得用 <strong>getchar()</strong> 来吸收回车，然后用 <strong>gets</strong>接收输入的图形；<br>（2） 也可以用循环来依次输入每一个字符，这样需要每个外层循环都使用一次 **getchar()**，在内层循环使用 <strong>getchar()</strong> 来接收；<br>（3）切记不能使用 <strong>scanf</strong> ，因为它不能接收空格！</li>
+<li>关于检验是否倒了：<br>（1）将图形存放在二维数组里，由于这个数组是 <strong>N</strong> 行 <strong>N</strong> 列，它的第一位 <strong>str[0][0]</strong> 与最后一位 <strong>str[N - 1][N - 1]</strong> 对应，依次类推，我们就可以得到 <strong>str[i][j]</strong> 与 <strong>str[N - i - 1][N - j - 1]</strong> 对应；<br>（2）可以用一个变量 flag 来判断图形是否倒了，如果有一组对应字符不相同，则整个图形就不对称，可以直接跳出循环。</li>
+<li>关于替换：<br>遍历图形，判断是否为空格，若不是空格说明需要替换，将其替换为指定字符即可。</li>
+<li>关于输出：<br>（1）若图形不对称，则从最后一位开始遍历输出；<br>（2）若图形对称，则从第1位开始遍历输出。（其实对称从哪里开始都可以，只是博主有强迫症）</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, i, j, flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%c %d&quot;</span>, &amp;c, &amp;N);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">105</span>][<span class="number">105</span>];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        gets(str[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[i][j] != str[N - i - <span class="number">1</span>][N - j - <span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[i][j] != <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                str[i][j] = c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = N<span class="number">-1</span>; i &gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = N<span class="number">-1</span>; j &gt;=<span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;bu yong dao le\n&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-054%20%E7%A6%8F%E5%88%B0%E4%BA%86%20(15%20%E5%88%86)/" data-id="ckyk9ydt60002kkvl78zn11xt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-057%20PTA%E4%BD%BF%E6%88%91%E7%B2%BE%E7%A5%9E%E7%84%95%E5%8F%91%20(5%20%E5%88%86)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-056%20%E7%8C%9C%E6%95%B0%E5%AD%97%20(20%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-059%20%E6%95%B2%E7%AC%A8%E9%92%9F%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-060%20%E5%BF%83%E7%90%86%E9%98%B4%E5%BD%B1%E9%9D%A2%E7%A7%AF%20(5%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-062%20%E5%B9%B8%E8%BF%90%E5%BD%A9%E7%A5%A8%20(15%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-061%20%E6%96%B0%E8%83%96%E5%AD%90%E5%85%AC%E5%BC%8F%20(10%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
