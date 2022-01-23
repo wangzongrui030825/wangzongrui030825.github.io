@@ -64,6 +64,180 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L1-023 输出GPLT (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-023%20%E8%BE%93%E5%87%BAGPLT%20(20%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-16T09:03:35.198Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>给定一个长度不超过10000的、仅由英文字母构成的字符串。请将字符重新调整顺序，按<strong>GPLTGPLT….<strong>这样的顺序输出，并忽略其它字符。当然，四种字符（不区分大小写）的个数不一定是一样多的，若某种字符已经输出完，则余下的字符仍按</strong>GPLT</strong>的顺序打印，直到所有字符都被输出。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出一个长度不超过10000的、仅由英文字母构成的非空字符串。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中按题目要求输出排序后的字符串。题目保证输出非空。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>pcTclnGloRgLrtLhgljkLhGFauPewSKgt</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>GPLTGPLTGLTGLGLL</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>题目难度不大，注意两个重要的点：</p>
+<ol>
+<li>四种字符（不区分大小写）。</li>
+<li>按 GPLT 的顺序打印。</li>
+</ol>
+<p>将这两段话翻译出来这道题就解决了。</p>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">10001</span>];</span><br><span class="line">	<span class="keyword">int</span> g = <span class="number">0</span>, p = <span class="number">0</span>, l = <span class="number">0</span>, t = <span class="number">0</span>, flag = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(str);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == <span class="string">&#x27;g&#x27;</span> || str[i] == <span class="string">&#x27;G&#x27;</span>)</span><br><span class="line">			g++;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == <span class="string">&#x27;p&#x27;</span> || str[i] == <span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">			p++;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == <span class="string">&#x27;l&#x27;</span> || str[i] == <span class="string">&#x27;L&#x27;</span>)</span><br><span class="line">			l++;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == <span class="string">&#x27;t&#x27;</span> || str[i] == <span class="string">&#x27;T&#x27;</span>)</span><br><span class="line">			t++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (flag)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (g)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;G&quot;</span>);</span><br><span class="line">			g--;</span><br><span class="line">			flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (p)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;P&quot;</span>);</span><br><span class="line">			p--;</span><br><span class="line">			flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (l)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;L&quot;</span>);</span><br><span class="line">			l--;</span><br><span class="line">			flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (t)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;T&quot;</span>);</span><br><span class="line">			t--;</span><br><span class="line">			flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-023%20%E8%BE%93%E5%87%BAGPLT%20(20%20%E5%88%86)/" data-id="ckyh17bee0002bkvl0u1hehkn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-024 后天 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-024%20%E5%90%8E%E5%A4%A9%20(5%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-16T09:03:35.195Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>如果今天是星期三，后天就是星期五；如果今天是星期六，后天就是星期一。我们用数字1到7对应星期一到星期日。给定某一天，请你输出那天的“后天”是星期几。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出一个正整数D（1 ≤ D ≤ 7），代表星期里的某一天。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中输出D天的后天是星期几。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>3</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>5</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> D;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;D);</span><br><span class="line">    D += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (D &gt; <span class="number">7</span>)</span><br><span class="line">        D -= <span class="number">7</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, D);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-024%20%E5%90%8E%E5%A4%A9%20(5%20%E5%88%86)/" data-id="ckyh17beh0006bkvl4jfmci60" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-025 正整数A+B (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-025%20%E6%AD%A3%E6%95%B4%E6%95%B0A+B%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-16T09:03:35.193Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>题的目标很简单，就是求两个正整数<strong>A</strong>和<strong>B</strong>的和，其中<strong>A</strong>和<strong>B</strong>都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行给出<strong>A</strong>和<strong>B</strong>，其间以空格分开。问题是<strong>A</strong>和<strong>B</strong>不一定是满足要求的正整数，有时候可能是超出范围的数字、负数、带小数点的实数、甚至是一堆乱码。</p>
+<p>注意：我们把输入中出现的第1个空格认为是<strong>A</strong>和<strong>B</strong>的分隔。题目保证至少存在一个空格，并且<strong>B</strong>不是一个空字符串。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>如果输入的确是两个正整数，则按格式<strong>A + B = 和</strong>输出。如果某个输入不合要求，则在相应位置输出**?<strong>，显然此时和也是</strong>?**。</p>
+</blockquote>
+<p><strong>输入样例1：</strong></p>
+<blockquote>
+<p>123 456</p>
+</blockquote>
+<p><strong>输出样例1：</strong></p>
+<blockquote>
+<p>123 + 456 = 579</p>
+</blockquote>
+<p><strong>输入样例2：</strong></p>
+<blockquote>
+<ol start="22">
+<li>18</li>
+</ol>
+</blockquote>
+<p><strong>输出样例2：</strong></p>
+<blockquote>
+<p>? + 18 = ?</p>
+</blockquote>
+<p><strong>输入样例3：</strong></p>
+<blockquote>
+<p>-100 blabla bla…33</p>
+</blockquote>
+<p><strong>输出样例3：</strong></p>
+<blockquote>
+<p>? + ? = ?</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
+<ol>
+<li>之前提到过 gets 与 scanf 的区别，根据题意 A 可以为空，而 B 非空，再根据 scanf 不能接收空格、gets 能接收空格的特点，我们就用 scanf 来接收A，gets 来接收 B，这样我们输入 A 和 B 的时候，会自动进行分割。</li>
+<li>由于 gets 是可以接收空格的，所以对于字符串 b ，b[0] = ‘ ’，所以我们在遍历的时候应该从 b[1] 开始。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a[<span class="number">20</span>], b[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, a);</span><br><span class="line">    gets(b);</span><br><span class="line">    <span class="keyword">int</span> len_a = <span class="built_in">strlen</span>(a), len_b = <span class="built_in">strlen</span>(b);</span><br><span class="line">    <span class="keyword">int</span> i, j, flagA = <span class="number">0</span>, flagB = <span class="number">0</span>, A = <span class="number">0</span>, B = <span class="number">0</span>, t = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = len_a - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] - <span class="string">&#x27;0&#x27;</span> &lt; <span class="number">0</span> || a[i] - <span class="string">&#x27;9&#x27;</span> &gt; <span class="number">9</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            flagA = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        A += t * (a[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        t *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (A &gt; <span class="number">1000</span> || A &lt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        flagA = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    t = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (j = len_b - <span class="number">1</span>; j &gt;=<span class="number">1</span>; j--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b[j] - <span class="string">&#x27;0&#x27;</span> &lt; <span class="number">0</span> || b[j] - <span class="string">&#x27;9&#x27;</span> &gt; <span class="number">9</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            flagB = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        B += t * (b[j] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        t *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (B &gt; <span class="number">1000</span> || B &lt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        flagB = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flagA &amp;&amp; !flagB)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d + %d = %d&quot;</span>, A, B, A + B);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!flagA)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d + ? = ?&quot;</span>, A);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!flagB)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;? + %d = ?&quot;</span>, B);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;? + ? = ?&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-025%20%E6%AD%A3%E6%95%B4%E6%95%B0A+B%20(15%20%E5%88%86)/" data-id="ckyh17bef0004bkvl2b5vajuk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L1-026 I Love GPLT (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-026%20I%20Love%20GPLT%20(5%20%E5%88%86)/" class="article-date">
@@ -421,186 +595,6 @@
 
 
   
-    <article id="post-C语言：L1-033 出生年 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-033%20%E5%87%BA%E7%94%9F%E5%B9%B4%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-16T09:03:35.167Z" itemprop="datePublished">2022-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><p><img src="https://img-blog.csdnimg.cn/e787225cd1684cd08eddb7efdc6cdcdb.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>以上是新浪微博中一奇葩贴：“我出生于1988年，直到25岁才遇到4个数字都不相同的年份。”也就是说，直到2013年才达到“4个数字都不相同”的要求。本题请你根据要求，自动填充“我出生于<strong>y</strong>年，直到<strong>x</strong>岁才遇到<strong>n</strong>个数字都不相同的年份”这句话。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出出生年份<strong>y</strong>和目标年份中不同数字的个数<strong>n</strong>，其中<strong>y</strong>在[1,<br>3000]之间，<strong>n</strong>可以是2、或3、或4。注意不足4位的年份要在前面补零，例如公元1年被认为是0001年，有2个不同的数字0和1。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>根据输入，输出<strong>x</strong>和能达到要求的年份。数字间以1个空格分隔，行首尾不得有多余空格。年份要按4位输出。注意：所谓“<strong>n</strong>个数字都不相同”是指不同的数字正好是<strong>n</strong>个。如“2013”被视为满足“4位数字都不同”的条件，但不被视为满足2位或3位数字不同的条件。</p>
-</blockquote>
-<p><strong>输入样例1：</strong></p>
-<blockquote>
-<p>1988 4</p>
-</blockquote>
-<p><strong>输出样例1：</strong></p>
-<blockquote>
-<p>25 2013</p>
-</blockquote>
-<p><strong>输入样例2：</strong></p>
-<blockquote>
-<p>1 2</p>
-</blockquote>
-<p><strong>输出样例2：</strong></p>
-<blockquote>
-<p>0 0001</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>按照题目要求去写循环即可，注意每次循环都要将上一次循环的数据初始化。</p>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> y, n, count = <span class="number">0</span>, cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;y, &amp;n);</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> flag[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> t = y;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; <span class="number">1000</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            flag[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (t)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> a = t % <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (flag[a] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flag[a] = <span class="number">1</span>;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            t /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cnt == n)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        y++;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %04d\n&quot;</span>, count, y);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-033%20%E5%87%BA%E7%94%9F%E5%B9%B4%20(15%20%E5%88%86)/" data-id="ckyh17bel000cbkvlbq7b2ux7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-034 点赞 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-034%20%E7%82%B9%E8%B5%9E%20(20%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-16T09:03:35.164Z" itemprop="datePublished">2022-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>微博上有个“点赞”功能，你可以为你喜欢的博文点个赞表示支持。每篇博文都有一些刻画其特性的标签，而你点赞的博文的类型，也间接刻画了你的特性。本题就要求你写个程序，通过统计一个人点赞的纪录，分析这个人的特性。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在第一行给出一个正整数N（≤1000），是该用户点赞的博文数量。随后N行，每行给出一篇被其点赞的博文的特性描述，格式为“K F<sub>1</sub> ​ ⋯F<sub>K</sub> ”，其中1≤K≤10，F<sub>i</sub> ​ （i=1,⋯,K）是特性标签的编号，我们将所有特性标签从1到1000编号。数字间以空格分隔。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>统计所有被点赞的博文中最常出现的那个特性标签，在一行中输出它的编号和出现次数，数字间隔1个空格。如果有并列，则输出编号最大的那个。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>4<br>3 889 233 2<br>5 100 3 233 2 73<br>4 3 73 889 2<br>2 233 123</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>233 3</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>当题量增加以后，我们就会发现，用数组来计数是一种非常方便的方法。<br><strong>易错点提示：</strong></p>
-<ol>
-<li>所谓数组存数，即用数组的角标来存放出现的数，数组的每一个元素即其角标出现的次数；</li>
-<li>注意，这种方法我们如果直接存数，由于题目要求 N &lt;= 1000，所以我们数组应至少为 1001，这样才可以把所有情况考虑进去；</li>
-<li>题目要求，有并列，则输出编号最大的那个，这里有两种思路：<br>（1）从1开始，交换条件为 count[k] &gt;= count[t]；<br>（2）从1000开始，交换条件为 count[k] &gt; count[t]；</li>
-</ol>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, K, i, j, k, t = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> num, count[<span class="number">1001</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;K);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; K; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">            count[num]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (k = <span class="number">1</span>; k &lt;= <span class="number">1000</span>; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (count[k] &gt;= count[t])</span><br><span class="line">        &#123;</span><br><span class="line">            t = k;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>, t, count[t]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-034%20%E7%82%B9%E8%B5%9E%20(20%20%E5%88%86)/" data-id="ckyh17bel000dbkvle02d50aj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-035 情人节 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-035%20%E6%83%85%E4%BA%BA%E8%8A%82%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-16T09:03:35.161Z" itemprop="datePublished">2022-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><p><img src="https://img-blog.csdnimg.cn/9d6b131eb01c4aa18bdbf3ad9ae898ab.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>以上是朋友圈中一奇葩贴：“2月14情人节了，我决定造福大家。第2个赞和第14个赞的，我介绍你俩认识…………咱三吃饭…你俩请…”。现给出此贴下点赞的朋友名单，请你找出那两位要请客的倒霉蛋。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入按照点赞的先后顺序给出不知道多少个点赞的人名，每个人名占一行，为不超过10个英文字母的非空单词，以回车结束。一个英文句点.标志输入的结束，这个符号不算在点赞名单里。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>根据点赞情况在一行中输出结论：若存在第2个人A和第14个人B，则输出“A and B are inviting you to dinner…”；若只有A没有B，则输出“A is the only one for you…”；若连A都没有，则输出“Momo… No one is for you …”。</p>
-</blockquote>
-<p><strong>输入样例1：</strong></p>
-<blockquote>
-<p>GaoXZh<br>Magi<br>Einst<br>Quark<br>LaoLao<br>FatMouse<br>ZhaShen<br>fantacy<br>latesum<br>SenSen<br>QuanQuan<br>whatever<br>whenever<br>Potaty<br>hahaha<br>.</p>
-</blockquote>
-<p><strong>输出样例1：</strong></p>
-<blockquote>
-<p>Magi and Potaty are inviting you to dinner…</p>
-</blockquote>
-<p><strong>输入样例2：</strong></p>
-<blockquote>
-<p>LaoLao<br>FatMouse<br>whoever<br>.</p>
-</blockquote>
-<p><strong>输出样例2：</strong></p>
-<blockquote>
-<p>FatMouse is the only one for you…</p>
-</blockquote>
-<p><strong>输入样例3：</strong></p>
-<blockquote>
-<p>LaoLao<br>.</p>
-</blockquote>
-<p><strong>输出样例3：</strong></p>
-<blockquote>
-<p>Momo… No one is for you …</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>本题唯一需要注意的就是我们是以 “.” 来结束输出的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">strcmp</span>(name, <span class="string">&quot;.&quot;</span>) != <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>], A[<span class="number">20</span>], B[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, name) &amp;&amp; <span class="built_in">strcmp</span>(name, <span class="string">&quot;.&quot;</span>) != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(A, name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">14</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(B, name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (count &gt;= <span class="number">14</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s and %s are inviting you to dinner...&quot;</span>, A, B);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (count &gt;= <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s is the only one for you...&quot;</span>, A);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Momo... No one is for you ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-035%20%E6%83%85%E4%BA%BA%E8%8A%82%20(15%20%E5%88%86)/" data-id="ckyh17bem000ebkvlf8042vas" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -637,23 +631,23 @@
       <ul>
         
           <li>
+            <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-069%20%E8%83%8E%E5%8E%8B%E7%9B%91%E6%B5%8B%20(15%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-070%20%E5%90%83%E7%81%AB%E9%94%85%20(15%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-059%20%E6%95%B2%E7%AC%A8%E9%92%9F%20(20%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
             <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-060%20%E5%BF%83%E7%90%86%E9%98%B4%E5%BD%B1%E9%9D%A2%E7%A7%AF%20(5%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-062%20%E5%B9%B8%E8%BF%90%E5%BD%A9%E7%A5%A8%20(15%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-061%20%E6%96%B0%E8%83%96%E5%AD%90%E5%85%AC%E5%BC%8F%20(10%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>
