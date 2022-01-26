@@ -64,6 +64,117 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L2-002 链表去重 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-26T14:48:19.761Z" itemprop="datePublished">2022-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>给定一个带整数键值的链表 L，你需要把其中绝对值重复的键值结点删掉。即对每个键值 K，只有第一个绝对值等于 K 的结点被保留。同时，所有被删除的结点须被保存在另一个链表上。例如给定 L 为 21→-15→-15→-7→15，你需要输出去重后的链表 21→-15→-7，还有被删除的链表 -15→15。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在第一行给出 L 的第一个结点的地址和一个正整数 N（≤10^5^，为结点总数）。一个结点的地址是非负的 5 位整数，空地址 NULL 用 −1 来表示。</p>
+<p>随后 N 行，每行按以下格式描述一个结点：<br><strong>地址 键值 下一个结点</strong><br>其中<strong>地址</strong>是该结点的地址，<strong>键值</strong>是绝对值不超过10^4^ 的整数，<strong>下一个结点</strong>是下个结点的地址。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>首先输出去重后的链表，然后输出被删除的链表。每个结点占一行，按输入的格式输出。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>00100 5<br>99999 -7 87654<br>23854 -15 00000<br>87654 15 -1<br>00000 -15 99999<br>00100 21 23854</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>00100 21 23854<br>23854 -15 99999<br>99999 -7 -1<br>00000 -15 87654<br>87654 15 -1</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
+<ol>
+<li>其实用链表也可以，不过数组更加简单，思路都大同小异；</li>
+<li>用数组的时候，在输入时，记得分开输入 <strong>t，num[t]，loc[t]</strong> 这三个数据，如果同时输入，会导致  <strong>num[t]，loc[t]</strong> 数据丢失；</li>
+<li>在输出的时候，注意最后一个节点的下一个节点为<strong>NULL</strong>，用 -1 表示，但是在去重遍历时，数组内的数据仍为随机值，所以要单独输出；</li>
+<li>根据题意，去重后的链表一定不为空，但是被删除的链表可能为空，所以输出时要判断一次。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 100005</span></span><br><span class="line"><span class="keyword">int</span> first, n;</span><br><span class="line"><span class="keyword">int</span> i, j; <span class="comment">// 遍历 </span></span><br><span class="line"><span class="keyword">int</span> t, k; <span class="comment">// 中间值</span></span><br><span class="line"><span class="keyword">int</span> cnt_a = <span class="number">0</span>, cnt_b = <span class="number">0</span>; <span class="comment">//</span></span><br><span class="line"><span class="keyword">int</span> num[max], loc[max], visit[max] = &#123; <span class="number">0</span> &#125;, a[max], b[max];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;first, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;num[t], &amp;loc[t]);</span><br><span class="line">    &#125;</span><br><span class="line">    k = first;</span><br><span class="line">    <span class="keyword">while</span> (k != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t = <span class="built_in">abs</span>(num[k]);</span><br><span class="line">        <span class="keyword">if</span> (visit[t] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            visit[t] = <span class="number">1</span>;</span><br><span class="line">            a[cnt_a++] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            b[cnt_b++] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        k = loc[k];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; cnt_a - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%05d %d %05d\n&quot;</span>, a[i], num[a[i]], a[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%05d %d -1\n&quot;</span>, a[cnt_a - <span class="number">1</span>], num[a[cnt_a - <span class="number">1</span>]]);</span><br><span class="line">    <span class="keyword">if</span> (cnt_b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; cnt_b - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%05d %d %05d\n&quot;</span>, b[i], num[b[i]], b[i + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%05d %d -1\n&quot;</span>, b[cnt_b - <span class="number">1</span>], num[b[cnt_b - <span class="number">1</span>]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" data-id="ckyvnxe030001dwvlhoktgwbe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L2-003 月饼 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-003%20%E6%9C%88%E9%A5%BC%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-26T14:48:19.759Z" itemprop="datePublished">2022-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。</p>
+<p>注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有 3 种月饼，其库存量分别为 18、15、10 万吨，总售价分别为 75、72、45 亿元。如果市场的最大需求量只有 20 万吨，那么我们最大收益策略应该是卖出全部 15 万吨第 2 种月饼、以及 5 万吨第 3 种月饼，获得 72 + 45/2 = 94.5（亿元）。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>每个输入包含一个测试用例。每个测试用例先给出一个不超过 1000 的正整数 N 表示月饼的种类数、以及不超过 500（以万吨为单位）的正整数 D 表示市场最大需求量。随后一行给出 N 个正数表示每种月饼的库存量（以万吨为单位）；最后一行给出 N 个正数表示每种月饼的总售价（以亿元为单位）。数字间以空格分隔。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每组测试用例，在一行中输出最大收益，以亿元为单位并精确到小数点后 2 位。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>3 20<br>18 15 10<br>75 72 45</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>94.50</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>用结构体存储数据，按照题目要求，按照单价从大到小排序，然后就是贪心了。<br><strong>易错点提示：</strong></p>
+<ol>
+<li>数据需要用double类型，虽然题目上说是正整数，但是计算单价就会出现浮点数了，这也是测试点2；</li>
+<li>按照单价排序时，用qsort函数快排，测试点0过不去，最后发现直接冒泡就过了；</li>
+<li>注意贪心时循环的条件，这个是测试点3；</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 1005</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">double</span> num; <span class="comment">// 库存</span></span><br><span class="line">    <span class="keyword">double</span> sum; <span class="comment">// 总售价</span></span><br><span class="line">    <span class="keyword">double</span> sale; <span class="comment">// 单价</span></span><br><span class="line">&#125;node;</span><br><span class="line">node a[max];</span><br><span class="line"><span class="keyword">int</span> n; <span class="comment">// 月饼的种类数</span></span><br><span class="line"><span class="keyword">double</span> d; <span class="comment">// 市场最大需求量</span></span><br><span class="line"><span class="keyword">int</span> i, j; <span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">double</span> pro = <span class="number">0</span>; <span class="comment">// 收益</span></span><br><span class="line"><span class="comment">//int cmp(const void* e1, const void* e2)</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    return ((node*)e2)-&gt;sale - ((node*)e1)-&gt;sale;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %lf&quot;</span>, &amp;n, &amp;d);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;a[i].num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;a[i].sum);</span><br><span class="line">        a[i].sale = (<span class="keyword">double</span>)a[i].sum / a[i].num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//qsort(a, n, sizeof(a[0]), cmp);</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//冒泡排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i].sale &lt; a[j].sale)</span><br><span class="line">            &#123;</span><br><span class="line">                node t = a[i];</span><br><span class="line">                a[i] = a[j];</span><br><span class="line">                a[j] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n &amp;&amp; d&gt;<span class="number">0</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (d &lt;= a[i].num)</span><br><span class="line">        &#123;</span><br><span class="line">            pro += d * a[i].sale;</span><br><span class="line">            d = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pro += a[i].sum;</span><br><span class="line">            d -= a[i].num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf&quot;</span>, pro);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-003%20%E6%9C%88%E9%A5%BC%20(25%20%E5%88%86)/" data-id="ckyvnxdzy0000dwvlhujzfply" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L2-001 紧急救援 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/" class="article-date">
@@ -573,123 +684,6 @@
 
 
   
-    <article id="post-C语言：L1-077 大笨钟的心情 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-077%20%E5%A4%A7%E7%AC%A8%E9%92%9F%E7%9A%84%E5%BF%83%E6%83%85%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.106Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/4e0ba13d40fe4a43b87cc941faa13179.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>有网友问：未来还会有更多大笨钟题吗？笨钟回复说：看心情……</p>
-<p>本题就请你替大笨钟写一个程序，根据心情自动输出回答。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出 24 个 [0, 100] 区间内的整数，依次代表大笨钟在一天 24 小时中，每个小时的心情指数。</p>
-<p>随后若干行，每行给出一个 [0, 23] 之间的整数，代表网友询问笨钟这个问题的时间点。当出现非法的时间点时，表示输入结束，这个非法输入不要处理。题目保证至少有 1 次询问。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>对每一次提问，如果当时笨钟的心情指数大于 50，就在一行中输出 心情指数 Yes，否则输出 心情指数 No。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>80 75 60 50 20 20 20 20 55 62 66 51 42 33 47 58 67 52 41 20 35 49 50 63<br>17<br>7<br>3<br>15<br>-1</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>52 Yes<br>20 No<br>50 No<br>58 Yes</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> clock[<span class="number">24</span>], n = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">24</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;clock[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">while</span> (n &gt;= <span class="number">0</span> &amp;&amp; n &lt;= <span class="number">23</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (clock[n] &gt; <span class="number">50</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d Yes\n&quot;</span>, clock[n]);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d No\n&quot;</span>, clock[n]);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-077%20%E5%A4%A7%E7%AC%A8%E9%92%9F%E7%9A%84%E5%BF%83%E6%83%85%20(15%20%E5%88%86)/" data-id="ckyrdsf170006isvlbmsb1h9i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-078 吉老师的回归 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-078%20%E5%90%89%E8%80%81%E5%B8%88%E7%9A%84%E5%9B%9E%E5%BD%92%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.102Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>曾经在天梯赛大杀四方的吉老师决定回归天梯赛赛场啦！</p>
-<p>为了简化题目，我们不妨假设天梯赛的每道题目可以用一个不超过 500 的、只包括可打印符号的字符串描述出来，如：**Problem A: Print “Hello world!”**。</p>
-<p>众所周知，吉老师的竞赛水平非常高超，你可以认为他每道题目都会做（事实上也是……）。因此，吉老师会按照顺序看题并做题。但吉老师水平太高了，所以签到题他就懒得做了（浪费时间），具体来说，假如题目的字符串里有 <strong>qiandao</strong> 或者 <strong>easy</strong>（区分大小写）的话，吉老师看完题目就会跳过这道题目不做。</p>
-<p>现在给定这次天梯赛总共有几道题目以及吉老师已经做完了几道题目，请你告诉大家吉老师现在正在做哪个题，或者吉老师已经把所有他打算做的题目做完了。</p>
-<p>提醒：天梯赛有分数升级的规则，如果不做签到题可能导致团队总分不足以升级，一般的选手请千万不要学习吉老师的酷炫行为！</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入第一行是两个正整数 N,M (1≤M≤N≤30)，表示本次天梯赛有 N 道题目，吉老师现在做完了 M 道。</p>
-<p>接下来 N 行，每行是一个符合题目描述的字符串，表示天梯赛的题目内容。吉老师会按照给出的顺序看题——第一行就是吉老师看的第一道题，第二行就是第二道，以此类推。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出吉老师当前正在做的题目对应的题面（即做完了 M 道题目后，吉老师正在做哪个题）。如果吉老师已经把所有他打算做的题目做完了，输出一行 Wo AK le。</p>
-</blockquote>
-<p><strong>输入样例 1：</strong></p>
-<blockquote>
-<p>5 1<br>L1-1 is a qiandao problem.<br>L1-2 is so…easy.<br>L1-3 is Easy.<br>L1-4 is qianDao.<br>Wow, such L1-5, so easy.</p>
-</blockquote>
-<p><strong>输出样例 1：</strong></p>
-<blockquote>
-<p>L1-4 is qianDao.</p>
-</blockquote>
-<p><strong>输入样例 2：</strong></p>
-<blockquote>
-<p>5 4<br>L1-1 is a-qiandao problem.<br>L1-2 is so easy.<br>L1-3 is Easy.<br>L1-4 is qianDao.<br>Wow, such L1-5, so!!easy.</p>
-</blockquote>
-<p><strong>输出样例 2：</strong></p>
-<blockquote>
-<p>Wo AK le</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
-<ol>
-<li>使用 gets() 输入记得先用 getchar() 吸收回车；</li>
-<li>在字符串中查找字符用 strstr 函数；</li>
-<li>可以提前声明一个字符串 str[505]=”Wo AK le” ，然后只需要判断能否做完，如果做完，就把做完时的这道题，复制到 str<br>中；最后直接输出即可。</li>
-</ol>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, M;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">505</span>], str[<span class="number">505</span>]=<span class="string">&quot;Wo AK le&quot;</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        gets(s);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strstr</span>(s, <span class="string">&quot;qiandao&quot;</span>) == <span class="literal">NULL</span> &amp;&amp; <span class="built_in">strstr</span>(s, <span class="string">&quot;easy&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            M--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (M &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(str, s);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-078%20%E5%90%89%E8%80%81%E5%B8%88%E7%9A%84%E5%9B%9E%E5%BD%92%20(15%20%E5%88%86)/" data-id="ckyrdsf160003isvlaih98k12" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -726,6 +720,14 @@
       <ul>
         
           <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-003%20%E6%9C%88%E9%A5%BC%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
@@ -735,14 +737,6 @@
         
           <li>
             <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-080%20%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E6%95%B0%E5%88%97%20(20%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-072%20%E5%88%AE%E5%88%AE%E5%BD%A9%E7%A5%A8%20(20%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>
