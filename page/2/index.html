@@ -64,6 +64,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L1-071 前世档案 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-22T15:11:35.752Z" itemprop="datePublished">2022-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p><img src="https://img-blog.csdnimg.cn/633102804d824402a29f044ed498053a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>网络世界中时常会遇到这类滑稽的算命小程序，实现原理很简单，随便设计几个问题，根据玩家对每个问题的回答选择一条判断树中的路径（如下图所示），结论就是路径终点对应的那个结点。<br><img src="https://img-blog.csdnimg.cn/1c61ec384754404a804740fd5c43d078.png" alt="在这里插入图片描述"><br>现在我们把结论从左到右顺序编号，编号从 1 开始。这里假设回答都是简单的“是”或“否”，又假设回答“是”对应向左的路径，回答“否”对应向右的路径。给定玩家的一系列回答，请你返回其得到的结论的编号。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出两个正整数：N（≤30）为玩家做一次测试要回答的问题数量；M（≤100）为玩家人数。<br>随后 M 行，每行顺次给出玩家的 N 个回答。这里用 y 代表“是”，用 n 代表“否”。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每个玩家，在一行中输出其对应的结论的编号。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>3 4<br>yny<br>nyy<br>nyn<br>yyn</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>3<br>5<br>6<br>2</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>本题编程难度不大，注意是考察找规律的能力，<strong>规律</strong>如下：</p>
+<ol>
+<li>如果我们从第 1 行开始，从上往下数，则第 i 层所包含的结论个数为2^(n-1)^个；</li>
+<li>从第 2 层开始，每做一次回答即下降一层，所包含的结论个数变为原来的<strong>一半</strong>；</li>
+<li>若回答为“是”，则编号 sum <strong>不变</strong>；若回答为“否”，则编号 sum <strong>+ 本层所包含的结论个数 num</strong>；</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N, M, i, j, num = <span class="number">0</span>, sum = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; M; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		num = <span class="built_in">pow</span>(<span class="number">2</span>, N - <span class="number">1</span>);</span><br><span class="line">		sum = <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (str[j] == <span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">				sum += num;</span><br><span class="line">			num /= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" data-id="ckypz0huo0000qovla5us9wmv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L1-069 胎压监测 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-069%20%E8%83%8E%E5%8E%8B%E7%9B%91%E6%B5%8B%20(15%20%E5%88%86)/" class="article-date">
@@ -554,64 +608,6 @@
 
 
   
-    <article id="post-C语言：L1-067 洛希极限 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>科幻电影《流浪地球》中一个重要的情节是地球距离木星太近时，大气开始被木星吸走，而随着不断接近地木“刚体洛希极限”，地球面临被彻底撕碎的危险。但实际上，这个计算是错误的。<br><img src="https://img-blog.csdnimg.cn/5ca5ae6484d44c94836a16ecdb0962d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>洛希极限（Roche limit）是一个天体自身的引力与第二个天体造成的潮汐力相等时的距离。当两个天体的距离少于洛希极限，天体就会倾向碎散，继而成为第二个天体的环。它以首位计算这个极限的人爱德华·洛希命名。（摘自百度百科）</p>
-<p>大天体密度与小天体的密度的比值开 3 次方后，再乘以大天体的半径以及一个倍数（流体对应的倍数是 2.455，刚体对应的倍数是 1.26），就是洛希极限的值。例如木星与地球的密度比值开 3 次方是 0.622，如果假设地球是流体，那么洛希极限就是 0.622×2.455=1.52701 倍木星半径；但地球是刚体，对应的洛希极限是 0.622×1.26=0.78372 倍木星半径，这个距离比木星半径小，即只有当地球位于木星内部的时候才会被撕碎，换言之，就是地球不可能被撕碎。</p>
-<p>本题就请你判断一个小天体会不会被一个大天体撕碎。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出 3 个数字，依次为：大天体密度与小天体的密度的比值开 3 次方后计算出的值（≤1）、小天体的属性（0 表示流体、1 表示刚体）、两个天体的距离与大天体半径的比值（&gt;1 但不超过 10）。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中首先输出小天体的洛希极限与大天体半径的比值（输出小数点后2位）；随后空一格；最后输出 ^_^ 如果小天体不会被撕碎，否则输出 T_T。</p>
-</blockquote>
-<p><strong>输入样例 1：</strong></p>
-<blockquote>
-<p>0.622 0 1.4</p>
-</blockquote>
-<p><strong>输出样例 1：</strong></p>
-<blockquote>
-<p>1.53 T_T</p>
-</blockquote>
-<p><strong>输入样例 2：</strong></p>
-<blockquote>
-<p>0.622 1 1.4</p>
-</blockquote>
-<p><strong>输出样例 2：</strong></p>
-<blockquote>
-<p>0.78 ^_^</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a, b, c, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf %lf&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="keyword">if</span> (b)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">1.26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">2.455</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2f &quot;</span>, sum * c);</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;T_T&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;^_^&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" data-id="ckyofthls00070ovl4lar7kpw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -648,6 +644,10 @@
       <ul>
         
           <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
           </li>
         
@@ -661,10 +661,6 @@
         
           <li>
             <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-074%20%E4%B8%A4%E5%B0%8F%E6%97%B6%E5%AD%A6%E5%AE%8CC%E8%AF%AD%E8%A8%80%20(5%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 作为一个城市的应急救援队伍的负责人，你有一张特殊的全国地图。在地图上显示有多个分散的城市和一些连接城市的快速道路。每个城市的救援队数量和每一条连接两个城市的快速道路长度都标在地图上。当其他城市有紧急求助电话给你的时候，你的任务是带领你的救援队尽快赶往事发地，同时，一路上召集尽可能多的救援队。  输入格式:  输入第一行给出4个正整数N、M、S、D，其中N（2≤N≤500）是城市">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 作为一个城市的应急救援队伍的负责人，你有一张特殊的全国地图。在地图上显示有多个分散的城市和一些连接城市的快速道路。每个城市的救援队数量和每一条连接两个城市的快速道路长度都标在地图上。当其他城市有紧急求助电话给你的时候，你的任务是带领你的救援队尽快赶往事发地，同时，一路上召集尽可能多的救援队。  输入格式:  输入第一行给出4个正整数N、M、S、D，其中N（2≤N≤500）是城市">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fe0b3772f892469bb5e5c95ff09008c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/38a769cc256a43c6aa617fd74509f164.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/dbcb224e2830491197fdc5dbac06964b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/934a56367ca349daa2aff1ece42e49ed.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2022-01-25T16:07:24.712Z">
+<meta property="article:modified_time" content="2022-01-25T16:01:40.029Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/fe0b3772f892469bb5e5c95ff09008c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L2-001 紧急救援 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-25T16:07:24.712Z" itemprop="datePublished">2022-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>作为一个城市的应急救援队伍的负责人，你有一张特殊的全国地图。在地图上显示有多个分散的城市和一些连接城市的快速道路。每个城市的救援队数量和每一条连接两个城市的快速道路长度都标在地图上。当其他城市有紧急求助电话给你的时候，你的任务是带领你的救援队尽快赶往事发地，同时，一路上召集尽可能多的救援队。</p>
+</blockquote>
+<p><strong>输入格式:</strong></p>
+<blockquote>
+<p>输入第一行给出4个正整数N、M、S、D，其中N（2≤N≤500）是城市的个数，顺便假设城市的编号为0 ~ (N−1)；M是快速道路的条数；S是出发地的城市编号；D是目的地的城市编号。<br>第二行给出N个正整数，其中第i个数是第i个城市的救援队的数目，数字间以空格分隔。随后的M行中，每行给出一条快速道路的信息，分别是：城市1、城市2、快速道路的长度，中间用空格分开，数字均为整数且不超过500。输入保证救援可行且最优解唯一。</p>
+</blockquote>
+<p><strong>输出格式:</strong></p>
+<blockquote>
+<p>第一行输出最短路径的条数和能够召集的最多的救援队数量。第二行输出从S到D的路径中经过的城市编号。数字间以空格分隔，输出结尾不能有多余空格。</p>
+</blockquote>
+<p><strong>输入样例:</strong></p>
+<blockquote>
+<p>4 5 0 3<br>20 30 40 10<br>0 1 1<br>1 3 2<br>0 3 3<br>0 2 2<br>2 3 2</p>
+</blockquote>
+<p><strong>输出样例:</strong></p>
+<blockquote>
+<p>2 60<br>0 1 3</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、相关知识点"><a href="#1、相关知识点" class="headerlink" title="1、相关知识点"></a>1、相关知识点</h2><h3 id="（1）图论"><a href="#（1）图论" class="headerlink" title="（1）图论"></a>（1）图论</h3><ul>
+<li><strong>图</strong>是由若干顶点以及连接两点之间的边所构成的图形，这种图形通常用来描述某些事物之间的某种特定关系；</li>
+<li>用<strong>点</strong>表示事物，连接两点的<strong>线</strong>表示相应两个事物之间的关系；</li>
+<li>使用图来描述事物的关系时，对于连接两顶点的边，往往还需要一个数值来描述（比如：距离，耗费、时间等等），这个值称为<strong>权值</strong>；</li>
+<li>带权值的图称为<strong>带权图</strong>；</li>
+</ul>
+<h3 id="（2）迪杰斯特拉算法（Dijkstra）："><a href="#（2）迪杰斯特拉算法（Dijkstra）：" class="headerlink" title="（2）迪杰斯特拉算法（Dijkstra）："></a>（2）迪杰斯特拉算法（Dijkstra）：</h3><p>旅游这一类问题一般被称为单源最短路径：即从一个顶点出发，计算从该顶点到其他所有顶点的最短路径长度，这里的长度即路上各边权值之和。<br>而<strong>迪杰斯特拉算法</strong>就是为解决这类问题而生的。</p>
+<h4 id="①概念"><a href="#①概念" class="headerlink" title="①概念"></a>①概念</h4><blockquote>
+<p>Dijkstra算法是基于贪心思想，从起始位置出发，每次寻找与起点距离最近且未访问过的顶点，以该顶点作为中间节点，更新从起点到其他顶点的距离，直到全部顶点都作为了中间节点，并完成路径更新，算法结束。</p>
+</blockquote>
+<h4 id="②图解"><a href="#②图解" class="headerlink" title="②图解"></a>②图解</h4><p>以本题为例：<br>我们希望求出0号城市到3号城市的最短距离，0号城市即为单源最短路径中的单源，使用迪杰斯特拉算法，可以求出0号城市到其他城市的全部的最短路径。</p>
+<p><strong>Ⅰ 先做出图</strong>：<br><img src="https://img-blog.csdnimg.cn/fe0b3772f892469bb5e5c95ff09008c4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>Ⅱ 用橙色标记起始位置，蓝色标记未被访问的节点，绿色标记已经作为中间节点并完成了其他顶点的路径更新的节点。</strong><br><img src="https://img-blog.csdnimg.cn/38a769cc256a43c6aa617fd74509f164.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>| 城市a | 城市b |距离|<br>|–|–|–|<br>| 0 | 1 | 1 |<br>| 0 | 2 | 2 |<br>| 0 | 3 | 3 |<br>由于0号城市到1号城市的距离最短，所以首先将1号城市作为中间节点，更新0号城市到其他城市的距离。</p>
+<p><strong>Ⅲ 以1号城市作为中间节点</strong><br>从1号城市可以到达3号城市，距离为2，所以从0号城市到达3号城市的距离更新为3（样例比较特殊，刚好不用更新），完成更新以后，1号城市就被标记为已访问了。<br>| 城市a | 城市b |距离|<br>|–|–|–|<br>| 1 | 2 | ∞ |<br>| 1 | 3 | 2 |<br><img src="https://img-blog.csdnimg.cn/dbcb224e2830491197fdc5dbac06964b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><strong>Ⅳ 以2号城市为中间节点</strong><br>从2号城市可以到达3号城市，距离为2；从0号城市到达3号城市的距离为4（不用更新），2号城市也被标记为已访问。<br>| 城市a | 城市b |距离|<br>|–|–|–|<br>| 2 | 3 | 2 |<br><img src="https://img-blog.csdnimg.cn/934a56367ca349daa2aff1ece42e49ed.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><strong>Ⅳ 以3号城市为中间节点</strong><br>由于3号城市为最后一个节点，路径更新就结束了。<br>同时我们得出了下表：<br>| 城市a | 城市b |最短距离|<br>|–|–|–|<br>| 0 | 1 | 1 |<br>| 0 | 2 | 2 |<br>| 0 | 3 | 3 |<br>即求出了0号城市到3号城市的最短距离。</p>
+<h4 id="③代码"><a href="#③代码" class="headerlink" title="③代码"></a>③代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// s：起始顶点</span></span><br><span class="line"><span class="comment">// n：储存图中顶点的个数</span></span><br><span class="line"><span class="comment">// visit数组：标记顶点是否已经作为中间节点完成相应的路径更新</span></span><br><span class="line"><span class="comment">// greph数组：领接矩阵graph</span></span><br><span class="line"><span class="comment">// INF：1e9 + 7;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i] = graph[s][i];<span class="comment">// 将dis数组初始化为最初图中的长度</span></span><br><span class="line">    &#125;</span><br><span class="line">	visit[s] = <span class="number">1</span>;<span class="comment">// 标记起始顶点</span></span><br><span class="line">    <span class="comment">// 更新最短路径的循环，循环进行n次</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> min_dist = INF; <span class="comment">// 存储从起点到其他未被访问节点中的最短距离</span></span><br><span class="line">        <span class="keyword">int</span> mid = <span class="number">-1</span>; <span class="comment">// 存储最短距离节点的编号</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历n个顶点，寻找当前未被访问的顶点中的距离起始顶点最短距离的节点编号</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果visit[j] == 0，说明顶点j未被访问，且min_dist &gt; dis[j]时</span></span><br><span class="line">            <span class="keyword">if</span> (visit[j] == <span class="number">0</span> &amp;&amp; min_dist &gt; dis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                min_dist = dis[j]; <span class="comment">// 更新最短距离</span></span><br><span class="line">                mid = j; <span class="comment">// 更新顶点编号mid为j</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 以mid为中间节点，再循环遍历其他所有节点</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果当前遍历的节点j未曾作为过中间节点</span></span><br><span class="line">            <span class="comment">// 并且从起始节点到j的距离dis[j]大于从起始节点到mid与从mid到j的距离之和</span></span><br><span class="line">            <span class="keyword">if</span> (visit[j] == <span class="number">0</span> &amp;&amp; dis[j] &gt; dis[mid] + graph[mid][j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 更新起始节点到j的距离dis[j]，更新为起始到mid与mid到j的距离之和</span></span><br><span class="line">                dis[j] = dis[mid] + graph[mid][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[mid] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、思路"><a href="#2、思路" class="headerlink" title="2、思路"></a>2、思路</h2><h3 id="（1）输入"><a href="#（1）输入" class="headerlink" title="（1）输入"></a>（1）输入</h3><p>需要注意将graph先进行一次初始化，将下标不相同的值置为INF，相同则置为0；然后再进行输入领接矩阵。</p>
+<h3 id="（2）Dijkstra"><a href="#（2）Dijkstra" class="headerlink" title="（2）Dijkstra"></a>（2）Dijkstra</h3><p>本题需要进行一定改动，来达成题意，我们需要进行一些改动：<br>在“以mid为中间节点，再循环遍历其他所有节点“”时，判断 <strong>dis[j]</strong> 和 <strong>dis[mid] + graph[mid][j]</strong> 的大小关系，如果前者大于后者，进行值的变换，如果两者相等，我们就需要判断救援队的数目。</p>
+<h3 id="（3）输出"><a href="#（3）输出" class="headerlink" title="（3）输出"></a>（3）输出</h3><p>用一个数组way来存放前驱节点，以类似链表的方式，用递归来输出经过的城市。</p>
+<h2 id="3、代码"><a href="#3、代码" class="headerlink" title="3、代码"></a>3、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span>; <span class="comment">// 迪杰斯特拉算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(<span class="keyword">int</span> t)</span></span>; <span class="comment">// 递归打印函数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 505</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 100000</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, s, d; <span class="comment">// 题目输入</span></span><br><span class="line"><span class="keyword">int</span> a, b, c; <span class="comment">// 题目输入</span></span><br><span class="line"><span class="keyword">int</span> i, j; <span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">int</span> people[max]; <span class="comment">// 记录城市的救援队的数目</span></span><br><span class="line"><span class="keyword">int</span> graph[max][max]; <span class="comment">// 领接矩阵graph</span></span><br><span class="line"><span class="keyword">int</span> dis[max]; <span class="comment">// 存储从起始节点至其他节点的最短路径的距离</span></span><br><span class="line"><span class="keyword">int</span> visit[max]; <span class="comment">// 标记顶点是否已经作为中间节点完成相应的路径更新</span></span><br><span class="line"><span class="keyword">int</span> num[MAX]; <span class="comment">// 存储从起始节点至其他节点召集的消防员最大总数</span></span><br><span class="line"><span class="keyword">int</span> cnt[MAX]; <span class="comment">// 存储从起始节点至其他节点的最短路径数目</span></span><br><span class="line"><span class="keyword">int</span> way[MAX]; <span class="comment">// 存储前驱节点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 输入</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;n, &amp;m, &amp;s, &amp;d);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;people[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != j)</span><br><span class="line">                graph[i][j] = INF;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                graph[i][j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">        <span class="comment">// 将距离存入领接矩阵graph</span></span><br><span class="line">        graph[a][b] = c;</span><br><span class="line">        graph[b][a] = c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 迪杰斯特拉算法</span></span><br><span class="line">    Dijkstra();</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, cnt[d], num[d]);</span><br><span class="line">    Print(d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">    num[s] = people[s];</span><br><span class="line">    cnt[s] = <span class="number">1</span>; <span class="comment">// 标记初始节点</span></span><br><span class="line">    way[s] = s;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i] = graph[s][i];<span class="comment">// 将dis数组初始化为最初图中的长度</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新最短路径的循环，循环进行n次</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> min_dist = INF; <span class="comment">// 存储从起点到其他未被访问节点中的最短距离</span></span><br><span class="line">        <span class="keyword">int</span> mid = <span class="number">-1</span>; <span class="comment">// 存储最短距离节点的编号</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历n个顶点，寻找当前未被访问的顶点中的距离起始顶点最短距离的节点编号</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果visit[j] == 0，说明顶点j未被访问，且min_dist &gt; dis[j]时</span></span><br><span class="line">            <span class="keyword">if</span> (visit[j] == <span class="number">0</span> &amp;&amp; min_dist &gt; dis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                min_dist = dis[j]; <span class="comment">// 更新最短距离</span></span><br><span class="line">                mid = j; <span class="comment">// 更新顶点编号mid为j</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mid == <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        visit[mid] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 以mid为中间节点，再循环遍历其他所有节点</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果当前遍历的节点j未曾作为过中间节点</span></span><br><span class="line">            <span class="comment">// 并且从起始节点到j的距离dis[j]大于从起始节点到mid与从mid到j的距离之和</span></span><br><span class="line">            <span class="keyword">if</span> (visit[j] == <span class="number">0</span> &amp;&amp; dis[j] &gt; dis[mid] + graph[mid][j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 更新起始节点到j的距离dis[j]，更新为起始到mid与mid到j的距离之和</span></span><br><span class="line">                dis[j] = dis[mid] + graph[mid][j];</span><br><span class="line">                <span class="comment">// 节点mid到节点j存在一条更短的路径，</span></span><br><span class="line">                cnt[j] = cnt[mid];</span><br><span class="line">                <span class="comment">// 更新节点j救援队的数目</span></span><br><span class="line">                num[j] = num[mid] + people[j];</span><br><span class="line">                <span class="comment">// 记录节点mid</span></span><br><span class="line">                way[j] = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果当前遍历的节点j未曾作为过中间节点</span></span><br><span class="line">            <span class="comment">// 并且从起始节点到j的距离dis[j]等于从起始节点到mid与从mid到j的距离之和</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (visit[j] == <span class="number">0</span> &amp;&amp; dis[j] == dis[mid] + graph[mid][j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 到j的最短路径数目需加上到min的最短路径数目</span></span><br><span class="line">                cnt[j] += cnt[mid];</span><br><span class="line">                <span class="keyword">if</span> (num[j] &lt; num[mid] + people[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 更新节点j救援队的数目</span></span><br><span class="line">                    num[j] = num[mid] + people[j];</span><br><span class="line">                    <span class="comment">// 记录节点mid</span></span><br><span class="line">                    way[j] = mid;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t == s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, s);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Print(way[t]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/" data-id="ckyubbhex0000dwvleyje5c5c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-080%20%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E6%95%B0%E5%88%97%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-072%20%E5%88%AE%E5%88%AE%E5%BD%A9%E7%A5%A8%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

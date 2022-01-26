@@ -64,6 +64,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L1-008 求整数段和 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-008%20%E6%B1%82%E6%95%B4%E6%95%B0%E6%AE%B5%E5%92%8C%20(10%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-16T08:55:25.016Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>给定两个整数A和B，输出从A到B的所有整数以及这些数的和。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出2个整数A和B，其中−100≤A≤B≤100，其间以空格分隔。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>首先顺序输出从A到B的所有整数，每5个数字占一行，每个数字占5个字符宽度，向右对齐。最后在一行中按Sum = X的格式输出全部数字的和X。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>-3 8</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>   -3   -2   -1    0    1<br>    2    3    4    5    6<br>    7    8<br>    Sum = 30</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>主要还是考察按照格式输出变量，每个数字占5个字符即 %5d；每5个数字占一行即除去最后一行，每5个数字换行一次。</p>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> A, B;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;A, &amp;B);</span><br><span class="line">	<span class="keyword">int</span> count = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = A; i &lt;= B; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		count++;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, i);</span><br><span class="line">		sum += i;</span><br><span class="line">		<span class="keyword">if</span> (count % <span class="number">5</span> == <span class="number">0</span> &amp;&amp; i != B)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\nSum = %d&quot;</span>, sum);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-008%20%E6%B1%82%E6%95%B4%E6%95%B0%E6%AE%B5%E5%92%8C%20(10%20%E5%88%86)/" data-id="ckyh0wuzk0005e8vldkhj2v8r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L1-009 N个数求和 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-009%20N%E4%B8%AA%E6%95%B0%E6%B1%82%E5%92%8C%20(20%20%E5%88%86)/" class="article-date">
@@ -547,46 +595,6 @@
 
 
   
-    <article id="post-C语言：L1-001 Hello World (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-001%20Hello%20World%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-16T08:47:59.967Z" itemprop="datePublished">2022-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>这道超级简单的题目没有任何输入。<br>你只需要在一行中输出著名短句“Hello World!”就可以了。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>无<br>结尾无空行</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>Hello World!<br>结尾无空行</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、完整代码："><a href="#1、完整代码：" class="headerlink" title="1、完整代码："></a>1、完整代码：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/16/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-001%20Hello%20World%20(5%20%E5%88%86)/" data-id="ckyh0nhss0000d0vl2uix4zdj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -623,6 +631,10 @@
       <ul>
         
           <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
           </li>
         
@@ -636,10 +648,6 @@
         
           <li>
             <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-074%20%E4%B8%A4%E5%B0%8F%E6%97%B6%E5%AD%A6%E5%AE%8CC%E8%AF%AD%E8%A8%80%20(5%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>

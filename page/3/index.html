@@ -64,6 +64,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L1-067 洛希极限 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>科幻电影《流浪地球》中一个重要的情节是地球距离木星太近时，大气开始被木星吸走，而随着不断接近地木“刚体洛希极限”，地球面临被彻底撕碎的危险。但实际上，这个计算是错误的。<br><img src="https://img-blog.csdnimg.cn/5ca5ae6484d44c94836a16ecdb0962d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>洛希极限（Roche limit）是一个天体自身的引力与第二个天体造成的潮汐力相等时的距离。当两个天体的距离少于洛希极限，天体就会倾向碎散，继而成为第二个天体的环。它以首位计算这个极限的人爱德华·洛希命名。（摘自百度百科）</p>
+<p>大天体密度与小天体的密度的比值开 3 次方后，再乘以大天体的半径以及一个倍数（流体对应的倍数是 2.455，刚体对应的倍数是 1.26），就是洛希极限的值。例如木星与地球的密度比值开 3 次方是 0.622，如果假设地球是流体，那么洛希极限就是 0.622×2.455=1.52701 倍木星半径；但地球是刚体，对应的洛希极限是 0.622×1.26=0.78372 倍木星半径，这个距离比木星半径小，即只有当地球位于木星内部的时候才会被撕碎，换言之，就是地球不可能被撕碎。</p>
+<p>本题就请你判断一个小天体会不会被一个大天体撕碎。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出 3 个数字，依次为：大天体密度与小天体的密度的比值开 3 次方后计算出的值（≤1）、小天体的属性（0 表示流体、1 表示刚体）、两个天体的距离与大天体半径的比值（&gt;1 但不超过 10）。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中首先输出小天体的洛希极限与大天体半径的比值（输出小数点后2位）；随后空一格；最后输出 ^_^ 如果小天体不会被撕碎，否则输出 T_T。</p>
+</blockquote>
+<p><strong>输入样例 1：</strong></p>
+<blockquote>
+<p>0.622 0 1.4</p>
+</blockquote>
+<p><strong>输出样例 1：</strong></p>
+<blockquote>
+<p>1.53 T_T</p>
+</blockquote>
+<p><strong>输入样例 2：</strong></p>
+<blockquote>
+<p>0.622 1 1.4</p>
+</blockquote>
+<p><strong>输出样例 2：</strong></p>
+<blockquote>
+<p>0.78 ^_^</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a, b, c, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf %lf&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="keyword">if</span> (b)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">1.26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">2.455</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2f &quot;</span>, sum * c);</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;T_T&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;^_^&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" data-id="ckyofthls00070ovl4lar7kpw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L1-068 调和平均 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-068%20%E8%B0%83%E5%92%8C%E5%B9%B3%E5%9D%87%20(10%20%E5%88%86)/" class="article-date">
@@ -533,55 +591,6 @@
 
 
   
-    <article id="post-C语言：L1-053 电子汪 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/17/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-053%20%E7%94%B5%E5%AD%90%E6%B1%AA%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-17T15:32:22.648Z" itemprop="datePublished">2022-01-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>据说汪星人的智商能达到人类 4 岁儿童的水平，更有些聪明汪会做加法计算。比如你在地上放两堆小球，分别有 1 只球和 2 只球，聪明汪就会用“汪！汪！汪！”表示 1 加 2 的结果是 3。</p>
-<p>本题要求你为电子宠物汪做一个模拟程序，根据电子眼识别出的两堆小球的个数，计算出和，并且用汪星人的叫声给出答案。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出两个 [1, 9] 区间内的正整数 A 和 B，用空格分隔。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出 A + B 个**Wang!**。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>2 1</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>Wang!Wang!Wang!</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">    a = a + b;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; a; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Wang!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/17/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-053%20%E7%94%B5%E5%AD%90%E6%B1%AA%20(10%20%E5%88%86)/" data-id="ckyiujfq00002vkvldk2i57tz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -618,6 +627,10 @@
       <ul>
         
           <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
           </li>
         
@@ -631,10 +644,6 @@
         
           <li>
             <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-074%20%E4%B8%A4%E5%B0%8F%E6%97%B6%E5%AD%A6%E5%AE%8CC%E8%AF%AD%E8%A8%80%20(5%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>
