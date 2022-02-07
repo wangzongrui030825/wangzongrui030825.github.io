@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 一棵二叉搜索树可被递归地定义为具有下列性质的二叉树：对于任一结点，  其左子树中所有结点的键值小于该结点的键值； 其右子树中所有结点的键值大于等于该结点的键值； 其左右子树都是二叉搜索树。  所谓二叉搜索树的“镜像”，即将所有结点的左右子树对换位置后所得到的树。给定一个整数键值序列，现请你编写程序，判断这是否是对一棵二叉搜索树或其镜像进行前序遍历的结果。 输入格式：  输入的第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 一棵二叉搜索树可被递归地定义为具有下列性质的二叉树：对于任一结点，  其左子树中所有结点的键值小于该结点的键值； 其右子树中所有结点的键值大于等于该结点的键值； 其左右子树都是二叉搜索树。  所谓二叉搜索树的“镜像”，即将所有结点的左右子树对换位置后所得到的树。给定一个整数键值序列，现请你编写程序，判断这是否是对一棵二叉搜索树或其镜像进行前序遍历的结果。 输入格式：  输入的第">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-27T15:07:58.420Z">
+<meta property="article:modified_time" content="2022-01-27T15:01:23.859Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L2-004 这是二叉搜索树吗？ (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-27T15:07:58.420Z" itemprop="datePublished">2022-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><p> 一棵二叉搜索树可被递归地定义为具有下列性质的二叉树：对于任一结点，</p>
+<ul>
+<li>其左子树中所有结点的键值小于该结点的键值；</li>
+<li>其右子树中所有结点的键值大于等于该结点的键值；</li>
+<li>其左右子树都是二叉搜索树。</li>
+</ul>
+<p>所谓二叉搜索树的“镜像”，即将所有结点的左右子树对换位置后所得到的树。<br>给定一个整数键值序列，现请你编写程序，判断这是否是对一棵二叉搜索树或其镜像进行前序遍历的结果。</p>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入的第一行给出正整数 N（≤1000）。随后一行给出 N 个整数键值，其间以空格分隔。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>如果输入序列是对一棵二叉搜索树或其镜像进行前序遍历的结果，则首先在一行中输出 YES ，然后在下一行输出该树后序遍历的结果。数字间有 1 个空格，一行的首尾不得有多余空格。若答案是否，则输出 NO。</p>
+</blockquote>
+<p><strong>输入样例 1：</strong></p>
+<blockquote>
+<p>7<br>8 6 5 7 10 8 11</p>
+</blockquote>
+<p><strong>输出样例 1：</strong></p>
+<blockquote>
+<p>YES<br>5 7 6 8 11 10 8</p>
+</blockquote>
+<p><strong>输入样例 2：</strong></p>
+<blockquote>
+<p>7<br>8 10 11 8 6 7 5</p>
+</blockquote>
+<p><strong>输出样例 2：</strong></p>
+<blockquote>
+<p>YES<br>11 8 10 7 5 6 8</p>
+</blockquote>
+<p><strong>输入样例 3：</strong></p>
+<blockquote>
+<p>7<br>8 6 8 5 10 9 11</p>
+</blockquote>
+<p><strong>输出样例 3：</strong></p>
+<blockquote>
+<p>NO</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>通过观察输入样例和输出样例，可以发现：</p>
+<ul>
+<li>输入的方式为先序，输出的方式为后序。</li>
+</ul>
+<p>整体思路为：</p>
+<ol>
+<li>在输入数据的时候，同时建立二叉树与镜像二叉树；</li>
+<li>分别对比输入序列与先序遍历的二叉树以及镜像二叉树是否相同；</li>
+<li>与谁相同，将其后序遍历打印即可。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="comment">// 定义二叉树的节点结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;NODE, * LPNODE;</span><br><span class="line"></span><br><span class="line"><span class="function">LPNODE <span class="title">insert</span><span class="params">(LPNODE tree, <span class="keyword">int</span> data)</span></span>; <span class="comment">// 镜像二叉树的创建</span></span><br><span class="line"><span class="function">LPNODE <span class="title">insert_mirror</span><span class="params">(LPNODE tree, <span class="keyword">int</span> data)</span></span>;<span class="comment">// 镜像二叉树的创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(LPNODE tree)</span></span>; <span class="comment">// 先序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lastOrder</span><span class="params">(LPNODE tree)</span></span>; <span class="comment">// 后序遍历</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> i, count = <span class="number">0</span>; <span class="comment">// 计数</span></span><br><span class="line">LPNODE Tree = <span class="literal">NULL</span>, mirror = <span class="literal">NULL</span>; <span class="comment">// 二叉树和镜像二叉树</span></span><br><span class="line"><span class="keyword">int</span> num[<span class="number">1005</span>]; <span class="comment">// 存放数据，进行判断与输出</span></span><br><span class="line"><span class="keyword">int</span> flag1 = <span class="number">0</span>, flag2 = <span class="number">0</span>; <span class="comment">// 判断序列是否为二叉树或镜像二叉树</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        Tree = insert(Tree, a[i]); <span class="comment">// 创建二叉树</span></span><br><span class="line">        mirror = insert_mirror(mirror, a[i]); <span class="comment">// 创建镜像二叉树</span></span><br><span class="line">    &#125;</span><br><span class="line">    preOrder(Tree); <span class="comment">// 先序遍历二叉树</span></span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num[i] != a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            flag1 = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    preOrder(mirror); <span class="comment">// 先序遍历镜像二叉树</span></span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num[i] != a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            flag2 = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flag1 || !flag2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (flag1 &amp;&amp; !flag2)</span><br><span class="line">            lastOrder(mirror);</span><br><span class="line">        <span class="keyword">if</span> (flag2 &amp;&amp; !flag1)</span><br><span class="line">            lastOrder(Tree);</span><br><span class="line">        <span class="keyword">if</span> (!flag1 &amp;&amp; !flag2)</span><br><span class="line">            lastOrder(Tree);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, num[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, num[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二叉树的创建</span></span><br><span class="line"><span class="function">LPNODE <span class="title">insert</span><span class="params">(LPNODE tree, <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 如果根节点不存在，则创建根节点</span></span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        tree = (LPNODE)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">        tree-&gt;data = data;</span><br><span class="line">        tree-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">        tree-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果根节点存在，则存储数据</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果数据小于根节点，则存放至左子树</span></span><br><span class="line">        <span class="keyword">if</span> (data &lt; tree-&gt;data)</span><br><span class="line">            tree-&gt;left = insert(tree-&gt;left, data);</span><br><span class="line">        <span class="comment">// 如果数据大于等于根节点，则存放至右子树</span></span><br><span class="line">        <span class="keyword">if</span> (data &gt;= tree-&gt;data)</span><br><span class="line">            tree-&gt;right = insert(tree-&gt;right, data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 镜像二叉树的创建</span></span><br><span class="line"><span class="function">LPNODE <span class="title">insert_mirror</span><span class="params">(LPNODE tree, <span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 如果根节点不存在，则创建根节点</span></span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        tree = (LPNODE)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">        tree-&gt;data = data;</span><br><span class="line">        tree-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">        tree-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果根节点存在，则存储数据</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果数据小于根节点，则存放至右子树</span></span><br><span class="line">        <span class="keyword">if</span> (data &lt; tree-&gt;data)</span><br><span class="line">            tree-&gt;right = insert_mirror(tree-&gt;right, data);</span><br><span class="line">        <span class="comment">// 如果数据大于等于根节点，则存放至左子树</span></span><br><span class="line">        <span class="keyword">if</span> (data &gt;= tree-&gt;data)</span><br><span class="line">            tree-&gt;left = insert_mirror(tree-&gt;left, data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(LPNODE tree)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        num[count] = tree-&gt;data;</span><br><span class="line">        count++;</span><br><span class="line">        preOrder(tree-&gt;left);</span><br><span class="line">        preOrder(tree-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lastOrder</span><span class="params">(LPNODE tree)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        lastOrder(tree-&gt;left);</span><br><span class="line">        lastOrder(tree-&gt;right);</span><br><span class="line">        num[count] = tree-&gt;data;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" data-id="ckyx42oq800003ovlc3089gqs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-003%20%E6%9C%88%E9%A5%BC%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

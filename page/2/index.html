@@ -64,6 +64,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L1-076 降价提醒机器人 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-076%20%E9%99%8D%E4%BB%B7%E6%8F%90%E9%86%92%E6%9C%BA%E5%99%A8%E4%BA%BA%20(10%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-23T14:53:24.110Z" itemprop="datePublished">2022-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>小 T 想买一个玩具很久了，但价格有些高，他打算等便宜些再买。但天天盯着购物网站很麻烦，请你帮小 T 写一个降价提醒机器人，当玩具的当前价格比他设定的价格便宜时发出提醒。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行是两个正整数 N 和 M (1 ≤ N ≤ 100,0 ≤ M ≤ 1000)，表示有 N 条价格记录，小 T 设置的价格为 M。</p>
+<p>接下来 N 行，每行有一个实数 P<sub>i</sub>（−1000.0 &lt; P<sub>i</sub> &lt; 1000.0），表示一条价格记录。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每一条比设定价格 M 便宜的价格记录 <strong>P</strong>，在一行中输出 <strong>On Sale! P</strong>，其中 <strong>P</strong> 输出到小数点后 1 位。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>4 99<br>98.0<br>97.0<br>100.2<br>98.9</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>On Sale! 98.0<br>On Sale! 97.0<br>On Sale! 98.9</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, M;</span><br><span class="line">    <span class="keyword">double</span> P;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;P);</span><br><span class="line">        <span class="keyword">if</span> (P &lt; M)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;On Sale! %.1f\n&quot;</span>, P);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-076%20%E9%99%8D%E4%BB%B7%E6%8F%90%E9%86%92%E6%9C%BA%E5%99%A8%E4%BA%BA%20(10%20%E5%88%86)/" data-id="ckyrdsf170005isvl8rieb89p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L1-077 大笨钟的心情 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-077%20%E5%A4%A7%E7%AC%A8%E9%92%9F%E7%9A%84%E5%BF%83%E6%83%85%20(15%20%E5%88%86)/" class="article-date">
@@ -571,64 +620,6 @@
 
 
   
-    <article id="post-C语言：L1-063 吃鱼还是吃肉 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>国家给出了 8 岁男宝宝的标准身高为 130 厘米、标准体重为 27 公斤；8 岁女宝宝的标准身高为 129 厘米、标准体重为 25 公斤。</p>
-<p>现在你要根据小宝宝的身高体重，给出补充营养的建议。</p>
-</blockquote>
-<p><strong>输入格式：</strong><br>输入在第一行给出一个不超过 10 的正整数 N，随后 N 行，每行给出一位宝宝的身体数据：</p>
-<blockquote>
-<p>性别 身高 体重</p>
-</blockquote>
-<p>其中<strong>性别</strong>是 1 表示男生，0 表示女生。<strong>身高</strong>和<strong>体重</strong>都是不超过 200 的正整数。</p>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>对于每一位宝宝，在一行中给出你的建议：</p>
-<ul>
-<li>如果太矮了，输出：duo chi yu!（多吃鱼）；</li>
-<li>如果太瘦了，输出：duo chi rou!（多吃肉）；</li>
-<li>如果正标准，输出：wan mei!（完美）；</li>
-<li>如果太高了，输出：ni li hai!（你厉害）；</li>
-<li>如果太胖了，输出：shao chi rou!（少吃肉）。</li>
-</ul>
-<p>先评价身高，再评价体重。两句话之间要有 1 个空格。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>4<br>0 130 23<br>1 129 27<br>1 130 30<br>0 128 27</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>ni li hai! duo chi rou!<br>duo chi yu! wan mei!<br>wan mei! shao chi rou!<br>duo chi yu! shao chi rou!</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sex, weight, high, N, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;sex, &amp;high, &amp;weight);</span><br><span class="line">        <span class="keyword">if</span> (sex == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (high &gt; <span class="number">130</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;ni li hai! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (high &lt; <span class="number">130</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi yu! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei! &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (weight &gt; <span class="number">27</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;shao chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (weight &lt; <span class="number">27</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (sex == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (high &gt; <span class="number">129</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;ni li hai! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (high &lt; <span class="number">129</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi yu! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei! &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (weight &gt; <span class="number">25</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;shao chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (weight &lt; <span class="number">25</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/" data-id="ckyofthlp00020ovlcfbe3z6t" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -665,6 +656,10 @@
       <ul>
         
           <li>
+            <a href="/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
@@ -678,10 +673,6 @@
         
           <li>
             <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-080%20%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E6%95%B0%E5%88%97%20(20%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>
