@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 学生互评作业的简单规则是这样定的：每个人的作业会被 k 个同学评审，得到 k 个成绩。系统需要去掉一个最高分和一个最低分，将剩下的分数取平均，就得到这个学生的最后成绩。本题就要求你编写这个互评系统的算分模块。  输入格式：  输入第一行给出3个正整数 N（3 &lt; N ≤10^4^ ，学生总数）、k（3 ≤ k ≤ 10，每份作业的评审数）、M（≤ 20，需要输出的学生数）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 学生互评作业的简单规则是这样定的：每个人的作业会被 k 个同学评审，得到 k 个成绩。系统需要去掉一个最高分和一个最低分，将剩下的分数取平均，就得到这个学生的最后成绩。本题就要求你编写这个互评系统的算分模块。  输入格式：  输入第一行给出3个正整数 N（3 &lt; N ≤10^4^ ，学生总数）、k（3 ≤ k ≤ 10，每份作业的评审数）、M（≤ 20，需要输出的学生数）">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-08T15:00:45.098Z">
+<meta property="article:modified_time" content="2022-02-08T14:53:07.730Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L2-015 互评成绩 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-08T15:00:45.098Z" itemprop="datePublished">2022-02-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>学生互评作业的简单规则是这样定的：每个人的作业会被 <strong>k</strong> 个同学评审，得到 <strong>k</strong> 个成绩。系统需要去掉一个最高分和一个最低分，将剩下的分数取平均，就得到这个学生的最后成绩。本题就要求你编写这个互评系统的算分模块。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出3个正整数 <strong>N</strong>（3 &lt; <strong>N</strong> ≤10^4^ ，学生总数）、<strong>k</strong>（3 ≤ <strong>k</strong> ≤ 10，每份作业的评审数）、<strong>M</strong>（≤ 20，需要输出的学生数）。随后 <strong>N</strong> 行，每行给出一份作业得到的 <strong>k</strong> 个评审成绩（在区间[0, 100]内），其间以空格分隔。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>按非递减顺序输出最后得分最高的M个成绩，保留小数点后3位。分数间有1个空格，行首尾不得有多余空格。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>6 5 3<br>88 90 85 99 60<br>67 60 80 76 70<br>90 93 96 99 99<br>78 65 77 70 72<br>88 88 88 88 88<br>55 55 55 55 55</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>87.667 88.000 96.000</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><ol>
+<li>用二维数组 score 来存放评分（好像一维数组就可以），取和；</li>
+<li>排序 score 减去最高分和最低分，取平均值，放入数组 a；</li>
+<li>排序数组 a；</li>
+<li>按要求输出。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 10010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k, m;</span><br><span class="line"><span class="keyword">int</span> i, j;</span><br><span class="line"><span class="keyword">double</span> sum;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> a[max];</span><br><span class="line"><span class="keyword">int</span> score[max][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span>; <span class="comment">// 整形</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span>; <span class="comment">// 浮点型</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;n, &amp;k, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; k; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;score[i][j]);</span><br><span class="line">            sum += score[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        qsort(score[i], k, <span class="keyword">sizeof</span>(score[i][<span class="number">0</span>]), cmp1);</span><br><span class="line">        sum -= score[i][<span class="number">0</span>];</span><br><span class="line">        sum -= score[i][k - <span class="number">1</span>];</span><br><span class="line">        a[i] = sum / (k - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    qsort(a, n, <span class="keyword">sizeof</span>(a[<span class="number">0</span>]), cmp2);</span><br><span class="line">    <span class="keyword">for</span> (i = n - m; i &lt; n; i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == n - m)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%.3lf&quot;</span>, a[i]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; %.3lf&quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *(<span class="keyword">int</span>*)e1 &gt; *(<span class="keyword">int</span>*)e2 ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *(<span class="keyword">double</span>*)e1 &gt; *(<span class="keyword">double</span>*)e2 ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/" data-id="ckze939nn002l4gvl8caghbyy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-012%20%E5%85%B3%E4%BA%8E%E5%A0%86%E7%9A%84%E5%88%A4%E6%96%AD%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-013%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

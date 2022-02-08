@@ -64,10 +64,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-C语言：L1-063 吃鱼还是吃肉 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C语言：L1-076 降价提醒机器人 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
+    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-076%20%E9%99%8D%E4%BB%B7%E6%8F%90%E9%86%92%E6%9C%BA%E5%99%A8%E4%BA%BA%20(10%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-23T14:53:24.110Z" itemprop="datePublished">2022-01-23</time>
 </a>
     
   </div>
@@ -78,41 +78,32 @@
       
         <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
 <h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>国家给出了 8 岁男宝宝的标准身高为 130 厘米、标准体重为 27 公斤；8 岁女宝宝的标准身高为 129 厘米、标准体重为 25 公斤。</p>
-<p>现在你要根据小宝宝的身高体重，给出补充营养的建议。</p>
+<p>小 T 想买一个玩具很久了，但价格有些高，他打算等便宜些再买。但天天盯着购物网站很麻烦，请你帮小 T 写一个降价提醒机器人，当玩具的当前价格比他设定的价格便宜时发出提醒。</p>
 </blockquote>
-<p><strong>输入格式：</strong><br>输入在第一行给出一个不超过 10 的正整数 N，随后 N 行，每行给出一位宝宝的身体数据：</p>
+<p><strong>输入格式：</strong></p>
 <blockquote>
-<p>性别 身高 体重</p>
+<p>输入第一行是两个正整数 N 和 M (1 ≤ N ≤ 100,0 ≤ M ≤ 1000)，表示有 N 条价格记录，小 T 设置的价格为 M。</p>
+<p>接下来 N 行，每行有一个实数 P<sub>i</sub>（−1000.0 &lt; P<sub>i</sub> &lt; 1000.0），表示一条价格记录。</p>
 </blockquote>
-<p>其中<strong>性别</strong>是 1 表示男生，0 表示女生。<strong>身高</strong>和<strong>体重</strong>都是不超过 200 的正整数。</p>
 <p><strong>输出格式：</strong></p>
 <blockquote>
-<p>对于每一位宝宝，在一行中给出你的建议：</p>
-<ul>
-<li>如果太矮了，输出：duo chi yu!（多吃鱼）；</li>
-<li>如果太瘦了，输出：duo chi rou!（多吃肉）；</li>
-<li>如果正标准，输出：wan mei!（完美）；</li>
-<li>如果太高了，输出：ni li hai!（你厉害）；</li>
-<li>如果太胖了，输出：shao chi rou!（少吃肉）。</li>
-</ul>
-<p>先评价身高，再评价体重。两句话之间要有 1 个空格。</p>
+<p>对每一条比设定价格 M 便宜的价格记录 <strong>P</strong>，在一行中输出 <strong>On Sale! P</strong>，其中 <strong>P</strong> 输出到小数点后 1 位。</p>
 </blockquote>
 <p><strong>输入样例：</strong></p>
 <blockquote>
-<p>4<br>0 130 23<br>1 129 27<br>1 130 30<br>0 128 27</p>
+<p>4 99<br>98.0<br>97.0<br>100.2<br>98.9</p>
 </blockquote>
 <p><strong>输出样例：</strong></p>
 <blockquote>
-<p>ni li hai! duo chi rou!<br>duo chi yu! wan mei!<br>wan mei! shao chi rou!<br>duo chi yu! shao chi rou!</p>
+<p>On Sale! 98.0<br>On Sale! 97.0<br>On Sale! 98.9</p>
 </blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sex, weight, high, N, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;sex, &amp;high, &amp;weight);</span><br><span class="line">        <span class="keyword">if</span> (sex == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (high &gt; <span class="number">130</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;ni li hai! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (high &lt; <span class="number">130</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi yu! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei! &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (weight &gt; <span class="number">27</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;shao chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (weight &lt; <span class="number">27</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (sex == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (high &gt; <span class="number">129</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;ni li hai! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (high &lt; <span class="number">129</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi yu! &quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei! &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (weight &gt; <span class="number">25</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;shao chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (weight &lt; <span class="number">25</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;duo chi rou!\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;wan mei!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, M;</span><br><span class="line">    <span class="keyword">double</span> P;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;P);</span><br><span class="line">        <span class="keyword">if</span> (P &lt; M)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;On Sale! %.1f\n&quot;</span>, P);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-063%20%E5%90%83%E9%B1%BC%E8%BF%98%E6%98%AF%E5%90%83%E8%82%89%20(10%20%E5%88%86)/" data-id="ckyofthlp00020ovlcfbe3z6t" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-076%20%E9%99%8D%E4%BB%B7%E6%8F%90%E9%86%92%E6%9C%BA%E5%99%A8%E4%BA%BA%20(10%20%E5%88%86)/" data-id="ckze939nh00234gvlh6ekcffd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -122,10 +113,10 @@
 
 
   
-    <article id="post-C语言：L1-066 猫是液体 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C语言：L1-077 大笨钟的心情 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-066%20%E7%8C%AB%E6%98%AF%E6%B6%B2%E4%BD%93%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
+    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-077%20%E5%A4%A7%E7%AC%A8%E9%92%9F%E7%9A%84%E5%BF%83%E6%83%85%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-23T14:53:24.106Z" itemprop="datePublished">2022-01-23</time>
 </a>
     
   </div>
@@ -136,31 +127,33 @@
       
         <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
 <h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/7a52a59222d04cbcaf14bc4c9cf11b68.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_15,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>测量一个人的体积是很难的，但猫就不一样了。因为猫是液体，所以可以很容易地通过测量一个长方体容器的容积来得到容器里猫的体积。本题就请你完成这个计算。</p>
+<p><img src="https://img-blog.csdnimg.cn/4e0ba13d40fe4a43b87cc941faa13179.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>有网友问：未来还会有更多大笨钟题吗？笨钟回复说：看心情……</p>
+<p>本题就请你替大笨钟写一个程序，根据心情自动输出回答。</p>
 </blockquote>
 <p><strong>输入格式：</strong></p>
 <blockquote>
-<p>输入在第一行中给出 3 个不超过 100 的正整数，分别对应容器的长、宽、高。</p>
+<p>输入在一行中给出 24 个 [0, 100] 区间内的整数，依次代表大笨钟在一天 24 小时中，每个小时的心情指数。</p>
+<p>随后若干行，每行给出一个 [0, 23] 之间的整数，代表网友询问笨钟这个问题的时间点。当出现非法的时间点时，表示输入结束，这个非法输入不要处理。题目保证至少有 1 次询问。</p>
 </blockquote>
 <p><strong>输出格式：</strong></p>
 <blockquote>
-<p>在一行中输出猫的体积。</p>
+<p>对每一次提问，如果当时笨钟的心情指数大于 50，就在一行中输出 心情指数 Yes，否则输出 心情指数 No。</p>
 </blockquote>
 <p><strong>输入样例：</strong></p>
 <blockquote>
-<p>23 15 20</p>
+<p>80 75 60 50 20 20 20 20 55 62 66 51 42 33 47 58 67 52 41 20 35 49 50 63<br>17<br>7<br>3<br>15<br>-1</p>
 </blockquote>
 <p><strong>输出样例：</strong></p>
 <blockquote>
-<p>6900</p>
+<p>52 Yes<br>20 No<br>50 No<br>58 Yes</p>
 </blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, z;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, x * y * z);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> clock[<span class="number">24</span>], n = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">24</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;clock[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">while</span> (n &gt;= <span class="number">0</span> &amp;&amp; n &lt;= <span class="number">23</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (clock[n] &gt; <span class="number">50</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d Yes\n&quot;</span>, clock[n]);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d No\n&quot;</span>, clock[n]);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-066%20%E7%8C%AB%E6%98%AF%E6%B6%B2%E4%BD%93%20(5%20%E5%88%86)/" data-id="ckyofthlq00040ovl1fascdos" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-077%20%E5%A4%A7%E7%AC%A8%E9%92%9F%E7%9A%84%E5%BF%83%E6%83%85%20(15%20%E5%88%86)/" data-id="ckze939ni00264gvlbbai1392" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,10 +163,10 @@
 
 
   
-    <article id="post-C语言：L1-065 嫑废话上代码 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C语言：L1-078 吉老师的回归 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-065%20%E5%AB%91%E5%BA%9F%E8%AF%9D%E4%B8%8A%E4%BB%A3%E7%A0%81%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
+    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-078%20%E5%90%89%E8%80%81%E5%B8%88%E7%9A%84%E5%9B%9E%E5%BD%92%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-23T14:53:24.102Z" itemprop="datePublished">2022-01-23</time>
 </a>
     
   </div>
@@ -184,259 +177,50 @@
       
         <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
 <h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>Linux 之父 Linus Torvalds 的名言是：“Talk is cheap. Show me the code.”（嫑废话，上代码）。本题就请你直接在屏幕上输出这句话。</p>
+<p>曾经在天梯赛大杀四方的吉老师决定回归天梯赛赛场啦！</p>
+<p>为了简化题目，我们不妨假设天梯赛的每道题目可以用一个不超过 500 的、只包括可打印符号的字符串描述出来，如：**Problem A: Print “Hello world!”**。</p>
+<p>众所周知，吉老师的竞赛水平非常高超，你可以认为他每道题目都会做（事实上也是……）。因此，吉老师会按照顺序看题并做题。但吉老师水平太高了，所以签到题他就懒得做了（浪费时间），具体来说，假如题目的字符串里有 <strong>qiandao</strong> 或者 <strong>easy</strong>（区分大小写）的话，吉老师看完题目就会跳过这道题目不做。</p>
+<p>现在给定这次天梯赛总共有几道题目以及吉老师已经做完了几道题目，请你告诉大家吉老师现在正在做哪个题，或者吉老师已经把所有他打算做的题目做完了。</p>
+<p>提醒：天梯赛有分数升级的规则，如果不做签到题可能导致团队总分不足以升级，一般的选手请千万不要学习吉老师的酷炫行为！</p>
 </blockquote>
 <p><strong>输入格式：</strong></p>
 <blockquote>
-<p>本题没有输入。</p>
+<p>输入第一行是两个正整数 N,M (1≤M≤N≤30)，表示本次天梯赛有 N 道题目，吉老师现在做完了 M 道。</p>
+<p>接下来 N 行，每行是一个符合题目描述的字符串，表示天梯赛的题目内容。吉老师会按照给出的顺序看题——第一行就是吉老师看的第一道题，第二行就是第二道，以此类推。</p>
 </blockquote>
 <p><strong>输出格式：</strong></p>
 <blockquote>
-<p>在一行中输出 Talk is cheap. Show me the code.。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>无</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>Talk is cheap. Show me the code.</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Talk is cheap. Show me the code.&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-065%20%E5%AB%91%E5%BA%9F%E8%AF%9D%E4%B8%8A%E4%BB%A3%E7%A0%81%20(5%20%E5%88%86)/" data-id="ckyofthlr00060ovl63hzhhc7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-067 洛希极限 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>科幻电影《流浪地球》中一个重要的情节是地球距离木星太近时，大气开始被木星吸走，而随着不断接近地木“刚体洛希极限”，地球面临被彻底撕碎的危险。但实际上，这个计算是错误的。<br><img src="https://img-blog.csdnimg.cn/5ca5ae6484d44c94836a16ecdb0962d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>洛希极限（Roche limit）是一个天体自身的引力与第二个天体造成的潮汐力相等时的距离。当两个天体的距离少于洛希极限，天体就会倾向碎散，继而成为第二个天体的环。它以首位计算这个极限的人爱德华·洛希命名。（摘自百度百科）</p>
-<p>大天体密度与小天体的密度的比值开 3 次方后，再乘以大天体的半径以及一个倍数（流体对应的倍数是 2.455，刚体对应的倍数是 1.26），就是洛希极限的值。例如木星与地球的密度比值开 3 次方是 0.622，如果假设地球是流体，那么洛希极限就是 0.622×2.455=1.52701 倍木星半径；但地球是刚体，对应的洛希极限是 0.622×1.26=0.78372 倍木星半径，这个距离比木星半径小，即只有当地球位于木星内部的时候才会被撕碎，换言之，就是地球不可能被撕碎。</p>
-<p>本题就请你判断一个小天体会不会被一个大天体撕碎。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出 3 个数字，依次为：大天体密度与小天体的密度的比值开 3 次方后计算出的值（≤1）、小天体的属性（0 表示流体、1 表示刚体）、两个天体的距离与大天体半径的比值（&gt;1 但不超过 10）。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中首先输出小天体的洛希极限与大天体半径的比值（输出小数点后2位）；随后空一格；最后输出 ^_^ 如果小天体不会被撕碎，否则输出 T_T。</p>
+<p>在一行中输出吉老师当前正在做的题目对应的题面（即做完了 M 道题目后，吉老师正在做哪个题）。如果吉老师已经把所有他打算做的题目做完了，输出一行 Wo AK le。</p>
 </blockquote>
 <p><strong>输入样例 1：</strong></p>
 <blockquote>
-<p>0.622 0 1.4</p>
+<p>5 1<br>L1-1 is a qiandao problem.<br>L1-2 is so…easy.<br>L1-3 is Easy.<br>L1-4 is qianDao.<br>Wow, such L1-5, so easy.</p>
 </blockquote>
 <p><strong>输出样例 1：</strong></p>
 <blockquote>
-<p>1.53 T_T</p>
+<p>L1-4 is qianDao.</p>
 </blockquote>
 <p><strong>输入样例 2：</strong></p>
 <blockquote>
-<p>0.622 1 1.4</p>
+<p>5 4<br>L1-1 is a-qiandao problem.<br>L1-2 is so easy.<br>L1-3 is Easy.<br>L1-4 is qianDao.<br>Wow, such L1-5, so!!easy.</p>
 </blockquote>
 <p><strong>输出样例 2：</strong></p>
 <blockquote>
-<p>0.78 ^_^</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a, b, c, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf %lf&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="keyword">if</span> (b)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">1.26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum = a / c * <span class="number">2.455</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2f &quot;</span>, sum * c);</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;T_T&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;^_^&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-067%20%E6%B4%9B%E5%B8%8C%E6%9E%81%E9%99%90%20(10%20%E5%88%86)/" data-id="ckyofthls00070ovl4lar7kpw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-068 调和平均 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-068%20%E8%B0%83%E5%92%8C%E5%B9%B3%E5%9D%87%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>N 个正数的算数平均是这些数的和除以 N，它们的调和平均是它们倒数的算数平均的倒数。本题就请你计算给定的一系列正数的调和平均值。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>每个输入包含 1 个测试用例。每个测试用例第 1 行给出正整数 N (≤1000)；第 2 行给出 N 个正数，都在区间 [0.1,100] 内。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出给定数列的调和平均值，输出小数点后2位。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>8<br>10 15 12.7 0.3 4 13 1 15.6</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>1.61</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, i;</span><br><span class="line">	<span class="keyword">float</span> a[<span class="number">1001</span>], sum = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%f&quot;</span>, &amp;a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum = sum + <span class="number">1</span> / a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.2f&quot;</span>, <span class="number">1</span> / (sum / n));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-068%20%E8%B0%83%E5%92%8C%E5%B9%B3%E5%9D%87%20(10%20%E5%88%86)/" data-id="ckyofthls00080ovl114v7ax0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python：L1-064 估值一亿的AI核心代码 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/21/Python%EF%BC%9AL1-064%20%E4%BC%B0%E5%80%BC%E4%B8%80%E4%BA%BF%E7%9A%84AI%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%20(20%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-21T13:24:53.629Z" itemprop="datePublished">2022-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/f428ea2015e84965a9f51fea5edda26c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>以上图片来自新浪微博。</p>
-<p>本题要求你实现一个稍微更值钱一点的 AI 英文问答程序，规则是：</p>
-<ul>
-<li>无论用户说什么，首先把对方说的话在一行中原样打印出来；</li>
-<li>消除原文中多余空格：把相邻单词间的多个空格换成 1 个空格，把行首尾的空格全部删掉，把标点符号前面的空格删掉；</li>
-<li>把原文中所有大写英文字母变成小写，除了 I；</li>
-<li>把原文中所有独立的 <strong>can you</strong>、<strong>could you</strong> 对应地换成 <strong>I can</strong>、<strong>I could</strong>——    这里“独立”是指被空格或标点符号分隔开的单词；</li>
-<li>把原文中所有独立的 <strong>I</strong> 和 <strong>me</strong> 换成 <strong>you</strong>；</li>
-<li>把原文中所有的问号 <strong>?</strong> 换成惊叹号 **!**；</li>
-<li>在一行中输出替换后的句子作为 AI 的回答。</li>
-</ul>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入首先在第一行给出不超过 10 的正整数 N，随后 N 行，每行给出一句不超过 1000 个字符的、以回车结尾的用户的对话，对话为非空字符串，仅包括字母、数字、空格、可见的半角标点符号。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>按题面要求输出，每个 AI 的回答前要加上 <strong>AI</strong>: 和一个空格。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>6<br>Hello ?<br> Good to chat   with you<br>can   you speak Chinese?<br>Really?<br>Could you show me 5<br>What Is this prime? I,don ‘t know</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>Hello ?<br>AI: hello!<br>Good to chat   with you<br>AI: good to chat with you<br>can   you speak Chinese?<br>AI: I can speak chinese!<br>Really?<br>AI: really!<br>Could you show me 5<br>AI: I could show you 5<br>What Is this prime? I,don ‘t know<br>AI: what Is this prime! you,don’t know</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>本题运用了<strong>正则表达式</strong>：</p>
-<ol>
-<li>除去首尾的空格；</li>
-<li>除去多余空格；</li>
-<li>除去标点符号前的空格；</li>
-<li>将 ? 替换为 ！；</li>
-<li>把除 I 以外的所以字符变为小写；</li>
-<li>先分别存放 can I，could I 中的 can，could，再添加 you（将 I，me改为 you）。</li>
-</ol>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">input</span>())):</span><br><span class="line">    str1=<span class="built_in">input</span>()</span><br><span class="line">    <span class="built_in">print</span>(str1)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;AI: &#x27;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    str1=str1.strip()</span><br><span class="line"></span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\s+)&#x27;</span>, <span class="string">&#x27; &#x27;</span>, str1)</span><br><span class="line"></span><br><span class="line">    str3 = re.<span class="built_in">compile</span>(<span class="string">r&#x27; +(\W)&#x27;</span>)</span><br><span class="line">    str1 = str3.sub(<span class="string">r&quot;\1&quot;</span>, str1)</span><br><span class="line"></span><br><span class="line">    str1 = re.sub(<span class="string">&#x27;\?&#x27;</span>, <span class="string">&#x27;!&#x27;</span>, str1)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> j != <span class="string">&#x27;I&#x27;</span>:</span><br><span class="line">            str1 = str1.replace(j, j.lower())</span><br><span class="line"></span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\bcan you\b)&#x27;</span>, <span class="string">&#x27;_I can&#x27;</span>, str1)</span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\bcould you\b)&#x27;</span>, <span class="string">&#x27;_I could&#x27;</span>, str1)</span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\bI\b)&#x27;</span>, <span class="string">&#x27;you&#x27;</span>, str1)</span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\bme\b)&#x27;</span>, <span class="string">&#x27;you&#x27;</span>, str1)</span><br><span class="line">    str1 = re.sub(<span class="string">r&#x27;(\b_I\b)&#x27;</span>, <span class="string">&#x27;I&#x27;</span>, str1)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(str1)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/21/Python%EF%BC%9AL1-064%20%E4%BC%B0%E5%80%BC%E4%B8%80%E4%BA%BF%E7%9A%84AI%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%20(20%20%E5%88%86)/" data-id="ckyofthlt00090ovlbq3f0r6f" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-058 6翻了 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-058%206%E7%BF%BB%E4%BA%86%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-18T15:31:36.198Z" itemprop="datePublished">2022-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/af582da946ae4d8a8adc3c27e1439fd1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_17,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>“666”是一种网络用语，大概是表示某人很厉害、我们很佩服的意思。最近又衍生出另一个数字“9”，意思是“6翻了”，实在太厉害的意思。如果你以为这就是厉害的最高境界，那就错啦 —— 目前的最高境界是数字“27”，因为这是 3 个 “9”！</p>
-<p>本题就请你编写程序，将那些过时的、只会用一连串“6666……6”表达仰慕的句子，翻译成最新的高级表达。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出一句话，即一个非空字符串，由不超过 1000 个英文字母、数字和空格组成，以回车结束。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>从左到右扫描输入的句子：如果句子中有超过 3 个连续的 6，则将这串连续的 6 替换成 9；但如果有超过 9 个连续的 6，则将这串连续的 6 替换成 27。其他内容不受影响，原样输出。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>it is so 666 really 6666 what else can I say 6666666666</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>it is so 666 really 9 what else can I say 27</p>
+<p>Wo AK le</p>
 </blockquote>
 <h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
 <ol>
-<li>因为字符串含有空格，所以用 gets() 来输入；</li>
-<li>不需要用 9 以及 27 去替换那些 6，我们只需要遇到 6 开始计数，直到遍历到非 6 的元素结束，判断 6 的个数，来打印即可；</li>
-<li>注意遍历时，i 的范围，遍历次数应该是 len + 1，之所以这样，是因为防止字符串结束前一段均为 6，如果遍历 len + 1，最后一次就是 ‘\0’，就可以防止上述情况的出现。</li>
+<li>使用 gets() 输入记得先用 getchar() 吸收回车；</li>
+<li>在字符串中查找字符用 strstr 函数；</li>
+<li>可以提前声明一个字符串 str[505]=”Wo AK le” ，然后只需要判断能否做完，如果做完，就把做完时的这道题，复制到 str<br>中；最后直接输出即可。</li>
 </ol>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">1005</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>, i, j;</span><br><span class="line">    gets(str);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= <span class="built_in">strlen</span>(str); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (str[i] == <span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="number">9</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;27&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (count &gt; <span class="number">3</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;9&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; count; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[i]);</span><br><span class="line">            count = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, M;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">505</span>], str[<span class="number">505</span>]=<span class="string">&quot;Wo AK le&quot;</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        gets(s);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strstr</span>(s, <span class="string">&quot;qiandao&quot;</span>) == <span class="literal">NULL</span> &amp;&amp; <span class="built_in">strstr</span>(s, <span class="string">&quot;easy&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            M--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (M &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(str, s);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-058%206%E7%BF%BB%E4%BA%86%20(15%20%E5%88%86)/" data-id="ckyk9ydt70004kkvl46mag2b1" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-078%20%E5%90%89%E8%80%81%E5%B8%88%E7%9A%84%E5%9B%9E%E5%BD%92%20(15%20%E5%88%86)/" data-id="ckze939ni00254gvl4ef50j3a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,10 +230,10 @@
 
 
   
-    <article id="post-C语言：L1-055 谁是赢家 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C语言：L1-071 前世档案 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-055%20%E8%B0%81%E6%98%AF%E8%B5%A2%E5%AE%B6%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-18T15:31:36.183Z" itemprop="datePublished">2022-01-18</time>
+    <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-22T15:11:35.752Z" itemprop="datePublished">2022-01-22</time>
 </a>
     
   </div>
@@ -460,80 +244,37 @@
       
         <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
 <h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>某电视台的娱乐节目有个表演评审环节，每次安排两位艺人表演，他们的胜负由观众投票和 3 名评委投票两部分共同决定。规则为：如果一位艺人的观众票数高，且得到至少 1 名评委的认可，该艺人就胜出；或艺人的观众票数低，但得到全部评委的认可，也可以胜出。节目保证投票的观众人数为奇数，所以不存在平票的情况。本题就请你用程序判断谁是赢家。</p>
+<p><img src="https://img-blog.csdnimg.cn/633102804d824402a29f044ed498053a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_10,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>网络世界中时常会遇到这类滑稽的算命小程序，实现原理很简单，随便设计几个问题，根据玩家对每个问题的回答选择一条判断树中的路径（如下图所示），结论就是路径终点对应的那个结点。<br><img src="https://img-blog.csdnimg.cn/1c61ec384754404a804740fd5c43d078.png" alt="在这里插入图片描述"><br>现在我们把结论从左到右顺序编号，编号从 1 开始。这里假设回答都是简单的“是”或“否”，又假设回答“是”对应向左的路径，回答“否”对应向右的路径。给定玩家的一系列回答，请你返回其得到的结论的编号。</p>
 </blockquote>
 <p><strong>输入格式：</strong></p>
 <blockquote>
-<p>输入第一行给出 2 个不超过 1000 的正整数 Pa 和 Pb，分别是艺人 a 和艺人 b 得到的观众票数。题目保证这两个数字不相等。随后第二行给出 3 名评委的投票结果。数字 0 代表投票给 a，数字 1 代表投票给 b，其间以一个空格分隔。</p>
-</blockquote>
-<p><strong>输出格式：</strong><br>按以下格式输出赢家：</p>
-<blockquote>
-<p>The winner is x: P1 + P2</p>
-</blockquote>
-<p>其中 <strong>x</strong> 是代表赢家的字母，<strong>P1</strong> 是赢家得到的观众票数，<strong>P2</strong> 是赢家得到的评委票数。</p>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>327 129<br>1 0 1</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>The winner is a: 327 + 1</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Pa, Pb, i, j, k, p;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;Pa, &amp;Pb);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;i, &amp;j, &amp;k);</span><br><span class="line">    p = i + j + k;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">3</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The winner is b: %d + %d&quot;</span>, Pb, p);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (p == <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The winner is a: %d + %d&quot;</span>, Pa, <span class="number">3</span> - p);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (Pa &gt; Pb)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The winner is a: %d + %d&quot;</span>, Pa, <span class="number">3</span> - p);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The winner is b: %d + %d&quot;</span>, Pb, p);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-055%20%E8%B0%81%E6%98%AF%E8%B5%A2%E5%AE%B6%20(10%20%E5%88%86)/" data-id="ckyk9ydt00000kkvla80ngv2d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-057 PTA使我精神焕发 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-057%20PTA%E4%BD%BF%E6%88%91%E7%B2%BE%E7%A5%9E%E7%84%95%E5%8F%91%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-18T15:31:36.183Z" itemprop="datePublished">2022-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/98947f749c7c405c98a3c42b8a9a996c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_11,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>以上是湖北经济学院同学的大作。本题就请你用汉语拼音输出这句话。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>本题没有输入。</p>
+<p>输入第一行给出两个正整数：N（≤30）为玩家做一次测试要回答的问题数量；M（≤100）为玩家人数。<br>随后 M 行，每行顺次给出玩家的 N 个回答。这里用 y 代表“是”，用 n 代表“否”。</p>
 </blockquote>
 <p><strong>输出格式：</strong></p>
 <blockquote>
-<p>在一行中按照样例输出，以惊叹号结尾。</p>
+<p>对每个玩家，在一行中输出其对应的结论的编号。</p>
 </blockquote>
 <p><strong>输入样例：</strong></p>
 <blockquote>
-<p>无</p>
+<p>3 4<br>yny<br>nyy<br>nyn<br>yyn</p>
 </blockquote>
 <p><strong>输出样例：</strong></p>
 <blockquote>
-<p>PTA shi3 wo3 jing1 shen2 huan4 fa1 !</p>
+<p>3<br>5<br>6<br>2</p>
 </blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;PTA shi3 wo3 jing1 shen2 huan4 fa1 !&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>本题编程难度不大，注意是考察找规律的能力，<strong>规律</strong>如下：</p>
+<ol>
+<li>如果我们从第 1 行开始，从上往下数，则第 i 层所包含的结论个数为2^(n-1)^个；</li>
+<li>从第 2 层开始，每做一次回答即下降一层，所包含的结论个数变为原来的<strong>一半</strong>；</li>
+<li>若回答为“是”，则编号 sum <strong>不变</strong>；若回答为“否”，则编号 sum <strong>+ 本层所包含的结论个数 num</strong>；</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N, M, i, j, num = <span class="number">0</span>, sum = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M);</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; M; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		num = <span class="built_in">pow</span>(<span class="number">2</span>, N - <span class="number">1</span>);</span><br><span class="line">		sum = <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (str[j] == <span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">				sum += num;</span><br><span class="line">			num /= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-057%20PTA%E4%BD%BF%E6%88%91%E7%B2%BE%E7%A5%9E%E7%84%95%E5%8F%91%20(5%20%E5%88%86)/" data-id="ckyk9ydt40001kkvlg2rmd6kj" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-071%20%E5%89%8D%E4%B8%96%E6%A1%A3%E6%A1%88%20(20%20%E5%88%86)/" data-id="ckze939nf001x4gvl1zqofkg1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -543,10 +284,10 @@
 
 
   
-    <article id="post-C语言：L1-054 福到了 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-C语言：L1-069 胎压监测 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-054%20%E7%A6%8F%E5%88%B0%E4%BA%86%20(15%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-18T15:31:36.183Z" itemprop="datePublished">2022-01-18</time>
+    <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-069%20%E8%83%8E%E5%8E%8B%E7%9B%91%E6%B5%8B%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-22T15:11:35.750Z" itemprop="datePublished">2022-01-22</time>
 </a>
     
   </div>
@@ -557,31 +298,319 @@
       
         <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
 <h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>“福”字倒着贴，寓意“福到”。不论到底算不算民俗，本题且请你编写程序，把各种汉字倒过来输出。这里要处理的每个汉字是由一个 N × N 的网格组成的，网格中的元素或者为字符 <strong>@</strong> 或者为空格。而倒过来的汉字所用的字符由裁判指定。</p>
+<p>小轿车中有一个系统随时监测四个车轮的胎压，如果四轮胎压不是很平衡，则可能对行车造成严重的影响。<br><img src="https://img-blog.csdnimg.cn/532bdb661d6f4a29897d6ddb2cb8f1fe.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>让我们把四个车轮 —— 左前轮、右前轮、右后轮、左后轮 —— 顺次编号为 1、2、3、4。本题就请你编写一个监测程序，随时监测四轮的胎压，并给出正确的报警信息。报警规则如下：</p>
+<p>如果所有轮胎的压力值与它们中的最大值误差在一个给定阈值内，并且都不低于系统设定的最低报警胎压，则说明情况正常，不报警；<br>如果存在一个轮胎的压力值与它们中的最大值误差超过了阈值，或者低于系统设定的最低报警胎压，则不仅要报警，而且要给出可能漏气的轮胎的准确位置；<br>如果存在两个或两个以上轮胎的压力值与它们中的最大值误差超过了阈值，或者低于系统设定的最低报警胎压，则报警要求检查所有轮胎。</p>
 </blockquote>
 <p><strong>输入格式：</strong></p>
 <blockquote>
-<p>输入在第一行中给出倒过来的汉字所用的字符、以及网格的规模 N （不超过100的正整数），其间以 1 个空格分隔；随后 N 行，每行给出 N 个字符，或者为 <strong>@</strong> 或者为空格。</p>
+<p>输入在一行中给出 6 个 [0, 400] 范围内的整数，依次为 1~4 号轮胎的胎压、最低报警胎压、以及胎压差的阈值。</p>
 </blockquote>
 <p><strong>输出格式：</strong></p>
 <blockquote>
-<p>输出倒置的网格，如样例所示。但是，如果这个字正过来倒过去是一样的，就先输出<strong>bu yong dao le</strong>，然后再用输入指定的字符将其输出。</p>
+<p>根据输入的胎压值给出对应信息：<br>如果不用报警，输出 Normal； 如果有一个轮胎需要报警，输出 Warning: please check #X!，其中 X 是出问题的轮胎的编号； 如果需要检查所有轮胎，输出 Warning: please check all the tires!。</p>
 </blockquote>
-<p><strong>输入样例 1：</strong><br><img src="https://img-blog.csdnimg.cn/086d9cd6501c4981ad65fe5a42757d6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><strong>输出样例 1：</strong><br><img src="https://img-blog.csdnimg.cn/595717ec1698420a9e02221e67a1a470.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><strong>输入样例 2：</strong><br><img src="https://img-blog.csdnimg.cn/a29bc28fdfdd4de9a9a44ab793d7b087.png" alt="在这里插入图片描述"><br><strong>输出样例 2：</strong><br><img src="https://img-blog.csdnimg.cn/df4a8a1be62941cba567fa4bb0d99a79.png" alt="在这里插入图片描述"></p>
+<p><strong>输入样例 1：</strong></p>
+<blockquote>
+<p>242 251 231 248 230 20</p>
+</blockquote>
+<p><strong>输出样例 1：</strong></p>
+<blockquote>
+<p>Normal</p>
+</blockquote>
+<p><strong>输入样例 2：</strong></p>
+<blockquote>
+<p>242 251 232 248 230 10</p>
+</blockquote>
+<p><strong>输出样例 2：</strong></p>
+<blockquote>
+<p>Warning: please check #3!</p>
+</blockquote>
+<p><strong>输入样例 3：</strong></p>
+<blockquote>
+<p>240 251 232 248 240 10</p>
+</blockquote>
+<p><strong>输出样例 3：</strong></p>
+<blockquote>
+<p>Warning: please check all the tires!</p>
+</blockquote>
 <h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
 <ol>
-<li>关于输入：<br>（1）在输入时，先输入字符 <strong>c</strong> 和网格的规模 <strong>N</strong>，然后记得用 <strong>getchar()</strong> 来吸收回车，然后用 <strong>gets</strong>接收输入的图形；<br>（2） 也可以用循环来依次输入每一个字符，这样需要每个外层循环都使用一次 **getchar()**，在内层循环使用 <strong>getchar()</strong> 来接收；<br>（3）切记不能使用 <strong>scanf</strong> ，因为它不能接收空格！</li>
-<li>关于检验是否倒了：<br>（1）将图形存放在二维数组里，由于这个数组是 <strong>N</strong> 行 <strong>N</strong> 列，它的第一位 <strong>str[0][0]</strong> 与最后一位 <strong>str[N - 1][N - 1]</strong> 对应，依次类推，我们就可以得到 <strong>str[i][j]</strong> 与 <strong>str[N - i - 1][N - j - 1]</strong> 对应；<br>（2）可以用一个变量 flag 来判断图形是否倒了，如果有一组对应字符不相同，则整个图形就不对称，可以直接跳出循环。</li>
-<li>关于替换：<br>遍历图形，判断是否为空格，若不是空格说明需要替换，将其替换为指定字符即可。</li>
-<li>关于输出：<br>（1）若图形不对称，则从最后一位开始遍历输出；<br>（2）若图形对称，则从第1位开始遍历输出。（其实对称从哪里开始都可以，只是博主有强迫症）</li>
+<li>在计数时，如果 count ==1的情况，标记以后，不要忘记将 count 置为一个数 x（方便起见，大于2即可），为了防止下一次循环，count 仍然为1，导致标记被刷新；</li>
+<li>在输出时，记得考虑到所有情况：<br>（1）没有出错：count均为0<br>（2）只有一个出错：<br>①其中一个 count == x，另一个 count == 0；<br>②两个 count == x，并且 标记 t 相等；<br>（3）出错数大于2个：有一个 count 均大于 x。<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">5</span>], i, a_max = <span class="number">0</span>, pre_max, diff_max, count1 = <span class="number">0</span>, t1 = <span class="number">0</span>, count2 = <span class="number">0</span>, t2 = <span class="number">6</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">		<span class="keyword">if</span> (a_max &lt; a[i])</span><br><span class="line">			a_max = a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;pre_max, &amp;diff_max);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a_max - a[i] &gt; diff_max)</span><br><span class="line">		&#123;</span><br><span class="line">			count1++;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (count1 == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			t1 = i;</span><br><span class="line">			count1 = <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] &lt; pre_max)</span><br><span class="line">		&#123;</span><br><span class="line">			count2++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (count2 == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			t2 = i;</span><br><span class="line">			count2 = <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (count1 == <span class="number">0</span> &amp;&amp; count2 == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Normal&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (count1 == <span class="number">2</span> &amp;&amp; count2 == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Warning: please check #%d!&quot;</span>, t1);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (count2 == <span class="number">2</span> &amp;&amp; count1 == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Warning: please check #%d!&quot;</span>, t2);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (count2 == <span class="number">2</span> &amp;&amp; count1 == <span class="number">2</span> &amp;&amp; t1 == t2)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Warning: please check #%d!&quot;</span>, t2);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (count1 &gt; <span class="number">2</span> || count2 &gt; <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Warning: please check all the tires!&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, i, j, flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%c %d&quot;</span>, &amp;c, &amp;N);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">105</span>][<span class="number">105</span>];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        gets(str[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[i][j] != str[N - i - <span class="number">1</span>][N - j - <span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[i][j] != <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                str[i][j] = c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = N<span class="number">-1</span>; i &gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = N<span class="number">-1</span>; j &gt;=<span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;bu yong dao le\n&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-069%20%E8%83%8E%E5%8E%8B%E7%9B%91%E6%B5%8B%20(15%20%E5%88%86)/" data-id="ckze939ne001u4gvl1806d195" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-070 吃火锅 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-070%20%E5%90%83%E7%81%AB%E9%94%85%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-22T15:11:35.746Z" itemprop="datePublished">2022-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><p><img src="https://img-blog.csdnimg.cn/fc5c967be68842b3ac76c27c61d01616.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>以上图片来自微信朋友圈：这种天气你有什么破事打电话给我基本没用。但是如果你说“吃火锅”，那就厉害了，我们的故事就开始了。</p>
+<p>本题要求你实现一个程序，自动检查你朋友给你发来的信息里有没有 chi1 huo3 guo1。</p>
+<p>输入格式：<br>输入每行给出一句不超过 80 个字符的、以回车结尾的朋友信息，信息为非空字符串，仅包括字母、数字、空格、可见的半角标点符号。当读到某一行只有一个英文句点 . 时，输入结束，此行不算在朋友信息里。</p>
+<p>输出格式：<br>首先在一行中输出朋友信息的总条数。然后对朋友的每一行信息，检查其中是否包含 chi1 huo3 guo1，并且统计这样厉害的信息有多少条。在第二行中首先输出第一次出现 chi1 huo3 guo1 的信息是第几条（从 1 开始计数），然后输出这类信息的总条数，其间以一个空格分隔。题目保证输出的所有数字不超过 100。</p>
+<p>如果朋友从头到尾都没提 chi1 huo3 guo1 这个关键词，则在第二行输出一个表情 -_-#。</p>
+<p><strong>输入样例 1：</strong></p>
+<blockquote>
+<p>Hello!<br>are you there?<br>wantta chi1 huo3 guo1?<br>that’s so li hai le<br>our story begins from chi1 huo3 guo1 le<br>.</p>
+</blockquote>
+<p><strong>输出样例 1：</strong></p>
+<blockquote>
+<p>5<br>3 2 </p>
+</blockquote>
+<p><strong>输入样例 2：</strong> </p>
+<blockquote>
+<p>Hello!<br>are you there?<br>wantta qi huo3 guo1 chi1huo3guo1?<br>that’s so li hai le<br>our story begins from ci1 huo4 guo2 le<br>.</p>
+</blockquote>
+<p><strong>输出样例 2：</strong></p>
+<blockquote>
+<p>5<br>-_-#</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>关于字符串查找函数：</strong></p>
+<ol>
+<li><strong>strchr</strong>：查找字符串 s 中首次出现字符 c 的位置（从字符串的首地址开始查找）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strchr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s,<span class="keyword">char</span> c)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>strstr</strong>：搜索字符串 src 在字符串 dst 中的第一次出现的位置(不包括src的串结束符)。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strstr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *dst, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">105</span>], flag[<span class="number">20</span>] = <span class="string">&quot;chi1 huo3 guo1&quot;</span>;</span><br><span class="line">	<span class="keyword">int</span> flag1 = <span class="number">0</span>, count = <span class="number">0</span>, flag2 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		gets(str);</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(str, <span class="string">&quot;.&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		count++;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strstr</span>(str, flag) != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			flag1++;</span><br><span class="line">			<span class="keyword">if</span> (flag2 == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				flag2 = count;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, count);</span><br><span class="line">	<span class="keyword">if</span> (flag1 == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;-_-#&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>, flag2, flag1);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/18/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-054%20%E7%A6%8F%E5%88%B0%E4%BA%86%20(15%20%E5%88%86)/" data-id="ckyk9ydt60002kkvl78zn11xt" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/01/22/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-070%20%E5%90%83%E7%81%AB%E9%94%85%20(15%20%E5%88%86)/" data-id="ckze939nf001y4gvlcr2x4ex4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-060 心理阴影面积 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-060%20%E5%BF%83%E7%90%86%E9%98%B4%E5%BD%B1%E9%9D%A2%E7%A7%AF%20(5%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-21T13:24:53.645Z" itemprop="datePublished">2022-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><p><img src="https://img-blog.csdnimg.cn/2d67ca8633394b1bb1813e7655f755f5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>这是一幅心理阴影面积图。我们都以为自己可以匀速前进（图中蓝色直线），而拖延症晚期的我们往往执行的是最后时刻的疯狂赶工（图中的红色折线）。由红、蓝线围出的面积，就是我们在做作业时的心理阴影面积。</p>
+<p>现给出红色拐点的坐标 (x,y)，要求你算出这个心理阴影面积。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出 2 个不超过 100 的正整数 x 和 y，并且保证有 x&gt;y。这里假设横、纵坐标的最大值（即截止日和最终完成度）都是 100。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中输出心理阴影面积。</p>
+<p>友情提醒：三角形的面积 = 底边长 x 高 / 2；矩形面积 = 底边长 x 高。嫑想得太复杂，这是一道 5 分考减法的题……</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>90 10</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>4000</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,<span class="number">50</span>*(x-y));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-060%20%E5%BF%83%E7%90%86%E9%98%B4%E5%BD%B1%E9%9D%A2%E7%A7%AF%20(5%20%E5%88%86)/" data-id="ckze939na001m4gvl23qj5i13" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-059 敲笨钟 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-059%20%E6%95%B2%E7%AC%A8%E9%92%9F%20(20%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-21T13:24:53.645Z" itemprop="datePublished">2022-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>微博上有个自称“大笨钟V”的家伙，每天敲钟催促码农们爱惜身体早点睡觉。为了增加敲钟的趣味性，还会糟改几句古诗词。其糟改的方法为：去网上搜寻压“ong”韵的古诗词，把句尾的三个字换成“敲笨钟”。例如唐代诗人李贺有名句曰：“寻章摘句老雕虫，晓月当帘挂玉弓”，其中“虫”（chong）和“弓”（gong）都压了“ong”韵。于是这句诗就被糟改为“寻章摘句老雕虫，晓月当帘敲笨钟”。</p>
+<p>现在给你一大堆古诗词句，要求你写个程序自动将压“ong”韵的句子糟改成“敲笨钟”。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入首先在第一行给出一个不超过 20 的正整数 N。随后 N 行，每行用汉语拼音给出一句古诗词，分上下两半句，用逗号 , 分隔，句号 . 结尾。相邻两字的拼音之间用一个空格分隔。题目保证每个字的拼音不超过 6 个字符，每行字符的总长度不超过 100，并且下半句诗至少有 3 个字。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每一行诗句，判断其是否压“ong”韵。即上下两句末尾的字都是“ong”结尾。如果是压此韵的，就按题面方法糟改之后输出，输出格式同输入；否则输出 Skipped，即跳过此句。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>5<br>xun zhang zhai ju lao diao chong, xiao yue dang lian gua yu gong.<br>tian sheng wo cai bi you yong, qian jin san jin huan fu lai.<br>xue zhui rou zhi leng wei rong, an xiao chen jing shu wei long.<br>zuo ye xing chen zuo ye feng, hua lou xi pan gui tang dong.<br>ren xian gui hua luo, ye jing chun shan kong.</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>xun zhang zhai ju lao diao chong, xiao yue dang lian qiao ben zhong.<br>Skipped<br>xue zhui rou zhi leng wei rong, an xiao chen jing qiao ben zhong.<br>Skipped<br>Skipped</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p><strong>易错点提示：</strong></p>
+<ol>
+<li>关于输入：<br>因为古诗有空格，所以用 gets() 来接收，同样需要用 getchar() 来吸收回车；</li>
+<li>关于判断：<br>遍历古诗，需要寻找是否押韵，也就是只需要寻找每一句最后3个字符即可；所以只需要寻找 ‘<strong>,</strong>‘ 和 ‘<strong>.</strong>‘ ，然后再判断其前3位是否为 “ong” 即可；</li>
+<li>关于输出：<br>由于是把最后3个字替换为敲笨种，每个字都是以空格隔开的，只需要逆序遍历，寻找3个空格即可。<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">105</span>];</span><br><span class="line">    <span class="keyword">int</span> N, i, j, k, len, flag1 = <span class="number">0</span>, flag2 = <span class="number">0</span>, count = <span class="number">0</span>, t = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag1 = <span class="number">0</span>, flag2 = <span class="number">0</span>, count = <span class="number">0</span>, t = <span class="number">0</span>;</span><br><span class="line">        gets(str);</span><br><span class="line">        len = <span class="built_in">strlen</span>(str);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; len; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[j] == <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (str[j - <span class="number">3</span>] == <span class="string">&#x27;o&#x27;</span> &amp;&amp; str[j - <span class="number">2</span>] == <span class="string">&#x27;n&#x27;</span> &amp;&amp; str[j - <span class="number">1</span>] == <span class="string">&#x27;g&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    flag1 = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (str[j] == <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (str[j - <span class="number">3</span>] == <span class="string">&#x27;o&#x27;</span> &amp;&amp; str[j - <span class="number">2</span>] == <span class="string">&#x27;n&#x27;</span> &amp;&amp; str[j - <span class="number">1</span>] == <span class="string">&#x27;g&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    flag2 = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag1 == <span class="number">1</span> &amp;&amp; flag2 == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (k = len - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (str[k] == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                    count++;</span><br><span class="line">                <span class="keyword">if</span> (count == <span class="number">3</span>)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                t++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; len - t; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, str[k]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;qiao ben zhong.\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Skipped\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-059%20%E6%95%B2%E7%AC%A8%E9%92%9F%20(20%20%E5%88%86)/" data-id="ckze939nb001n4gvl7w7d2dpj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-062 幸运彩票 (15 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-062%20%E5%B9%B8%E8%BF%90%E5%BD%A9%E7%A5%A8%20(15%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-21T13:24:53.645Z" itemprop="datePublished">2022-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>彩票的号码有 6 位数字，若一张彩票的前 3 位上的数之和等于后 3 位上的数之和，则称这张彩票是幸运的。本题就请你判断给定的彩票是不是幸运的。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在第一行中给出一个正整数 N（≤ 100）。随后 N 行，每行给出一张彩票的 6 位数字。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每张彩票，如果它是幸运的，就在一行中输出 You are lucky!；否则输出 Wish you good luck.。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>2<br>233008<br>123456</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>You are lucky!<br>Wish you good luck.</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>因为题目给定了彩票只有6位，且无空格，所以可以用 scanf 输入，当做数组做，将字符转化为整形求和比较即可。</p>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, i, j, sum1, sum2;</span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, num);</span><br><span class="line">        sum1 = <span class="number">0</span>, sum2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum1 += num[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">3</span>; j &lt; <span class="number">6</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum2 += num[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum1 == sum2)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;You are lucky!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Wish you good luck.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-062%20%E5%B9%B8%E8%BF%90%E5%BD%A9%E7%A5%A8%20(15%20%E5%88%86)/" data-id="ckze939nc001p4gvl0c6b1750" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L1-061 新胖子公式 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-061%20%E6%96%B0%E8%83%96%E5%AD%90%E5%85%AC%E5%BC%8F%20(10%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-01-21T13:24:53.645Z" itemprop="datePublished">2022-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>根据钱江晚报官方微博的报导，最新的肥胖计算方法为：体重(kg) / 身高(m) 的平方。如果超过 25，你就是胖子。于是本题就请你编写程序自动判断一个人到底算不算胖子。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出两个正数，依次为一个人的体重（以 kg 为单位）和身高（以 m 为单位），其间以空格分隔。其中体重不超过 1000 kg，身高不超过 3.0 m。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>首先输出将该人的体重和身高代入肥胖公式的计算结果，保留小数点后 1 位。如果这个数值大于 25，就在第二行输出 PANG，否则输出 Hai Xing。</p>
+</blockquote>
+<p><strong>输入样例 1：</strong></p>
+<blockquote>
+<p>100.1 1.74</p>
+</blockquote>
+<p><strong>输出样例 1：</strong></p>
+<blockquote>
+<p>33.1<br>PANG</p>
+</blockquote>
+<p><strong>输入样例 2：</strong></p>
+<blockquote>
+<p>65 1.70</p>
+</blockquote>
+<p><strong>输出样例 2：</strong></p>
+<blockquote>
+<p>22.5<br>Hai Xing</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> weight, high, s;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf&quot;</span>, &amp;weight, &amp;high);</span><br><span class="line">	s = weight / (high * high);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.1f\n&quot;</span>, s);</span><br><span class="line">	<span class="keyword">if</span> (s &gt; <span class="number">25</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;PANG&quot;</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Hai Xing&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/21/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-061%20%E6%96%B0%E8%83%96%E5%AD%90%E5%85%AC%E5%BC%8F%20(10%20%E5%88%86)/" data-id="ckze939nd001r4gvl1pln7l0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -595,7 +624,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -614,7 +643,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
     </div>
   </div>
 
@@ -627,23 +656,23 @@
       <ul>
         
           <li>
-            <a href="/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-012%20%E5%85%B3%E4%BA%8E%E5%A0%86%E7%9A%84%E5%88%A4%E6%96%AD%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-002%20%E9%93%BE%E8%A1%A8%E5%8E%BB%E9%87%8D%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-013%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-003%20%E6%9C%88%E9%A5%BC%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/01/26/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-001%20%E7%B4%A7%E6%80%A5%E6%95%91%E6%8F%B4%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-079%20%E5%A4%A9%E6%A2%AF%E8%B5%9B%E7%9A%84%E5%96%84%E8%89%AF%20(20%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 定每个人的家庭成员和其自己名下的房产，请你统计出每个家庭的人口数、人均房产面积及房产套数。  输入格式：输入第一行给出一个正整数N（≤1000），随后N行，每行按下列格式给出一个人的房产：  编号 父 母 k 孩子1 … 孩子k 房产套数 总面积  其中编号是每个人独有的一个4位数的编号；父和母分别是该编号对应的这个人的父母的编号（如果已经过世，则显示**-1）；k（0≤k≤5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-007%20%E5%AE%B6%E5%BA%AD%E6%88%BF%E4%BA%A7%20(25%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 定每个人的家庭成员和其自己名下的房产，请你统计出每个家庭的人口数、人均房产面积及房产套数。  输入格式：输入第一行给出一个正整数N（≤1000），随后N行，每行按下列格式给出一个人的房产：  编号 父 母 k 孩子1 … 孩子k 房产套数 总面积  其中编号是每个人独有的一个4位数的编号；父和母分别是该编号对应的这个人的父母的编号（如果已经过世，则显示**-1）；k（0≤k≤5">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-07T15:23:17.508Z">
+<meta property="article:modified_time" content="2022-02-06T06:54:50.180Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L2-007 家庭房产 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-007%20%E5%AE%B6%E5%BA%AD%E6%88%BF%E4%BA%A7%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.508Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>定每个人的家庭成员和其自己名下的房产，请你统计出每个家庭的人口数、人均房产面积及房产套数。</p>
+</blockquote>
+<p><strong>输入格式：</strong><br>输入第一行给出一个正整数N（≤1000），随后N行，每行按下列格式给出一个人的房产：</p>
+<blockquote>
+<p>编号 父 母 k 孩子1 … 孩子k 房产套数 总面积</p>
+</blockquote>
+<p>其中<strong>编号</strong>是每个人独有的一个4位数的编号；<strong>父</strong>和<strong>母</strong>分别是该编号对应的这个人的父母的编号（如果已经过世，则显示**-1<strong>）；</strong>k<strong>（0≤</strong>k<strong>≤5）是该人的子女的个数；</strong>孩子i**是其子女的编号。</p>
+<p><strong>输出格式：</strong><br>首先在第一行输出家庭个数（所有有亲属关系的人都属于同一个家庭）。随后按下列格式输出每个家庭的信息：</p>
+<blockquote>
+<p>家庭成员的最小编号 家庭人口数 人均房产套数 人均房产面积</p>
+</blockquote>
+<p>其中人均值要求保留小数点后3位。家庭信息首先按人均面积降序输出，若有并列，则按成员编号的升序输出。</p>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>10<br>6666 5551 5552 1 7777 1 100<br>1234 5678 9012 1 0002 2 300<br>8888 -1 -1 0 1 1000<br>2468 0001 0004 1 2222 1 500<br>7777 6666 -1 0 2 300<br>3721 -1 -1 1 2333 2 150<br>9012 -1 -1 3 1236 1235 1234 1 100<br>1235 5678 9012 0 1 50<br>2222 1236 2468 2 6661 6662 1 300<br>2333 -1 3721 3 6661 6662 6663 1 100</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>3<br>8888 1 1.000 1000.000<br>0001 15 0.600 100.000<br>5551 4 0.750 100.000</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><h3 id="（1）整体架构"><a href="#（1）整体架构" class="headerlink" title="（1）整体架构"></a>（1）整体架构</h3><p>在输入时使用并查集的思维，将数据存放至其中，找到每个家庭最小的成员，用该成员代表整个家庭，先算房产总和，同时计算家庭人数，再计算个人房产，然后创建一个结构体 NODE2，存放将 NODE1 中无效数据清除以后的数据，然后按照题目要求排序即可。</p>
+<h3 id="（2）初始化"><a href="#（2）初始化" class="headerlink" title="（2）初始化"></a>（2）初始化</h3><p>由于需要使用 NODE1 中的 flag 来判断该家庭是否遍历，，以及并查集用到的数组 home 都需要初始化，所以单独写一个初始化函数。</p>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		home[i] = i;</span><br><span class="line">		b[i].flag = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="（3）类并查集思维"><a href="#（3）类并查集思维" class="headerlink" title="（3）类并查集思维"></a>（3）类并查集思维</h3><p>前提：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="keyword">int</span> home[<span class="number">10010</span>]; </span><br></pre></td></tr></table></figure>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != home[x])</span><br><span class="line">		x = home[x];</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> f_a = find(a);</span><br><span class="line">	<span class="keyword">int</span> f_b = find(b);</span><br><span class="line">	<span class="keyword">if</span> (f_a &gt; f_b)</span><br><span class="line">		home[f_a] = f_b;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (f_a &lt; f_b)</span><br><span class="line">		home[f_b] = f_a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="（4）排序"><a href="#（4）排序" class="headerlink" title="（4）排序"></a>（4）排序</h3><p>这里其实可以直接用系统给的 qsort 函数，博主尝试了很久都没有成功，所以直接手动实现了。</p>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">NODE2 t;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (c[j].area &lt; c[j + <span class="number">1</span>].area)</span><br><span class="line">		&#123;</span><br><span class="line">			t = c[j];</span><br><span class="line">			c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">			c[j + <span class="number">1</span>] = t;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c[j].area == c[j + <span class="number">1</span>].area)</span><br><span class="line">		&#123;				</span><br><span class="line">			<span class="keyword">if</span> (c[j].id &gt; c[j + <span class="number">1</span>].id)</span><br><span class="line">			&#123;</span><br><span class="line">				t = c[j];</span><br><span class="line">				c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">				c[j + <span class="number">1</span>] = t;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//// 快排</span></span><br><span class="line"><span class="comment">//int cmp(const void* e1, const void* e2);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> people;</span><br><span class="line">	<span class="keyword">int</span> fa;</span><br><span class="line">	<span class="keyword">int</span> ma;</span><br><span class="line">	<span class="keyword">int</span> kid_number;</span><br><span class="line">	<span class="keyword">double</span> sum, area;</span><br><span class="line">	<span class="keyword">int</span> kid[<span class="number">10</span>];</span><br><span class="line">&#125; NODE;</span><br><span class="line">NODE a[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> area, sum;</span><br><span class="line">	<span class="keyword">int</span> person, id, flag;</span><br><span class="line">&#125; NODE1;</span><br><span class="line">NODE1 b[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> area, sum;</span><br><span class="line">	<span class="keyword">int</span> person, id;</span><br><span class="line">&#125; NODE2;</span><br><span class="line">NODE2 c[<span class="number">110</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> i, j, k;				<span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>, cnt = <span class="number">0</span>; 	<span class="comment">// 家庭个数</span></span><br><span class="line"><span class="keyword">int</span> visit[<span class="number">10010</span>] = &#123; <span class="number">0</span> &#125;;   <span class="comment">// 某人是否存在</span></span><br><span class="line"><span class="keyword">int</span> home[<span class="number">10010</span>];            <span class="comment">// 并查集所用数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 并查集</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	init();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;a[i].people, &amp;a[i].fa, &amp;a[i].ma, &amp;a[i].kid_number);</span><br><span class="line">		visit[a[i].people] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 有爸爸</span></span><br><span class="line">		<span class="keyword">if</span> (a[i].fa != <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			Union(a[i].people, a[i].fa);</span><br><span class="line">			visit[a[i].fa] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 有妈妈</span></span><br><span class="line">		<span class="keyword">if</span> (a[i].ma != <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			Union(a[i].people, a[i].ma);</span><br><span class="line">			visit[a[i].ma] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 孩子</span></span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; a[i].kid_number; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i].kid[j]);</span><br><span class="line">			Union(a[i].people, a[i].kid[j]);</span><br><span class="line">			visit[a[i].kid[j]] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 房产套数 和 总面积</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf&quot;</span>, &amp;a[i].sum, &amp;a[i].area);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 以孩子为下标计算全家房产</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> id = find(a[i].people);</span><br><span class="line">		b[id].id = id;</span><br><span class="line">		b[id].sum += a[i].sum;</span><br><span class="line">		b[id].area += a[i].area;</span><br><span class="line">		b[id].flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算家庭人数</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (visit[i] != <span class="number">0</span>)</span><br><span class="line">			b[find(i)].person++;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag != <span class="number">0</span>)</span><br><span class="line">			cnt++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算个人资产</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag)</span><br><span class="line">		&#123;</span><br><span class="line">			b[i].sum = b[i].sum * <span class="number">1.0</span> / b[i].person;</span><br><span class="line">			b[i].area = b[i].area * <span class="number">1.0</span> / b[i].person;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 新建结构体，留下有效项</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			c[count].id = b[i].id;</span><br><span class="line">			c[count].person = b[i].person;</span><br><span class="line">			c[count].sum = b[i].sum;</span><br><span class="line">			c[count].area = b[i].area;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//qsort(c, max, sizeof(c[0]), cmp);</span></span><br><span class="line"></span><br><span class="line">	NODE2 t;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (c[j].area &lt; c[j + <span class="number">1</span>].area)</span><br><span class="line">			&#123;</span><br><span class="line">				t = c[j];</span><br><span class="line">				c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">				c[j + <span class="number">1</span>] = t;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (c[j].area == c[j + <span class="number">1</span>].area)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (c[j].id &gt; c[j + <span class="number">1</span>].id)</span><br><span class="line">				&#123;</span><br><span class="line">					t = c[j];</span><br><span class="line">					c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">					c[j + <span class="number">1</span>] = t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, count);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%04d %d %.3lf %.3lf\n&quot;</span>, c[i].id, c[i].person, c[i].sum, c[i].area);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		home[i] = i;</span><br><span class="line">		b[i].flag = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != home[x])</span><br><span class="line">		x = home[x];</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> f_a = find(a);</span><br><span class="line">	<span class="keyword">int</span> f_b = find(b);</span><br><span class="line">	<span class="keyword">if</span> (f_a &gt; f_b)</span><br><span class="line">		home[f_a] = f_b;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (f_a &lt; f_b)</span><br><span class="line">		home[f_b] = f_a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//int cmp(const void* e1, const void* e2)</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//	node3* a = (node3*)e1;</span></span><br><span class="line"><span class="comment">//	node3* b = (node3*)e2;</span></span><br><span class="line"><span class="comment">//	if (a-&gt;house_area != b-&gt;house_area)</span></span><br><span class="line"><span class="comment">//		return ((a-&gt;house_area) - (b-&gt;house_area));</span></span><br><span class="line"><span class="comment">//	else</span></span><br><span class="line"><span class="comment">//		return ((b-&gt;people) - (a-&gt;people));</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-007%20%E5%AE%B6%E5%BA%AD%E6%88%BF%E4%BA%A7%20(25%20%E5%88%86)/" data-id="ckze939nk002c4gvl4t8afnfr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-008%20%E6%9C%80%E9%95%BF%E5%AF%B9%E7%A7%B0%E5%AD%90%E4%B8%B2%20(25%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-012%20%E5%85%B3%E4%BA%8E%E5%A0%86%E7%9A%84%E5%88%A4%E6%96%AD%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-013%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
