@@ -64,6 +64,292 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言：L2-007 家庭房产 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-007%20%E5%AE%B6%E5%BA%AD%E6%88%BF%E4%BA%A7%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.508Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>定每个人的家庭成员和其自己名下的房产，请你统计出每个家庭的人口数、人均房产面积及房产套数。</p>
+</blockquote>
+<p><strong>输入格式：</strong><br>输入第一行给出一个正整数N（≤1000），随后N行，每行按下列格式给出一个人的房产：</p>
+<blockquote>
+<p>编号 父 母 k 孩子1 … 孩子k 房产套数 总面积</p>
+</blockquote>
+<p>其中<strong>编号</strong>是每个人独有的一个4位数的编号；<strong>父</strong>和<strong>母</strong>分别是该编号对应的这个人的父母的编号（如果已经过世，则显示**-1<strong>）；</strong>k<strong>（0≤</strong>k<strong>≤5）是该人的子女的个数；</strong>孩子i**是其子女的编号。</p>
+<p><strong>输出格式：</strong><br>首先在第一行输出家庭个数（所有有亲属关系的人都属于同一个家庭）。随后按下列格式输出每个家庭的信息：</p>
+<blockquote>
+<p>家庭成员的最小编号 家庭人口数 人均房产套数 人均房产面积</p>
+</blockquote>
+<p>其中人均值要求保留小数点后3位。家庭信息首先按人均面积降序输出，若有并列，则按成员编号的升序输出。</p>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>10<br>6666 5551 5552 1 7777 1 100<br>1234 5678 9012 1 0002 2 300<br>8888 -1 -1 0 1 1000<br>2468 0001 0004 1 2222 1 500<br>7777 6666 -1 0 2 300<br>3721 -1 -1 1 2333 2 150<br>9012 -1 -1 3 1236 1235 1234 1 100<br>1235 5678 9012 0 1 50<br>2222 1236 2468 2 6661 6662 1 300<br>2333 -1 3721 3 6661 6662 6663 1 100</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>3<br>8888 1 1.000 1000.000<br>0001 15 0.600 100.000<br>5551 4 0.750 100.000</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><h3 id="（1）整体架构"><a href="#（1）整体架构" class="headerlink" title="（1）整体架构"></a>（1）整体架构</h3><p>在输入时使用并查集的思维，将数据存放至其中，找到每个家庭最小的成员，用该成员代表整个家庭，先算房产总和，同时计算家庭人数，再计算个人房产，然后创建一个结构体 NODE2，存放将 NODE1 中无效数据清除以后的数据，然后按照题目要求排序即可。</p>
+<h3 id="（2）初始化"><a href="#（2）初始化" class="headerlink" title="（2）初始化"></a>（2）初始化</h3><p>由于需要使用 NODE1 中的 flag 来判断该家庭是否遍历，，以及并查集用到的数组 home 都需要初始化，所以单独写一个初始化函数。</p>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		home[i] = i;</span><br><span class="line">		b[i].flag = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="（3）类并查集思维"><a href="#（3）类并查集思维" class="headerlink" title="（3）类并查集思维"></a>（3）类并查集思维</h3><p>前提：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="keyword">int</span> home[<span class="number">10010</span>]; </span><br></pre></td></tr></table></figure>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != home[x])</span><br><span class="line">		x = home[x];</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> f_a = find(a);</span><br><span class="line">	<span class="keyword">int</span> f_b = find(b);</span><br><span class="line">	<span class="keyword">if</span> (f_a &gt; f_b)</span><br><span class="line">		home[f_a] = f_b;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (f_a &lt; f_b)</span><br><span class="line">		home[f_b] = f_a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="（4）排序"><a href="#（4）排序" class="headerlink" title="（4）排序"></a>（4）排序</h3><p>这里其实可以直接用系统给的 qsort 函数，博主尝试了很久都没有成功，所以直接手动实现了。</p>
+<p><strong>具体实现：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">NODE2 t;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (c[j].area &lt; c[j + <span class="number">1</span>].area)</span><br><span class="line">		&#123;</span><br><span class="line">			t = c[j];</span><br><span class="line">			c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">			c[j + <span class="number">1</span>] = t;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c[j].area == c[j + <span class="number">1</span>].area)</span><br><span class="line">		&#123;				</span><br><span class="line">			<span class="keyword">if</span> (c[j].id &gt; c[j + <span class="number">1</span>].id)</span><br><span class="line">			&#123;</span><br><span class="line">				t = c[j];</span><br><span class="line">				c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">				c[j + <span class="number">1</span>] = t;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//// 快排</span></span><br><span class="line"><span class="comment">//int cmp(const void* e1, const void* e2);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> people;</span><br><span class="line">	<span class="keyword">int</span> fa;</span><br><span class="line">	<span class="keyword">int</span> ma;</span><br><span class="line">	<span class="keyword">int</span> kid_number;</span><br><span class="line">	<span class="keyword">double</span> sum, area;</span><br><span class="line">	<span class="keyword">int</span> kid[<span class="number">10</span>];</span><br><span class="line">&#125; NODE;</span><br><span class="line">NODE a[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> area, sum;</span><br><span class="line">	<span class="keyword">int</span> person, id, flag;</span><br><span class="line">&#125; NODE1;</span><br><span class="line">NODE1 b[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> area, sum;</span><br><span class="line">	<span class="keyword">int</span> person, id;</span><br><span class="line">&#125; NODE2;</span><br><span class="line">NODE2 c[<span class="number">110</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> i, j, k;				<span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>, cnt = <span class="number">0</span>; 	<span class="comment">// 家庭个数</span></span><br><span class="line"><span class="keyword">int</span> visit[<span class="number">10010</span>] = &#123; <span class="number">0</span> &#125;;   <span class="comment">// 某人是否存在</span></span><br><span class="line"><span class="keyword">int</span> home[<span class="number">10010</span>];            <span class="comment">// 并查集所用数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 并查集</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	init();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;a[i].people, &amp;a[i].fa, &amp;a[i].ma, &amp;a[i].kid_number);</span><br><span class="line">		visit[a[i].people] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 有爸爸</span></span><br><span class="line">		<span class="keyword">if</span> (a[i].fa != <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			Union(a[i].people, a[i].fa);</span><br><span class="line">			visit[a[i].fa] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 有妈妈</span></span><br><span class="line">		<span class="keyword">if</span> (a[i].ma != <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			Union(a[i].people, a[i].ma);</span><br><span class="line">			visit[a[i].ma] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 孩子</span></span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; a[i].kid_number; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i].kid[j]);</span><br><span class="line">			Union(a[i].people, a[i].kid[j]);</span><br><span class="line">			visit[a[i].kid[j]] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 房产套数 和 总面积</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf&quot;</span>, &amp;a[i].sum, &amp;a[i].area);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 以孩子为下标计算全家房产</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> id = find(a[i].people);</span><br><span class="line">		b[id].id = id;</span><br><span class="line">		b[id].sum += a[i].sum;</span><br><span class="line">		b[id].area += a[i].area;</span><br><span class="line">		b[id].flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算家庭人数</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (visit[i] != <span class="number">0</span>)</span><br><span class="line">			b[find(i)].person++;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag != <span class="number">0</span>)</span><br><span class="line">			cnt++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算个人资产</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag)</span><br><span class="line">		&#123;</span><br><span class="line">			b[i].sum = b[i].sum * <span class="number">1.0</span> / b[i].person;</span><br><span class="line">			b[i].area = b[i].area * <span class="number">1.0</span> / b[i].person;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 新建结构体，留下有效项</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b[i].flag != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			c[count].id = b[i].id;</span><br><span class="line">			c[count].person = b[i].person;</span><br><span class="line">			c[count].sum = b[i].sum;</span><br><span class="line">			c[count].area = b[i].area;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//qsort(c, max, sizeof(c[0]), cmp);</span></span><br><span class="line"></span><br><span class="line">	NODE2 t;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (c[j].area &lt; c[j + <span class="number">1</span>].area)</span><br><span class="line">			&#123;</span><br><span class="line">				t = c[j];</span><br><span class="line">				c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">				c[j + <span class="number">1</span>] = t;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (c[j].area == c[j + <span class="number">1</span>].area)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (c[j].id &gt; c[j + <span class="number">1</span>].id)</span><br><span class="line">				&#123;</span><br><span class="line">					t = c[j];</span><br><span class="line">					c[j] = c[j + <span class="number">1</span>];</span><br><span class="line">					c[j + <span class="number">1</span>] = t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, count);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%04d %d %.3lf %.3lf\n&quot;</span>, c[i].id, c[i].person, c[i].sum, c[i].area);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10010</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		home[i] = i;</span><br><span class="line">		b[i].flag = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != home[x])</span><br><span class="line">		x = home[x];</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> f_a = find(a);</span><br><span class="line">	<span class="keyword">int</span> f_b = find(b);</span><br><span class="line">	<span class="keyword">if</span> (f_a &gt; f_b)</span><br><span class="line">		home[f_a] = f_b;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (f_a &lt; f_b)</span><br><span class="line">		home[f_b] = f_a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//int cmp(const void* e1, const void* e2)</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//	node3* a = (node3*)e1;</span></span><br><span class="line"><span class="comment">//	node3* b = (node3*)e2;</span></span><br><span class="line"><span class="comment">//	if (a-&gt;house_area != b-&gt;house_area)</span></span><br><span class="line"><span class="comment">//		return ((a-&gt;house_area) - (b-&gt;house_area));</span></span><br><span class="line"><span class="comment">//	else</span></span><br><span class="line"><span class="comment">//		return ((b-&gt;people) - (a-&gt;people));</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-007%20%E5%AE%B6%E5%BA%AD%E6%88%BF%E4%BA%A7%20(25%20%E5%88%86)/" data-id="ckze939nk002c4gvl4t8afnfr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L2-008 最长对称子串 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-008%20%E6%9C%80%E9%95%BF%E5%AF%B9%E7%A7%B0%E5%AD%90%E4%B8%B2%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.506Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>对给定的字符串，本题要求你输出最长对称子串的长度。<br>例如，给定<strong>Is PAT&amp;TAP symmetric?<strong>，最长对称子串为</strong>s PAT&amp;TAP s</strong>，于是你应该输出11。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入在一行中给出长度不超过1000的非空字符串。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中输出最长对称子串的长度。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>Is PAT&amp;TAP symmetric?</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>11</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>子问题：dp [ i ] [ j ] 是否为回文字符串。<br>dp[ i ] [ j ] ：从字符串的第 i 个出发到第 j 个的字符串；</p>
+<p>dp[ i ] [ j ] == 1 ：该字符串为回文字符串；<br>dp[ i ] [ j ] == 1 的前提：<strong>dp[ i + 1 ] [ j - 1 ] == 1</strong> 并且 **str[ i ] == str[ j ]**；</p>
+<p><strong>易错点提示：</strong><br>需要给定前提条件： </p>
+<ol>
+<li>标记 dp[ i ] [ i ] == 1；</li>
+<li>判断 dp [ i ] [ i + 1] == 1 成立的情况，并标记。</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 1010</span></span><br><span class="line"><span class="keyword">char</span> str[max];</span><br><span class="line"><span class="keyword">int</span> dp[max][max] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> i, j, k;</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    gets(str);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(str); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; <span class="built_in">strlen</span>(str) - <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == str[i + <span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                len = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (k = <span class="number">3</span>; k &lt;= <span class="built_in">strlen</span>(str); k++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i + k - <span class="number">1</span> &lt; <span class="built_in">strlen</span>(str); i++) </span><br><span class="line">        &#123;</span><br><span class="line">            j = i + k - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == str[j] &amp;&amp; dp[i + <span class="number">1</span>][j - <span class="number">1</span>] == <span class="number">1</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j] = <span class="number">1</span>;</span><br><span class="line">                len = k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,len);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-008%20%E6%9C%80%E9%95%BF%E5%AF%B9%E7%A7%B0%E5%AD%90%E4%B8%B2%20(25%20%E5%88%86)/" data-id="ckze939nl002d4gvl3rkd3vcx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L2-009 抢红包 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-009%20%E6%8A%A2%E7%BA%A2%E5%8C%85%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.502Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>没有人没抢过红包吧…… 这里给出N个人之间互相发红包、抢红包的记录，请你统计一下他们抢红包的收获。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出一个正整数N（≤ 10^4^），即参与发红包和抢红包的总人数，则这些人从1到N编号。随后N行，第i行给出编号为i的人发红包的记录，格式如下： K<br>N<sub>1</sub> P<sub>1</sub> ⋯N<sub>K</sub> P<sub>K</sub><br>其中K（0 ≤ K ≤ 20）是发出去的红包个数，N<sub>i</sub> 是抢到红包的人的编号，P<sub>i</sub> （&gt;0）是其抢到的红包金额（以分为单位）。注意：对于同一个人发出的红包，每人最多只能抢1次，不能重复抢。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>按照收入金额从高到低的递减顺序输出每个人的编号和收入金额（以元为单位，输出小数点后2位）。每个人的信息占一行，两数字间有1个空格。如果收入金额有并列，则按抢到红包的个数递减输出；如果还有并列，则按个人编号递增输出。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>10<br>3 2 22 10 58 8 125<br>5 1 345 3 211 5 233 7 13 8 101<br>1 7 8800<br>2 1 1000 2 1000<br>2 4 250 10 320<br>6 5 11 9 22 8 33 7 44 10 55 4 2<br>1 3 8800<br>2 1 23 2 123<br>1 8 250<br>4 2 121 4 516 7 112 9 10</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>1 11.63<br>2 3.63<br>8 3.63<br>3 2.11<br>7 1.69<br>6 -1.67<br>9 -2.18<br>10 -3.26<br>5 -3.26<br>4 -12.32</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>很简单的一个模拟算法，按照题目要求去做即可；</p>
+<p><strong>易错点提示：</strong></p>
+<ol>
+<li>题目给的单位是分，而最终结果为元，所以要注意使用浮点型；</li>
+<li>注意输入存值时，下标一一对应；</li>
+<li>注意排序时的条件；</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 10010</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	<span class="keyword">double</span> money;</span><br><span class="line">&#125;node;</span><br><span class="line">node a[max];</span><br><span class="line"><span class="keyword">int</span> N, K;</span><br><span class="line"><span class="keyword">int</span> i, j;</span><br><span class="line"><span class="keyword">int</span> n, p;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">		a[i].id = i + <span class="number">1</span>;</span><br><span class="line">		a[i].num = <span class="number">0</span>;</span><br><span class="line">		a[i].money = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;K);</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; K; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;p);</span><br><span class="line">			a[n - <span class="number">1</span>].money += p;</span><br><span class="line">			a[i].money -= p;</span><br><span class="line">			a[n - <span class="number">1</span>].num++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	qsort(a, N, <span class="keyword">sizeof</span>(a[<span class="number">0</span>]), cmp);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d %.2lf\n&quot;</span>, a[i].id, a[i].money / <span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* e1, <span class="keyword">const</span> <span class="keyword">void</span>* e2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	node* a = (node*)e1;</span><br><span class="line">	node* b = (node*)e2;</span><br><span class="line">	<span class="keyword">if</span> (a-&gt;money == b-&gt;money) &#123;</span><br><span class="line">		<span class="keyword">if</span> (a-&gt;num == b-&gt;num) &#123;</span><br><span class="line">			<span class="keyword">return</span> a-&gt;id &gt; b-&gt;id ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> a-&gt;num &lt; b-&gt;num ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a-&gt;money &lt; b-&gt;money ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-009%20%E6%8A%A2%E7%BA%A2%E5%8C%85%20(25%20%E5%88%86)/" data-id="ckze939nm002g4gvl2kay52ru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L2-010 排座位 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-010%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.499Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>布置宴席最微妙的事情，就是给前来参宴的各位宾客安排座位。无论如何，总不能把两个死对头排到同一张宴会桌旁！这个艰巨任务现在就交给你，对任何一对客人，请编写程序告诉主人他们是否能被安排同席。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出3个正整数：<strong>N</strong>（≤100），即前来参宴的宾客总人数，则这些人从1到<strong>N</strong>编号；M为已知两两宾客之间的关系数；<strong>K</strong>为查询的条数。随后<strong>M</strong>行，每行给出一对宾客之间的关系，格式为：<strong>宾客1 宾客2 关系</strong>，其中<strong>关系</strong>为1表示是朋友，-1表示是死对头。注意两个人不可能既是朋友又是敌人。最后<strong>K</strong>行，每行给出一对需要查询的宾客编号。<br>这里假设朋友的朋友也是朋友。但敌人的敌人并不一定就是朋友，朋友的敌人也不一定是敌人。只有单纯直接的敌对关系才是绝对不能同席的。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每个查询输出一行结果：如果两位宾客之间是朋友，且没有敌对关系，则输出<strong>No problem</strong>；如果他们之间并不是朋友，但也不敌对，则输出<strong>OK</strong>；如果他们之间有敌对，然而也有共同的朋友，则输出<strong>OK but…<strong>；如果他们之间只有敌对关系，则输出</strong>No way</strong>。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>7 8 4<br>5 6 1<br>2 7 -1<br>1 3 1<br>3 4 1<br>6 7 -1<br>1 2 1<br>1 4 1<br>2 3 -1<br>3 4<br>5 7<br>2 3<br>7 2</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>No problem<br>OK<br>OK but…<br>No way</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><ul>
+<li>由于题目要求朋友的朋友是朋友，所以很自然就联想到并查集；</li>
+<li>用一个二维数组 visit 来标记仇人关系；</li>
+</ul>
+<p><strong>易错点提示：</strong></p>
+<ol>
+<li>并查集数组一定要初始化；</li>
+<li>仇人关系一定要标记双方；</li>
+</ol>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 110</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, k;</span><br><span class="line"><span class="keyword">int</span> i, j;</span><br><span class="line"><span class="keyword">int</span> m1, m2, flag;</span><br><span class="line"><span class="keyword">int</span> k1, k2;</span><br><span class="line"><span class="keyword">int</span> visit[max][max] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Friend[max];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">	init();</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;m1, &amp;m2, &amp;flag);</span><br><span class="line">		<span class="comment">// 朋友</span></span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 朋友的朋友是朋友</span></span><br><span class="line">			Union(m1, m2);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 敌人</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 双方都要标记</span></span><br><span class="line">			visit[m1][m2] = <span class="number">1</span>;</span><br><span class="line">			visit[m2][m1] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;m1, &amp;m2);</span><br><span class="line">		k1 = find(m1);</span><br><span class="line">		k2 = find(m2);</span><br><span class="line">		<span class="comment">// 两位宾客之间是朋友，且没有敌对关系</span></span><br><span class="line">		<span class="keyword">if</span> (k1 == k2 &amp;&amp; visit[m1][m2] == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;No problem\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 他们之间并不是朋友，但也不敌对</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (k1 != k2 &amp;&amp; visit[m1][m2] == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 他们之间有敌对，然而也有共同的朋友</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (k1 == k2 &amp;&amp; visit[m1][m2] == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;OK but...\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 他们之间只有敌对关系</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (k1 != k2 &amp;&amp; visit[m1][m2] == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;No way\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; max; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Friend[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != Friend[x])</span><br><span class="line">		x = Friend[x];</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> f_a = find(a);</span><br><span class="line">	<span class="keyword">int</span> f_b = find(b);</span><br><span class="line">	<span class="keyword">if</span> (f_a != f_b)</span><br><span class="line">	&#123;</span><br><span class="line">		Friend[f_a] = f_b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-010%20%E6%8E%92%E5%BA%A7%E4%BD%8D%20(25%20%E5%88%86)/" data-id="ckze939nl002e4gvlh9b19mm6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言：L2-011 玩转二叉树 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-011%20%E7%8E%A9%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-07T15:23:17.496Z" itemprop="datePublished">2022-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>给定一棵二叉树的中序遍历和前序遍历，请你先将树做个镜面反转，再输出反转后的层序遍历的序列。所谓镜面反转，是指将所有非叶结点的左右孩子对换。这里假设键值都是互不相等的正整数。</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出一个正整数N（≤30），是二叉树中结点的个数。第二行给出其中序遍历序列。第三行给出其前序遍历序列。数字间以空格分隔。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>在一行中输出该树反转后的层序遍历的序列。数字间以1个空格分隔，行首尾不得有多余空格。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>7<br>1 2 3 4 5 6 7<br>4 1 3 2 6 5 7</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>4 6 1 7 5 3 2</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>已知先序中序重构二叉树，然后层序遍历时先从右向左遍历即可。</p>
+<h3 id="（1）还原二叉树"><a href="#（1）还原二叉树" class="headerlink" title="（1）还原二叉树"></a>（1）还原二叉树</h3><h4 id="①思路"><a href="#①思路" class="headerlink" title="①思路"></a>①思路</h4><p>以本题为例：<br>先序遍历为：<strong>4 1 3 2 6 5 7</strong>；中序遍历为：<strong>1 2 3 4 5 6 7</strong> </p>
+<ol>
+<li>首先我们需要明白：对于先序遍历，其根节点位于头部；而对于中序遍历，其根节点位于中部；</li>
+<li>根据这个规律，先从先序遍历中找到根节点 “4”，再观察中序遍历，以 “4” 为分界点，将二叉树序列分为两部分，其中 “1 2<br>3”为左子树，“5 6 7”为右子树，这样就找到了第一层；</li>
+<li>继续重复以上操作，以左子树为例，其先序遍历为 “1 3 2”，中序遍历为 “1 2 3”，其根节点为 “1”，观察中序遍历，以 “1” 为分界点，将其分为两部分，其中 “2 3”为右子树，无左子树；</li>
+</ol>
+<h4 id="②代码"><a href="#②代码" class="headerlink" title="②代码"></a>②代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LPNODE <span class="title">insert</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LPNODE tree;</span><br><span class="line">    <span class="keyword">if</span> (start &gt; end) </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = start; i &lt;= end; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] == b[root])</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    tree = (LPNODE)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">    tree-&gt;data = b[root];</span><br><span class="line">    tree-&gt;left = insert(root + <span class="number">1</span>, start, i - <span class="number">1</span>);</span><br><span class="line">    tree-&gt;right = insert(root + i - start + <span class="number">1</span>, i + <span class="number">1</span>, end);</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 50</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义二叉树的节点结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">treeNode</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;NODE, * LPNODE;</span><br><span class="line"></span><br><span class="line"><span class="function">LPNODE <span class="title">insert</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>; <span class="comment">// 二叉树的创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LayerOrder</span><span class="params">(LPNODE tree)</span></span>; <span class="comment">// 层序镜像遍历</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> i, j;           <span class="comment">// 计数</span></span><br><span class="line">LPNODE Tree = <span class="literal">NULL</span>; <span class="comment">// 二叉树</span></span><br><span class="line"><span class="keyword">int</span> a[max], b[max]; <span class="comment">// a-&gt;中序  b-&gt;先序</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    Tree = insert(<span class="number">0</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    LayerOrder(Tree);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 已知先序和中序，求二叉树</span></span><br><span class="line"><span class="function">LPNODE <span class="title">insert</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LPNODE tree;</span><br><span class="line">    <span class="keyword">if</span> (start &gt; end) </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = start; i &lt;= end; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] == b[root])</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    tree = (LPNODE)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NODE));</span><br><span class="line">    tree-&gt;data = b[root];</span><br><span class="line">    tree-&gt;left = insert(root + <span class="number">1</span>, start, i - <span class="number">1</span>);</span><br><span class="line">    tree-&gt;right = insert(root + i - start + <span class="number">1</span>, i + <span class="number">1</span>, end);</span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 层序镜像遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LayerOrder</span><span class="params">(LPNODE tree)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">    LPNODE <span class="built_in">queue</span>[max];</span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">-1</span>; <span class="keyword">int</span> end = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>[end] = tree;</span><br><span class="line">    <span class="keyword">while</span> (start != end) </span><br><span class="line">    &#123;</span><br><span class="line">        start++;<span class="comment">//保证输出的第一个数之前没有空格</span></span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">queue</span>[start]-&gt;data);</span><br><span class="line">        flag++;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">queue</span>[start]-&gt;right != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            end++;</span><br><span class="line">            <span class="built_in">queue</span>[end] = <span class="built_in">queue</span>[start]-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">queue</span>[start]-&gt;left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            end++;</span><br><span class="line">            <span class="built_in">queue</span>[end] = <span class="built_in">queue</span>[start]-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-011%20%E7%8E%A9%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%20(25%20%E5%88%86)/" data-id="ckze939nn002j4gvl2lpb17yc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言：L2-004 这是二叉搜索树吗？ (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/01/27/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-004%20%E8%BF%99%E6%98%AF%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%90%97%EF%BC%9F%20(25%20%E5%88%86)/" class="article-date">
@@ -371,353 +657,11 @@
 
 
   
-    <article id="post-C语言：L1-080 乘法口诀数列 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-080%20%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E6%95%B0%E5%88%97%20(20%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-24T14:28:09.304Z" itemprop="datePublished">2022-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>本题要求你从任意给定的两个 1 位数字 a<sub>1</sub> 和 a<sub>2</sub> 开始，用乘法口诀生成一个数列 {a<sub>n</sub>}，规则为从 a<sub>1</sub> 开始顺次进行，每次将当前数字与后面一个数字相乘，将结果贴在数列末尾。如果结果不是 1 位数，则其每一位都应成为数列的一项。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出 3 个整数，依次为 a<sub>1</sub>、a<sub>2</sub> 和 n，满足 0 ≤ a<sub>1</sub>,a<sub>2</sub>  ≤ 9，0 &lt; n ≤ 10^3^。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出数列的前 n 项。数字间以 1 个空格分隔，行首尾不得有多余空格。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>2 3 10</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>2 3 6 1 8 6 8 4 8 4</p>
-</blockquote>
-<p><strong>样例解释：</strong></p>
-<blockquote>
-<p>数列前 2 项为 2 和 3。从 2 开始，因为 2×3=6，所以第 3 项是 6。因为 3×6=18，所以第 4、5 项分别是 1、8。依次类推…… 最后因为第 6 项有 6×8=48，对应第 10、11 项应该是 4、8。而因为只要求输出前 10 项，所以在输出 4 后结束。</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>用数组 num 来存放数据，count 来计算当前是第几项。<br>每次判断乘积是否小于10：小于10直接存储；大于等于10，分别存放即可。</p>
-<p><strong>注意：由于是乘法口诀表，所以最大为9×9=81，不可能出现三位数以上。</strong></p>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a1, a2, n, count = <span class="number">3</span>, num[<span class="number">1005</span>], i, j, sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a1, &amp;a2, &amp;n);</span><br><span class="line">    num[<span class="number">1</span>] = a1, num[<span class="number">2</span>] = a2;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum = num[i] * num[i + <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (sum &lt; <span class="number">10</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			num[count++] = sum;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			num[count++] = sum / <span class="number">10</span>;</span><br><span class="line">			num[count++] = sum % <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (count &gt; n)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a1);</span><br><span class="line">	<span class="keyword">for</span> (j = <span class="number">2</span>; j &lt;= n; j++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, num[j]);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/24/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-080%20%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E6%95%B0%E5%88%97%20(20%20%E5%88%86)/" data-id="ckze939nj00274gvl55rdcgx1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-072 刮刮彩票 (20 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-072%20%E5%88%AE%E5%88%AE%E5%BD%A9%E7%A5%A8%20(20%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.120Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>“刮刮彩票”是一款网络游戏里面的一个小游戏。如图所示：<br><img src="https://img-blog.csdnimg.cn/61be025bfa184997bcd048e9bc6d1bc4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>每次游戏玩家会拿到一张彩票，上面会有 9 个数字，分别为数字 1 到数字 9，数字各不重复，并以 3×3 的“九宫格”形式排布在彩票上。<br>在游戏开始时能看见一个位置上的数字，其他位置上的数字均不可见。你可以选择三个位置的数字刮开，这样玩家就能看见四个位置上的数字了。最后玩家再从 3 横、3 竖、2 斜共 8 个方向中挑选一个方向，方向上三个数字的和可根据下列表格进行兑奖，获得对应数额的金币。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>数字合计</th>
-<th>获得金币</th>
-<th>数字合计</th>
-<th>获得金币</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>6</td>
-<td>10,000</td>
-<td>16</td>
-<td>72</td>
-</tr>
-<tr>
-<td>7</td>
-<td>36</td>
-<td>17</td>
-<td>180</td>
-</tr>
-<tr>
-<td>8</td>
-<td>720</td>
-<td>18</td>
-<td>119</td>
-</tr>
-<tr>
-<td>9</td>
-<td>360</td>
-<td>19</td>
-<td>36</td>
-</tr>
-<tr>
-<td>10</td>
-<td>80</td>
-<td>20</td>
-<td>306</td>
-</tr>
-<tr>
-<td>11</td>
-<td>252</td>
-<td>21</td>
-<td>1,080</td>
-</tr>
-<tr>
-<td>12</td>
-<td>108</td>
-<td>22</td>
-<td>144</td>
-</tr>
-<tr>
-<td>13</td>
-<td>72</td>
-<td>23</td>
-<td>1,800</td>
-</tr>
-<tr>
-<td>14</td>
-<td>54</td>
-<td>24</td>
-<td>3,600</td>
-</tr>
-<tr>
-<td>15</td>
-<td>180</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>现在请你写出一个模拟程序，模拟玩家的游戏过程。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>输入格式:</strong></p>
-<blockquote>
-<p>输入第一部分给出一张合法的彩票，即用 3 行 3 列给出 0 至 9 的数字。<strong>0 表示的是这个位置上的数字初始时就能看见了</strong>，而不是彩票上的数字为 0。<br>第二部给出玩家刮开的三个位置，分为三行，每行按格式 x y 给出玩家刮开的位置的行号和列号（题目中定义左上角的位置为第 1 行、第 1 列。）。数据保证玩家不会重复刮开已刮开的数字。<br>最后一部分给出玩家选择的方向，即一个整数： 1 至 3 表示选择横向的第一行、第二行、第三行，4 至 6 表示纵向的第一列、第二列、第三列，7、8分别表示左上到右下的主对角线和右上到左下的副对角线。</p>
-</blockquote>
-<p><strong>输出格式:</strong></p>
-<blockquote>
-<p>对于每一个刮开的操作，在一行中输出玩家能看到的数字。最后对于选择的方向，在一行中输出玩家获得的金币数量。</p>
-</blockquote>
-<p><strong>输入样例:</strong></p>
-<blockquote>
-<p>1 2 3<br>4 5 6<br>7 8 0<br>1 1<br>2 2<br>2 3<br>7</p>
-</blockquote>
-<p><strong>输出样例:</strong></p>
-<blockquote>
-<p>1<br>5<br>6<br>180</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><ol>
-<li>解题：<br>（1）第一部分输入的是 0-9 的数字，其中 0 表示我们已知的数字，然后依次输入 9 的数字，一定会有一个数字没有被输入，这个数字就是我们已知的数字的值；<br>（2）其次需要输入坐标，来刮数字，并且输出所刮数字；<br>（3）然后需要输入选择：1-3 表示行相加；4-6表示列相加；7表示主对角线相加；8表示副对角线；<br>（4）最后我们需要根据选择计算和，然后找到对应的金币。</li>
-<li>易错点提示：<br>（1）记得把 0 替换为该位置的值：用一个数组 flag 来存数，输入的数标记为 1，没有输入的数标记为 0，寻找标记为 0 的数，即为已知的数；<br>（2）输入坐标的同时输出该坐标的数，只需要用二维数组来存放所有数字即可；<br>（3）输入选择并求和，用 if 把所有情况考虑到即可；<br>（4）换算金币时记得 sum - 6；<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">4</span>][<span class="number">4</span>], flag[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;, i, j, k, t = <span class="number">0</span>, x, y, choice, sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> money[<span class="number">19</span>] = &#123; <span class="number">10000</span>,<span class="number">36</span>,<span class="number">720</span>,<span class="number">360</span>,<span class="number">80</span>,<span class="number">252</span>,<span class="number">108</span>,<span class="number">72</span>,<span class="number">54</span>,<span class="number">180</span>,<span class="number">72</span>,<span class="number">180</span>,<span class="number">119</span>,<span class="number">36</span>,<span class="number">306</span>,<span class="number">1080</span>,<span class="number">144</span>,<span class="number">1800</span>,<span class="number">3600</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i][j]);</span><br><span class="line">			flag[a[i][j]] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag[i] == <span class="number">0</span>)</span><br><span class="line">			t = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; <span class="number">4</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i][j] == <span class="number">0</span>)</span><br><span class="line">				a[i][j] = t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, a[x][y]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;choice);</span><br><span class="line">	<span class="keyword">if</span> (choice &lt;= <span class="number">3</span>)</span><br><span class="line">		sum += a[choice][<span class="number">1</span>] + a[choice][<span class="number">2</span>] + a[choice][<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (choice &gt; <span class="number">3</span> &amp;&amp; choice &lt;= <span class="number">6</span>)</span><br><span class="line">		sum += a[<span class="number">1</span>][choice - <span class="number">3</span>] + a[<span class="number">2</span>][choice - <span class="number">3</span>] + a[<span class="number">3</span>][choice - <span class="number">3</span>];</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (choice == <span class="number">7</span>)</span><br><span class="line">		sum += a[<span class="number">1</span>][<span class="number">1</span>] + a[<span class="number">2</span>][<span class="number">2</span>] + a[<span class="number">3</span>][<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (choice == <span class="number">8</span>)</span><br><span class="line">		sum += a[<span class="number">1</span>][<span class="number">3</span>] + a[<span class="number">2</span>][<span class="number">2</span>] + a[<span class="number">3</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, money[sum - <span class="number">6</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-072%20%E5%88%AE%E5%88%AE%E5%BD%A9%E7%A5%A8%20(20%20%E5%88%86)/" data-id="ckze939ng001z4gvl6lri42kd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-073 人与神 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.118Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>跨界大神 L. Peter Deutsch 有一句名言：“To iterate is human, to recurse divine.”（迭代的是人，递归的是神）。本题就请你直接在屏幕上输出这句话。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>本题没有输入。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出 <strong>To iterate is human, to recurse divine</strong>.。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>无</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>To iterate is human, to recurse divine.</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;To iterate is human, to recurse divine.&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-073%20%E4%BA%BA%E4%B8%8E%E7%A5%9E%20(5%20%E5%88%86)/" data-id="ckze939ng00204gvl9krada4i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-074 两小时学完C语言 (5 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-074%20%E4%B8%A4%E5%B0%8F%E6%97%B6%E5%AD%A6%E5%AE%8CC%E8%AF%AD%E8%A8%80%20(5%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.115Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/229bac23579b439aab8035c211ef7202.png" alt="在这里插入图片描述"><br>知乎上有个宝宝问：“两个小时内如何学完 C 语言？”当然，问的是“学完”并不是“学会”。</p>
-<p>假设一本 C 语言教科书有 N 个字，这个宝宝每分钟能看 K 个字，看了 M 分钟。还剩多少字没有看？</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出 3 个正整数，分别是 N（不超过 400 000），教科书的总字数；K（不超过 3 000），是宝宝每分钟能看的字数；M（不超过 120），是宝宝看书的分钟数。<br>题目保证宝宝看完的字数不超过 N。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中输出宝宝还没有看的字数。</p>
-</blockquote>
-<p><strong>输入样例：</strong></p>
-<blockquote>
-<p>100000 1000 72</p>
-</blockquote>
-<p><strong>输出样例：</strong></p>
-<blockquote>
-<p>28000</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、代码"><a href="#1、代码" class="headerlink" title="1、代码"></a>1、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N, K, M;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;N, &amp;K, &amp;M);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, N - K * M);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-074%20%E4%B8%A4%E5%B0%8F%E6%97%B6%E5%AD%A6%E5%AE%8CC%E8%AF%AD%E8%A8%80%20(5%20%E5%88%86)/" data-id="ckze939ng00214gvlffgqgnn5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-C语言：L1-075 强迫症 (10 分)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-075%20%E5%BC%BA%E8%BF%AB%E7%97%87%20(10%20%E5%88%86)/" class="article-date">
-  <time datetime="2022-01-23T14:53:24.112Z" itemprop="datePublished">2022-01-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
-<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
-<p>小强在统计一个小区里居民的出生年月，但是发现大家填写的生日格式不统一，例如有的人写 199808，有的人只写 9808。有强迫症的小强请你写个程序，把所有人的出生年月都整理成 年年年年-月月 格式。对于那些只写了年份后两位的信息，我们默认小于 22 都是 20 开头的，其他都是 19 开头的。</p>
-</blockquote>
-<p><strong>输入格式：</strong></p>
-<blockquote>
-<p>输入在一行中给出一个出生年月，为一个 6 位或者 4 位数，题目保证是 1000 年 1 月到 2021 年 12 月之间的合法年月。</p>
-</blockquote>
-<p><strong>输出格式：</strong></p>
-<blockquote>
-<p>在一行中按标准格式 年年年年-月月 将输入的信息整理输出。</p>
-</blockquote>
-<p><strong>输入样例 1：</strong></p>
-<blockquote>
-<p>9808</p>
-</blockquote>
-<p><strong>输出样例 1：</strong></p>
-<blockquote>
-<p>1998-08</p>
-</blockquote>
-<p><strong>输入样例 2：</strong></p>
-<blockquote>
-<p>0510</p>
-</blockquote>
-<p><strong>输出样例 2：</strong></p>
-<blockquote>
-<p>2005-10</p>
-</blockquote>
-<p><strong>输入样例 3：</strong></p>
-<blockquote>
-<p>196711</p>
-</blockquote>
-<p><strong>输出样例 3：</strong></p>
-<blockquote>
-<p>1967-11</p>
-</blockquote>
-<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>以字符串的形式来输出，判断长度为 4 还是 6。如果为 4，则判断前两位与22的关系，然后按要求输出即可；如果为 6，直接按要求输出即可。</p>
-<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, s);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(s), num;</span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        num = (s[<span class="number">0</span>] - <span class="string">&#x27;0&#x27;</span>) * <span class="number">10</span> + (s[<span class="number">1</span>] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        num = num &lt; <span class="number">22</span> ? <span class="number">20</span> : <span class="number">19</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, num);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c%c-%c%c&quot;</span>, s[<span class="number">0</span>], s[<span class="number">1</span>], s[<span class="number">2</span>], s[<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c%c%c%c-%c%c&quot;</span>, s[<span class="number">0</span>], s[<span class="number">1</span>], s[<span class="number">2</span>], s[<span class="number">3</span>], s[<span class="number">4</span>], s[<span class="number">5</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/C%E8%AF%AD%E8%A8%80%EF%BC%9AL1-075%20%E5%BC%BA%E8%BF%AB%E7%97%87%20(10%20%E5%88%86)/" data-id="ckze939nh00224gvl2jdsgsn5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -749,23 +693,23 @@
       <ul>
         
           <li>
-            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-012%20%E5%85%B3%E4%BA%8E%E5%A0%86%E7%9A%84%E5%88%A4%E6%96%AD%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-013%20%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-017%20%E4%BA%BA%E4%BB%A5%E7%BE%A4%E5%88%86%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-014%20%E5%88%97%E8%BD%A6%E8%B0%83%E5%BA%A6%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-018%20%E5%A4%9A%E9%A1%B9%E5%BC%8FA%E9%99%A4%E4%BB%A5B%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/02/08/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-015%20%E4%BA%92%E8%AF%84%E6%88%90%E7%BB%A9%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-019%20%E6%82%84%E6%82%84%E5%85%B3%E6%B3%A8%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2022/02/07/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-006%20%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%20(25%20%E5%88%86)/">(no title)</a>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-020%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%20%E5%88%86)/">(no title)</a>
           </li>
         
       </ul>

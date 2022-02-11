@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 一、题目 呵呵。大家都知道五服以内不得通婚，即两个人最近的共同祖先如果在五代以内（即本人、父母、祖父母、曾祖父母、高祖父母）则不可通婚。本题就请你帮助一对有情人判断一下，他们究竟是否可以成婚？  输入格式：  输入第一行给出一个正整数 N（2 ≤ N ≤10^4^ ），随后 N 行，每行按以下格式给出一个人的信息：本人ID 性别 父亲ID 母亲ID其中 ID 是5位数字，每人不同；性别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC 一、题目 呵呵。大家都知道五服以内不得通婚，即两个人最近的共同祖先如果在五代以内（即本人、父母、祖父母、曾祖父母、高祖父母）则不可通婚。本题就请你帮助一对有情人判断一下，他们究竟是否可以成婚？  输入格式：  输入第一行给出一个正整数 N（2 ≤ N ≤10^4^ ），随后 N 行，每行按以下格式给出一个人的信息：本人ID 性别 父亲ID 母亲ID其中 ID 是5位数字，每人不同；性别">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-10T16:28:01.602Z">
+<meta property="article:modified_time" content="2022-02-10T03:54:28.436Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言：L2-016 愿天下有情人都是失散多年的兄妹 (25 分)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/" class="article-date">
+  <time datetime="2022-02-10T16:28:01.602Z" itemprop="datePublished">2022-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<h1 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h1><blockquote>
+<p>呵呵。大家都知道五服以内不得通婚，即两个人最近的共同祖先如果在五代以内（即本人、父母、祖父母、曾祖父母、高祖父母）则不可通婚。本题就请你帮助一对有情人判断一下，他们究竟是否可以成婚？</p>
+</blockquote>
+<p><strong>输入格式：</strong></p>
+<blockquote>
+<p>输入第一行给出一个正整数 <strong>N</strong>（2 ≤ <strong>N</strong> ≤10^4^ ），随后 <strong>N</strong> 行，每行按以下格式给出一个人的信息：<br><strong>本人ID 性别 父亲ID 母亲ID</strong><br>其中 <strong>ID</strong> 是5位数字，每人不同；性别 <strong>M</strong> 代表男性、<strong>F</strong> 代表女性。如果某人的父亲或母亲已经不可考，则相应的 <strong>ID</strong> 位置上标记为-1。<br>接下来给出一个正整数 <strong>K</strong>，随后 <strong>K</strong> 行，每行给出一对有情人的 <strong>ID</strong>，其间以空格分隔。</p>
+<p>注意：题目保证两个人是同辈，每人只有一个性别，并且血缘关系网中没有乱伦或隔辈成婚的情况。</p>
+</blockquote>
+<p><strong>输出格式：</strong></p>
+<blockquote>
+<p>对每一对有情人，判断他们的关系是否可以通婚：如果两人是同性，输出<strong>Never Mind</strong>；如果是异性并且关系出了五服，输出<strong>Yes</strong>；如果异性关系未出五服，输出<strong>No</strong>。</p>
+</blockquote>
+<p><strong>输入样例：</strong></p>
+<blockquote>
+<p>24<br>00001 M 01111 -1<br>00002 F 02222 03333<br>00003 M 02222 03333<br>00004 F 04444 03333<br>00005 M 04444 05555<br>00006 F 04444 05555<br>00007 F 06666 07777<br>00008 M 06666 07777<br>00009 M 00001 00002<br>00010 M 00003 00006<br>00011 F 00005 00007<br>00012 F 00008 08888<br>00013 F 00009 00011<br>00014 M 00010 09999<br>00015 M 00010 09999<br>00016 M 10000 00012<br>00017 F -1 00012<br>00018 F 11000 00013<br>00019 F 11100 00018<br>00020 F 00015 11110<br>00021 M 11100 00020<br>00022 M 00016 -1<br>00023 M 10012 00017<br>00024 M 00022 10013<br>9<br>00021 00024<br>00019 00024<br>00011 00012<br>00022 00018<br>00001 00004<br>00013 00016<br>00017 00015<br>00019 00021<br>00010 00011</p>
+</blockquote>
+<p><strong>输出样例：</strong></p>
+<blockquote>
+<p>Never Mind<br>Yes<br>Never Mind<br>No<br>Yes<br>No<br>Yes<br>No<br>No</p>
+</blockquote>
+<h1 id="二、方法1"><a href="#二、方法1" class="headerlink" title="二、方法1"></a>二、方法1</h1><h2 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a>1、思路</h2><p>看到这种家庭关系第一时间想到的就是<strong>并查集</strong>，然后再根据题意，五代之内不能通婚，很明显想到了<strong>深度优先搜索</strong>。</p>
+<p><strong>深度优先搜索：</strong></p>
+<ol>
+<li>双方同时开始找祖先，如果五代以内不相交，则可以通婚；反之，则不行。</li>
+<li>一个人找到五代以内所有祖先，放入一个数组，另一个人再开始一一对比，如果都不一样，则可以通婚；反之，则不行。</li>
+</ol>
+<p><strong>易错点提示：</strong></p>
+<ul>
+<li>在定义孩子的父母时记得将父母初始化为-1；</li>
+<li>并查集数组也要进行初始化；</li>
+<li>并查集的实现中，find 函数如果用 while 循环来实现，最后会超时，所以可以选用递归（只要内存限制不大，递归可以省很多时间）；</li>
+</ul>
+<h2 id="2、代码"><a href="#2、代码" class="headerlink" title="2、代码"></a>2、代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> father;                             <span class="comment">// 父亲</span></span><br><span class="line">    <span class="keyword">int</span> mather;                             <span class="comment">// 母亲</span></span><br><span class="line">    <span class="keyword">char</span> sex;                               <span class="comment">// 性别</span></span><br><span class="line">&#125;node;</span><br><span class="line">node a[max];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">int</span> i, j;                                   <span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">int</span> id, father, mather;                     <span class="comment">// 孩子，父，母</span></span><br><span class="line"><span class="keyword">char</span> sex;                                   <span class="comment">// 性别</span></span><br><span class="line"><span class="keyword">int</span> x, y;                                   <span class="comment">// 需要判断的两个人</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> pre[max];                               <span class="comment">// 并查集数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> age)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %c %d %d&quot;</span>, &amp;id, &amp;sex, &amp;father, &amp;mather);</span><br><span class="line">        <span class="comment">// 存值</span></span><br><span class="line">        a[id].father = father;</span><br><span class="line">        a[id].sex = sex;</span><br><span class="line">        a[id].mather = mather;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将孩子与父母联系起来</span></span><br><span class="line">        Union(id, father);</span><br><span class="line">        Union(id, mather);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 父母的性别</span></span><br><span class="line">        <span class="keyword">if</span> (father != <span class="number">-1</span>)</span><br><span class="line">            a[father].sex = <span class="string">&#x27;M&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (mather != <span class="number">-1</span>)</span><br><span class="line">            a[mather].sex = <span class="string">&#x27;F&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;k);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        <span class="comment">// 先判断性别</span></span><br><span class="line">        <span class="keyword">if</span> (a[x].sex == a[y].sex)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Never Mind\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 不同祖先</span></span><br><span class="line">            <span class="keyword">if</span> (find(x) != find(y))</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">            <span class="comment">// 相同祖先</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dfs(x, y, <span class="number">1</span>))</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; max; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        pre[i] = i;</span><br><span class="line">        a[i].father = <span class="number">-1</span>;</span><br><span class="line">        a[i].mather = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == pre[x])</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> pre[x] = find(pre[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> f_a = find(a);</span><br><span class="line">    <span class="keyword">int</span> f_b = find(b);</span><br><span class="line">    <span class="keyword">if</span> (f_a != f_b)</span><br><span class="line">    &#123;</span><br><span class="line">        pre[f_a] = f_b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> age)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!(x != <span class="number">-1</span> &amp;&amp; y != <span class="number">-1</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (age &gt; <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> dfs(a[x].father, a[y].father, age + <span class="number">1</span>) &amp;&amp; dfs(a[x].father, a[y].mather, age + <span class="number">1</span>) &amp;&amp; dfs(a[x].mather, a[y].father, age + <span class="number">1</span>) &amp;&amp; dfs(a[x].mather, a[y].mather, age + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/" data-id="ckzh73o2m00020gvl84r500h9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-017%20%E4%BA%BA%E4%BB%A5%E7%BE%A4%E5%88%86%20(25%20%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-016%20%E6%84%BF%E5%A4%A9%E4%B8%8B%E6%9C%89%E6%83%85%E4%BA%BA%E9%83%BD%E6%98%AF%E5%A4%B1%E6%95%A3%E5%A4%9A%E5%B9%B4%E7%9A%84%E5%85%84%E5%A6%B9%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-017%20%E4%BA%BA%E4%BB%A5%E7%BE%A4%E5%88%86%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-018%20%E5%A4%9A%E9%A1%B9%E5%BC%8FA%E9%99%A4%E4%BB%A5B%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-019%20%E6%82%84%E6%82%84%E5%85%B3%E6%B3%A8%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/11/C%E8%AF%AD%E8%A8%80%EF%BC%9AL2-020%20%E5%8A%9F%E5%A4%AB%E4%BC%A0%E4%BA%BA%20(25%20%E5%88%86)/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
