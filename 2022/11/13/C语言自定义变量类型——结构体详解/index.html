@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/11/13/C%E8%AF%AD%E8%A8%80%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@TOC">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c62e4d1c12444af1a816be1398d4af15.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/53ceef0f951b4f888cb0630c088b57db.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8ed10f54b38b4f9dac76828cc5c96126.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2022-11-13T06:48:18.128Z">
+<meta property="article:modified_time" content="2022-11-13T06:47:11.407Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/c62e4d1c12444af1a816be1398d4af15.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言自定义变量类型——结构体详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2022-11-13T06:48:18.128Z" itemprop="datePublished">2022-11-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <font color=#999AAA >
+
+</font>
+
+<p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于C语言，在指针学习过程中，在学习之余，做了一次总结，写成了一篇详解博客，也向大家分享的我对于指针的见解，我发现将所学的内容写成博客，不仅仅可以使和我一样的初学者们更快的了解相关知识点，还可以让我查缺补漏，弥补自己的短板，让我的基础更加扎实，所以在学完结构体以后，我也将结构体的内容整理成一篇博客，向大家分享。</p>
+<h1 id="为什么要学习结构体"><a href="#为什么要学习结构体" class="headerlink" title="为什么要学习结构体"></a>为什么要学习结构体</h1><p>当我们需要表达一个数据的时候，我们就需要用到变量，而变量又需要定义一个类型。我们通过之前的学习，知道了C语言中变量类型有：int、double、char、float等等基础类型，还有指针等等。但是如果我们想表达的数据比较复杂，不是一个数据，例如：日期（年、月、日）、学生信息（姓名、性别、年龄等等）、时间（时、分、秒）等等。而我们又想用一个整体来表达这些所有的数据，这个时候我们就需要用到一个自定义变量类型——结构体。</p>
+<h1 id="什么是结构体"><a href="#什么是结构体" class="headerlink" title="什么是结构体"></a>什么是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员（或称为域，或称为元素）的不同数据组成，其中每个成员可以具有不同的类型。结构体通常用来表示类型不同但是又相关的若干数据。</p>
+<p><strong>注意：结构体是一种数据类型！！！</strong></p>
+<h1 id="一、结构体：struct"><a href="#一、结构体：struct" class="headerlink" title="一、结构体：struct"></a>一、结构体：struct</h1><h2 id="1、结构体类型的声明"><a href="#1、结构体类型的声明" class="headerlink" title="1、结构体类型的声明"></a>1、结构体类型的声明</h2><h3 id="（1）结构体的基础知识"><a href="#（1）结构体的基础知识" class="headerlink" title="（1）结构体的基础知识"></a>（1）结构体的基础知识</h3><p>成员变量：结构是一些值的集合，这些值称为成员变量。</p>
+<p><strong>结构体的每个成员可以是不同类型的变量。</strong></p>
+<h3 id="（2）结构体的声明"><a href="#（2）结构体的声明" class="headerlink" title="（2）结构体的声明"></a>（2）结构体的声明</h3><p>结构体的定义如下所示，struct为结构体关键字，tag为结构体的标志，member-list为结构体成员列表，其必须列出其所有成员；variable-list为此结构体声明的变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tag</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	member-<span class="built_in">list</span></span><br><span class="line">&#125;variable-<span class="built_in">list</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例1：描述一个学生信息</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//声明一个结构体类型</span></span><br><span class="line"><span class="comment">//声明一个学生类型，是想通过学生类型来创建学生变量（对象）</span></span><br><span class="line"><span class="comment">//描述学生：属性·名字+电话+性别+年龄</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];<span class="comment">//名字</span></span><br><span class="line">	<span class="keyword">char</span> tele[<span class="number">12</span>];<span class="comment">//电话</span></span><br><span class="line">	<span class="keyword">char</span> sex[<span class="number">5</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="keyword">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">&#125;s4,s5,s6;<span class="comment">//分号不能丢</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s3</span>;</span><span class="comment">//s3,s4,s5,s6为全局变量</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建结构体变量</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s1</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s2</span>;</span></span><br><span class="line">	<span class="comment">//s1,s2为局部变量</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>易错提示：<br>一定不要忘记结束时的分号！！！</strong></p>
+<h3 id="（3）特殊的声明"><a href="#（3）特殊的声明" class="headerlink" title="（3）特殊的声明"></a>（3）特殊的声明</h3><p>在声明结构的时候，可以不完全的声明<br><strong>例2：匿名结构体类型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">char</span> b;</span><br><span class="line">	<span class="keyword">float</span> c;</span><br><span class="line">&#125;x;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">char</span> b;</span><br><span class="line">	<span class="keyword">float</span> c;</span><br><span class="line">&#125;* p;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	p = &amp;x;<span class="comment">//错误 E0513	不能将 &quot;struct &lt;unnamed&gt; *&quot; 类型的值分配到 &quot;struct &lt;unnamed&gt; *&quot; 类型的实体	</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的两个结构在声明的时候省略了结构体的标志（tag）。（是正确的）</p>
+<p>上述代码的问题出现在：p = &amp;x。//这是非法的。<br>上面的两个匿名结构体虽然各自的成员是一模一样的，但是在编译器看来，它们是两个不同的类型，所以出现了报错（部分编译器是警告）。</p>
+<h2 id="2、结构体的自引用"><a href="#2、结构体的自引用" class="headerlink" title="2、结构体的自引用"></a>2、结构体的自引用</h2><p>结构体的自引用就是指在结构体内部，包含指向自身类型结构体的指针。</p>
+<p>在之前的学习中，我们知道了在函数中可以包含自己（即递归），那么在结构中包含一个类型为该结构体本身的成员是否可以呢？</p>
+<p><strong>例3：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;<span class="comment">//4</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span> <span class="title">n</span>;</span><span class="comment">//4+套娃</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">sizeof</span>(struct Node);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br>错误    C2460    “Node::n”: 使用正在定义的“Node”</p>
+<p>这是为什么呢？因为n定义中又有n，无限循环，系统无法确定该结构体的长度，会判定定义非法。</p>
+<p><strong>切记，结构体自引用，成员定义只能是指针。</strong></p>
+<p><strong>例4：正确的自引用</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;<span class="comment">//4</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">n</span>;</span><span class="comment">//4/8</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="keyword">sizeof</span>(struct Node);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：8（因为博主是32位）</p>
+<p>这是为什么呢？因为我们在自引用时把结构的成员定义为指针，又指针的长度是确定的（上一节指针详解中提到过），所以此时结构体的长度也是确定的。</p>
+<p>这时候可能有人又有疑问了，我们刚刚学了一种特殊的声明方式——匿名，那在自引用的时候，我们可不可以使用匿名了，就拿例4来举例子，因为这时候，我们使用了匿名结构，所以里边使用“Node* n;”不就好了吗？我们来看看，结构是怎样的：<br><strong>例5：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	Node* n;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="keyword">sizeof</span>(struct Node);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：一大堆报错</p>
+<p>这是为什么呢？因为我们在声明结构体的内部，就使用了Node这个变量，但是我们的编译器是在声明结构体结束以后，才接收到Node这个变量，所以，在使用Node变量的时候，编译器无法识别，就自然会出现错误。</p>
+<p><strong>建议：在使用结构体自引用的时候最好不要使用匿名声明结构体。</strong></p>
+<h2 id="3、结构体变量的定义和初始化"><a href="#3、结构体变量的定义和初始化" class="headerlink" title="3、结构体变量的定义和初始化"></a>3、结构体变量的定义和初始化</h2><p>前面我们了解了如何声明结构体的类型，现在我们有了结构体类型，那么我们要如何定义一个结构体变量以及初始化一个结构体变量呢？其实非常简单。</p>
+<h3 id="（1）单一结构体的定义和初始化"><a href="#（1）单一结构体的定义和初始化" class="headerlink" title="（1）单一结构体的定义和初始化"></a>（1）单一结构体的定义和初始化</h3><p><strong>例6：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">char</span> sex[<span class="number">5</span>];</span><br><span class="line">&#125;s1;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s2</span> =</span> &#123; <span class="string">&quot;lisi&quot;</span>,<span class="number">18</span>,<span class="string">&quot;nan&quot;</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s %d %s&quot;</span>, s2.name[<span class="number">20</span>], s2.age, s2.sex[<span class="number">5</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>lisi 18 nan<br>PS：这里博主用的是Visual Studio 2019</p>
+<p>通过struct+结构体的标志（tag）+变量名，就完成了结构体的定义；而在{}内把结构体成员对应的类型用逗号隔开赋值给声明的结构体，我们就完成的结构体的初始化。</p>
+<h3 id="（2）嵌套结构体的定义和初始化"><a href="#（2）嵌套结构体的定义和初始化" class="headerlink" title="（2）嵌套结构体的定义和初始化"></a>（2）嵌套结构体的定义和初始化</h3><p>刚刚我们了解了结构体的自引用，了解了结构体内是可以存在结构体的，也就是结构体的嵌套，现在我们了解了单一的结构体如何定义和初始化，那有人就会想了，嵌套结构体如何进行定义和初始化呢？<br><strong>例7：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">T</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">	<span class="keyword">double</span> weight;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">T</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">char</span> sex[<span class="number">5</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s</span> =</span> &#123; <span class="string">&quot;lisi&quot;</span>,&#123;<span class="number">30</span>,<span class="number">1.0</span>&#125;,<span class="number">18</span>,<span class="string">&quot;nan&quot;</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d %lf&quot;</span>,s.p.c,s.p.weight);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：30 1.000000</p>
+<p>在结构体中遇到结构体，我们在初始化的时候，同样的方法在外层结构体的{}内再添加一个{}即可。</p>
+<p><strong>注意：嵌套结构体在调用的时候，逐层调用。</strong></p>
+<h2 id="4、结构体内存对齐"><a href="#4、结构体内存对齐" class="headerlink" title="4、结构体内存对齐"></a>4、结构体内存对齐</h2><p>通过前面的学习，我们已经掌握了结构体的基本使用了。</p>
+<p>有人就又会问了，结构体是变量，那变量就有大小啊，我们如何计算结构体的大小呢？</p>
+<p>这里就涉及到了一个热门的考点：<strong>结构体内存对齐</strong>。</p>
+<h3 id="（1）单一结构体内存对齐"><a href="#（1）单一结构体内存对齐" class="headerlink" title="（1）单一结构体内存对齐"></a>（1）单一结构体内存对齐</h3><p>先来做一道练习题：<br><strong>例8：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s1</span> <span class="title">s1</span> =</span> &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(s1));</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s2</span> <span class="title">s2</span> =</span> &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(s2));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>12<br>8</p>
+<p>大家第一次拿到这个题，肯定会想：这有什么好算的，不就是6、6吗？但是结构体的大小计算不是这样随便计算的，它需要符合一定的条件。</p>
+<p>那么到底如何计算呢？我们需要利用结构体对齐规则：<br>①第一个成员在与结构体变量偏移量为0的地址处。<br>②其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处。<br><strong>对齐数</strong> = 编译器默认的一个对齐数 与 该成员大小的<strong>较小值</strong><br><strong>提示：VS中默认的值为8</strong><br>③结构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。</p>
+<p>看完对齐规则，我们回到例8<br>㈠先看到struct s1这个结构体<br><img src="https://img-blog.csdnimg.cn/c62e4d1c12444af1a816be1398d4af15.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>第①步 结构体存放变量从偏移量为0的位置开始：<br>就是从图中0开始，又因为c1是一个字节，所以c1就是0 ~ 1。</p>
+<p>第②步 其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处：<br>对齐数 = 编译器默认的一个对齐数 与 该成员大小的 较小值<br>a的对齐数为4，所以a要放到4的整数倍的地址处，所以a从4开始，又因为a是4个字节，所以a就是4 ~ 8；<br>到这里有人就会问了：那中间的1 ~ 4怎么办，中间这部分就浪费掉了。<br>c2的对齐数为1，c2是1个字节，所以从8开始，c2是8~9。</p>
+<p>第③步 结构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。<br>对于这个结构体中的成员：<br>c1的对齐数为1，a的对齐数为4，c2的对齐数为1，那么最大对齐数就是4；<br>而现在我们的一共用了9个字节，9不是4的整数倍，所以我们还要再浪费3个字节，达到4的整数倍12个字节。</p>
+<p>㈡再看到struct s2这个结构体<br><img src="https://img-blog.csdnimg.cn/53ceef0f951b4f888cb0630c088b57db.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>第①步 结构体存放变量从偏移量为0的位置开始：<br>就是从图中0开始，又因为c1是一个字节，所以c1就是0 ~ 1。</p>
+<p>第②步 其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处：<br>对齐数 = 编译器默认的一个对齐数 与 该成员大小的 较小值<br>c2的对齐数为1，所以c2要放到1的整数倍的地址处，所以c2从1开始，又因为c2是1个字节，所以c2就是1 ~ 2；<br>a的对齐数为4，所以a要放到4的整数倍的地址处，所以a从4开始，又因为a是4个字节，所以a就是4 ~ 8。</p>
+<p>第③步 结构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。<br>对于这个结构体中的成员：<br>c1的对齐数为1，c2的对齐数为1，a的对齐数为4，那么最大对齐数就是4；<br>现在我们一共用了8个字节，8是4的整数倍，所以这个结构体的大小就是8个字节。</p>
+<p>趁热打铁，再来一道练习题：<br><strong>例9：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> a;</span><br><span class="line">	<span class="keyword">char</span> b;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct s3));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：16</p>
+<p>你做对了吗？如果没做对，没关系重新来过，再温习一遍例题；如果做对了，是不是成就感满满，但是别急，下面还有更难的！</p>
+<h3 id="（2）嵌套结构体内存对齐"><a href="#（2）嵌套结构体内存对齐" class="headerlink" title="（2）嵌套结构体内存对齐"></a>（2）嵌套结构体内存对齐</h3><p>在思考每一个问题的同时，不要忘记我们学过的结构体是可以嵌套的。但是不要担心，我们的对齐规则考虑到了这种情况：</p>
+<p>④如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。</p>
+<p>来看一道例题：<br><strong>例10：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> a;</span><br><span class="line">	<span class="keyword">char</span> b;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s4</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s3</span> <span class="title">s3</span>;</span></span><br><span class="line">	<span class="keyword">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct s4));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：32</p>
+<p>还是按照步骤来解题：<br><img src="https://img-blog.csdnimg.cn/8ed10f54b38b4f9dac76828cc5c96126.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAV0UtdWJ5dHQ=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>第①步 结构体存放变量从偏移量为0的位置开始：<br>就是从图中0开始，又因为c1是一个字节，所以c1就是0 ~ 1。</p>
+<p>第②步 其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处，<br>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处：<br>对齐数 = 编译器默认的一个对齐数 与 该成员大小的 较小值<br>对于struct s3这个结构体：<br>a的对齐数为8，b的对齐数为1，c的对齐数为4，所以最大对齐数为8；<br>所以s3要放到8的整数倍的地址处，所以s3从8开始，又因为s3是16个字节（例9），所以s3就是8~24；<br>d的对齐数为8，所以a要放到8的整数倍的地址处，所以a从24开始，又因为a是8个字节，所以a就是24 ~ 32。</p>
+<p>第③步 结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。<br>对于这个结构体中的成员：<br>c1的对齐数为1，s3的对齐数为8，d的对齐数为8，那么最大对齐数就是8；<br>现在我们一共用了32个字节，32是4的整数倍，所以这个结构体的大小就是32个字节。</p>
+<h3 id="（3）对齐规则"><a href="#（3）对齐规则" class="headerlink" title="（3）对齐规则"></a>（3）对齐规则</h3><p>①第一个成员在与结构体变量偏移量为0的地址处。<br>②其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处。<br><strong>对齐数</strong> = 编译器默认的一个对齐数 与 该成员大小的<strong>较小值</strong><br><strong>提示：VS中默认的值为8</strong><br>③结构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。<br>④如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。</p>
+<h3 id="（4）为什么存在内存对齐"><a href="#（4）为什么存在内存对齐" class="headerlink" title="（4）为什么存在内存对齐"></a>（4）为什么存在内存对齐</h3><p>大家在对于对齐规则的学习中，肯定会有这样的疑问：<br>我们在对齐的过程中，浪费了那么多空间，那为什么还要存在内存对齐呢？</p>
+<p>①<strong>平台原因（移植原因）</strong>：不是所有的硬件平台都能访问任意地址上的任意数据的；某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。<br>②<strong>性能原因</strong>：数据结构（尤其是栈）应该尽可能地在自然边界上对齐。原因在于：为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存访问仅需要一次访问。</p>
+<p>即 结构体的内存对齐是拿<strong>空间</strong>来换取<strong>时间</strong>的做法。</p>
+<h3 id="（5）如何利用内存对齐"><a href="#（5）如何利用内存对齐" class="headerlink" title="（5）如何利用内存对齐"></a>（5）如何利用内存对齐</h3><p>前面我们了解到：内存对齐是拿<strong>空间</strong>来换取<strong>时间</strong>的做法。</p>
+<p>那么我们如何做到既要满足内存对齐，又要节省空间呢？<br><strong>让占用空间小的成员尽量集中在一起。</strong></p>
+<p>举个例子：<br><strong>例11：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">char</span> c2;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里s1和s2类型的成员是一模一样的，但是s2占用的空间比s1小。</p>
+<h3 id="（6）修改默认对齐数"><a href="#（6）修改默认对齐数" class="headerlink" title="（6）修改默认对齐数"></a>（6）修改默认对齐数</h3><p>在C语言中默认对齐数是可以修改的，利用 #pragma 这个预处理命令，就可以改变默认对齐数。</p>
+<p>举一个例子：<br><strong>例12：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">double</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="comment">//设置默认对齐数为4</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c1;</span><br><span class="line">	<span class="keyword">double</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack()</span></span><br><span class="line"><span class="comment">//取消设置的默认对齐数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct s1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(struct s2));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>16<br>12</p>
+<p>这里可以看到：<br>s1中，存放a的时候对齐数为8，所以a从8开始，又因为a是8个字节，所以a是8<del>16，所以s2是16个字节；<br>我们将默认对齐数修改为4的时候，s2中，存放a的时候对齐数为4，所以a从4开始，又因为a是8个字节，所以a是4</del>12，所以s2是12个字节。</p>
+<h3 id="（7）offsetof（）函数"><a href="#（7）offsetof（）函数" class="headerlink" title="（7）offsetof（）函数"></a>（7）offsetof（）函数</h3><p>offsetof（）函数是用来返回结构体成员的偏移量。<br>使用offsetof（）函数时，需要加上 #include&lt;stddef.h&gt; 这个头文件<br>offsetof（variable-list，member-list）</p>
+<p>举个例子：<br><strong>例13：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stddef.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">double</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, offsetof(struct s, c));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, offsetof(struct s, a));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, offsetof(struct s, b));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>0<br>4<br>8</p>
+<h2 id="5、结构体传参"><a href="#5、结构体传参" class="headerlink" title="5、结构体传参"></a>5、结构体传参</h2><p>直接上例子：<br><strong>例14：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">double</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(struct s p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	p.a = <span class="number">100</span>;</span><br><span class="line">	p.b = <span class="number">3.14</span>;</span><br><span class="line">	p.c = <span class="string">&#x27;w&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(struct s* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	p-&gt;a = <span class="number">100</span>;</span><br><span class="line">	p-&gt;b = <span class="number">3.14</span>;</span><br><span class="line">	p-&gt;c = <span class="string">&#x27;w&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//传值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print1</span><span class="params">(struct s tmp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d %lf %c\n&quot;</span>, tmp.a, tmp.b, tmp.c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//传址</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2</span><span class="params">(struct s* tmp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d %lf %c\n&quot;</span>, tmp-&gt;a, tmp-&gt;b, tmp-&gt;c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s</span> <span class="title">s</span> =</span> &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	func1(s);</span><br><span class="line">	print1(s);</span><br><span class="line">	print2(&amp;s);</span><br><span class="line"></span><br><span class="line">	func2(&amp;s);</span><br><span class="line">	print1(s);</span><br><span class="line">	print2(&amp;s);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>0 0.000000<br>0 0.000000<br>100 3.140000 w<br>100 3.140000 w</p>
+<p>通过例14，我们可以看出func1进行传参，只是形参，func2进行传参，传的是地址；同样print1是传值，而print2是传址。两种传递方法都可以，但是我们更加提倡以地址的形式进行传递，因为这样是以指针的形式传递，无论结构体有多大，指针的大小均为4/8。</p>
+<h2 id="6、结构体实现位段（位段的填充-amp-可移植性）"><a href="#6、结构体实现位段（位段的填充-amp-可移植性）" class="headerlink" title="6、结构体实现位段（位段的填充&amp;可移植性）"></a>6、结构体实现位段（位段的填充&amp;可移植性）</h2><h3 id="（1）什么是位段"><a href="#（1）什么是位段" class="headerlink" title="（1）什么是位段"></a>（1）什么是位段</h3><p>位段的声明和结构是类似的，有两个不同：<br>①位段的成员必须是int、unsigned int 、 signed int 或 char。<br>②位段的成员名后边有一个冒号和一个数字。</p>
+<p>来做一道题：<br><strong>例15：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//位段 - 二进制位</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a : <span class="number">2</span>;<span class="comment">//2个bit</span></span><br><span class="line">	<span class="keyword">int</span> b : <span class="number">5</span>;<span class="comment">//5个bit</span></span><br><span class="line">	<span class="keyword">int</span> c : <span class="number">10</span>;<span class="comment">//10个bit</span></span><br><span class="line">	<span class="keyword">int</span> d : <span class="number">30</span>;<span class="comment">//30个bit</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s</span> <span class="title">s</span>;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：8</p>
+<p>这里大家就会猜测说：2+5+10+30=47bit，那不应该是6个字节吗？为什么是8个字节啊，这是因为位段也有它的规则。</p>
+<h3 id="（2）位段的内存分配"><a href="#（2）位段的内存分配" class="headerlink" title="（2）位段的内存分配"></a>（2）位段的内存分配</h3><p>①位段的成员可以是int、unsigned int 、 signed int 或 char（属于整形家族）类型。<br>②位段的空间上是按照需要以4个字节（int）或者1个字节（char）的方式来开辟的。<br>③位段涉及很多不确定因素，位段是不跨平台的，注重可移植的程序应该避免使用位段。</p>
+<p>现在我们再来看例15,：<br>a，b，c一共需要17个bit来存放，这时，需要开辟4个字节（32bit）的空间来存放；但是剩下的15个bit不足以存放d，所以就需要再开辟4个字节（32bit）的空间来存放d。（剩余的空间浪费了）<br>所以共需8个字节。</p>
+<h3 id="（3）位段的跨平台问题"><a href="#（3）位段的跨平台问题" class="headerlink" title="（3）位段的跨平台问题"></a>（3）位段的跨平台问题</h3><p>①int位段被当成有符号数还是无符号数是不确定的；<br>②位段中最大位的数目不能确定；（16位机器最大16,32位机器最大32）<br>③位段中的成员在内存中从左向右分配，还是从右向左分配标准尚未定义；<br>④当一个结构包含两个位段，第二个位段成员比较大，无法容纳于第一个位段剩余的位时，是舍弃剩余的位还是利用，这是不确定的。</p>
+<h3 id="（4）比较"><a href="#（4）比较" class="headerlink" title="（4）比较"></a>（4）比较</h3><p>跟结构体相比，位段可以达到同样的效果，但是可以很好的节省空间，但是有跨平台的问题存在。</p>
+<h1 id="二、枚举：enum"><a href="#二、枚举：enum" class="headerlink" title="二、枚举：enum"></a>二、枚举：enum</h1><p>概念：一一列举，把可能的取值一一列举。</p>
+<h2 id="1、枚举类型的定义"><a href="#1、枚举类型的定义" class="headerlink" title="1、枚举类型的定义"></a>1、枚举类型的定义</h2><p>举一个例子：<br><strong>例16：一个人的性别</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//枚举类型</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Sex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//枚举的可能取值</span></span><br><span class="line">	MALE,<span class="comment">//男性</span></span><br><span class="line">	FEMALE,<span class="comment">//女性</span></span><br><span class="line">	SECRET<span class="comment">//秘密</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">enum</span> <span class="title">Sex</span> <span class="title">s</span> =</span> MALE;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>, MALE, FEMALE, SECRET);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：0 1 2</p>
+<p>注意：在定义枚举时，我们可以随意定义，但是如果没有赋值，会默认为0，1,2，……，同时枚举作为一个常量，我们无法在定义完成后进行修改。</p>
+<h2 id="2、枚举的优点"><a href="#2、枚举的优点" class="headerlink" title="2、枚举的优点"></a>2、枚举的优点</h2><p>①增加代码的可读性和可维护性；<br>②和 #define 定义的标识符比较枚举，枚举具有类型检查，更加严谨；<br>③防止了命名污染（封装）；<br>④便于调试；<br>⑤使用方便，一次可以定义多个常量。</p>
+<h2 id="3、枚举的使用"><a href="#3、枚举的使用" class="headerlink" title="3、枚举的使用"></a>3、枚举的使用</h2><p>再举一个例子：<br><strong>例17：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DAY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    MON = <span class="number">1</span>, TUE, WED, THU, FRI, SAT, SUN</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">DAY</span> <span class="title">day</span>;</span></span><br><span class="line">    day = MON;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, day);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：1</p>
+<h1 id="三、联合体（共用体）：union"><a href="#三、联合体（共用体）：union" class="headerlink" title="三、联合体（共用体）：union"></a>三、联合体（共用体）：union</h1><h2 id="1、联合体类型的定义"><a href="#1、联合体类型的定义" class="headerlink" title="1、联合体类型的定义"></a>1、联合体类型的定义</h2><p>联合体也是一种特殊的自定义类型。这种类型定义的变量也包含一系列的成员，特征是这些成员公用同一块空间（所以联合也叫共用体）。</p>
+<p>来看一个例子<br><strong>例18：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">un</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">union</span> <span class="title">un</span> <span class="title">u</span>;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(u));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;u);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(u.c));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(u.i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：<br>4<br>004FFD3C<br>004FFD3C<br>004FFD3C</p>
+<p>这也说明了：联合体的成员<strong>公用同一块空间</strong>。</p>
+<h2 id="2、联合体的特点"><a href="#2、联合体的特点" class="headerlink" title="2、联合体的特点"></a>2、联合体的特点</h2><p>联合体的成员是公用同一块内存空间的，这样一个联合变量的大小，至少是最大成员的大小（因为联合体至少得有能力保存最大的那个成员）。</p>
+<h2 id="3、联合体大小的计算"><a href="#3、联合体大小的计算" class="headerlink" title="3、联合体大小的计算"></a>3、联合体大小的计算</h2><p>前面的结构体和枚举都有自己的规则，那联合体也不例外：<br>①联合体的大小至少是最大成员的大小；<br>②当最大成员大小不是最大对齐数的整数倍的时候，就要对齐到最大对齐数的整数倍。</p>
+<h1 id="练习1"><a href="#练习1" class="headerlink" title="练习1"></a>练习1</h1><p>判断当前计算机的大小端存储。<br><strong>例19：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check_sys</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//返回1表示小端</span></span><br><span class="line">	<span class="comment">//返回0表示大端</span></span><br><span class="line">	<span class="keyword">return</span> *(<span class="keyword">char</span>*)&amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> ret = check_sys();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="number">1</span> == ret)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//int a = Ox11223344;</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">//低地址----------------------------------------------&gt;高地址</span></span><br><span class="line">	<span class="comment">//...[][][][11][22][33][44][][][][]...			大端字节序存储模式</span></span><br><span class="line">	<span class="comment">//...[][][][44][33][22][11][][][][]...			小端字节序存储模式</span></span><br><span class="line">	<span class="comment">//讨论一个数据，放在内存中的存放的字节顺序</span></span><br><span class="line">	<span class="comment">//大小端字节序问题</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：小端</p>
+<h1 id="练习2"><a href="#练习2" class="headerlink" title="练习2"></a>练习2</h1><p>制作学生管理系统</p>
+<p>这个博主现在正在研究，也欢迎大家来交流，因为目前能力所限，这个到时候会再写一篇博客，专门说明这个。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>不知不觉，结构体的内容已经结束了，博主从晚上七点奋战至凌晨四点，不得不感叹道：时间过的真快的。学习的时光总是美好的，每天能学到新的知识就会感到很充实，做这个博客的原因不光是想查缺补漏一下，更多的是想帮助那些初学者，让他们能够很快理解这些知识点，一起加油。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/13/C%E8%AF%AD%E8%A8%80%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/" data-id="claf3rtio0006bovl73mpcbgn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E2%80%94%E2%80%94qsort%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E8%AE%B2%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E2%80%94%E2%80%94qsort%E5%87%BD%E6%95%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E8%AF%A6%E8%A7%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/C%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
